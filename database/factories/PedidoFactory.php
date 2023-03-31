@@ -17,7 +17,9 @@ class PedidoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'email' => $this->faker->email()->unique(),
+            'descripcion' => $this->faker->text(),
+
         ];
     }
 }

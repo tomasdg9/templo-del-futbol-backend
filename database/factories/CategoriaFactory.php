@@ -18,7 +18,7 @@ class CategoriaFactory extends Factory
     {
         return [
             'nombre' => $this->faker->unique()->name(),
-            'descripcion' => $this->faker->text()->nullable(),
+            'descripcion' => $this->faker->text(),
             'visible' => $this->faker->boolean(),
         ];
     }

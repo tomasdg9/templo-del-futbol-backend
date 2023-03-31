@@ -16,14 +16,14 @@ class ProductoFactory extends Factory
      */
     public function definition(): array
     {
+        $categoria = Categoria::inRandomOrder()->first();
         return [
-            'nombre' => $this->faker->name(),
-            'precio' => $this->faker->randomFloat(2),
-            //'stock' => $this->faker->randomNumber(2, false),
+            'nombre' => $this->faker->unique()->name(),
+            'precio' => $this->faker->randomFloat(5, 2),
+            'stock' => $this->faker->randomDigit(),
             'descripcion' => $this->faker->text(),
             'estado' => $this->faker->word(),
-            'categoria_nombre' => $categoria->nombre(),
-            'categoria_id' => $categoria->id(),
+            'categoria_id' => $categoria.id(),
         ];
     }
 }

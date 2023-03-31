@@ -14,26 +14,13 @@ return new class extends Migration
         Schema::create('reporte_pedidos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
-            /*
-            Si agregamos esto, no habría que borrar timestamp?
-            */
+            $table->string('nombre_reporte');
             $table->date('fecha_inicio')->unique();
             $table->date('fecha_fin')->unique();
-            
+            $table->decimal('recaudado', 10, 2);
 
-            $table->decimal('precio', 10, 2);
-
-            /* Hacer todo esto por foreingId */
-            $table->string('categoria_nombre_reporte');
-            $table->decimal('producto_precio_detalle', 10, 2);
-
-            $table->foreignId('categoria_id')->constrained(); //se deberia obtener desde detalle_pedidos?
-            $table->foreignId('producto_id')->constrained();
-
-            $table->foreign('producto_precio_detalle')->references('producto_precio')->on('detalle_pedidos')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('categoria_nombre_reporte')->references('categoria_nombre_producto')->on('detalle_pedidos')->onDelete('cascade')->onUpdate('cascade'); 
-            
+           // Hay que hacer una tabla que relacione a ReportePedidos con DetallePedido ya que un ReportePedido tiene asociados muchos DetallePedido (productos) y un producto puede estar asociado a muchos Reportes
+           // ya que se podria crear un reporte de todo febrero, y otro de febrero y marzo. "Contenido-Reporte" se podría llamar
         });
     }
 

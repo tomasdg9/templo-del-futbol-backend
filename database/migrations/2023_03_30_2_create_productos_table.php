@@ -17,16 +17,14 @@ return new class extends Migration
 
             $table->decimal('precio',10,2);//->unique();
             $table->string('nombre',55)->unique();
-            //$table->unsignedInteger('stock');
+            $table->unsignedInteger('stock');
             $table->text('descripcion');
             $table->string('estado', 20);
-            
-            $table->foreignId('categoria_nombre')->constrained();
-            $table->foreignId('categoria_id')->constrained();
 
-            $table->foreign('categoria_nombre')->references('nombre')->on('categorias')->onDelete('cascade')->onUpdate('cascade'); 
-            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade')->onUpdate('cascade'); 
-             
+            // Llave foranea.
+            $table->foreignId('categoria_id')->constrained();
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 
