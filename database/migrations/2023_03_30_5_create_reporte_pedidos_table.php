@@ -15,10 +15,16 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
+            /*
+            Si agregamos esto, no habría que borrar timestamp?
+            */
             $table->date('fecha_inicio')->unique();
             $table->date('fecha_fin')->unique();
-            $table->decimal('precio', 10, 2);
             
+
+            $table->decimal('precio', 10, 2);
+
+            /* Hacer todo esto por foreingId */
             $table->string('categoria_nombre_reporte');
             $table->decimal('producto_precio_detalle', 10, 2);
 
