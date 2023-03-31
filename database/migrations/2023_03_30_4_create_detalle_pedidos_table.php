@@ -15,18 +15,13 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->string('cliente_email',45);
-            $table->decimal('producto_precio', 10, 2);
-            $table->string('categoria_nombre_producto', 50);
-
+            // Llaves foraneas
             //$table->foreignId('categoria_id')->constrained(); no hace falta obtenerlo, ya que se obtiene producto id y con este se obtiene el id de la categoria
             $table->foreignId('producto_id')->constrained();
+            $table->foreignId('pedido_id')->constrained();
+            $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('pedido_id')->references('id')->on('pedidos')->onDelete('cascade')->onUpdate('cascade');
 
-            
-            $table->foreign('categoria_nombre_producto')->references('categoria_nombre')->on('productos')->onDelete('cascade')->onUpdate('cascade'); 
-            $table->foreign('producto_precio')->references('precio')->on('productos')->onDelete('cascade')->onUpdate('cascade'); 
-            $table->foreign('cliente_email')->references('email')->on('pedidos')->onDelete('cascade')->onUpdate('cascade'); 
-            
 
         });
     }
