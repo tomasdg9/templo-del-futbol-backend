@@ -16,13 +16,8 @@ return new class extends Migration
             $table->timestamps();
 
             // Llaves foraneas
-            //$table->foreignId('categoria_id')->constrained(); no hace falta obtenerlo, ya que se obtiene producto id y con este se obtiene el id de la categoria
             $table->foreignId('producto_id')->constrained();
             $table->foreignId('pedido_id')->constrained();
-            $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('pedido_id')->references('id')->on('pedidos')->onDelete('cascade')->onUpdate('cascade');
-
-
         });
     }
 
