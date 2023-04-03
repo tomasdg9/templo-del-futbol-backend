@@ -1,6 +1,9 @@
 <?php
 
 namespace Database\Factories;
+use App\Models\Pedido;
+use App\Models\Producto;
+
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,8 +22,8 @@ class DetallePedidoFactory extends Factory
         $producto = Producto::inRandomOrder()->first();
         $pedido = Pedido::inRandomOrder()->first();
         return [
-            'producto_id' => $producto.id(),
-            'pedido_id' => $pedido.id(),
+            'producto_id' => $producto->id,
+            'pedido_id' => $pedido->id,
         ];
     }
 }

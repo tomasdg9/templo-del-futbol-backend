@@ -22,4 +22,6 @@ class CategoriaFactory extends Factory
             'visible' => $this->faker->boolean(),
         ];
     }
+
+    protected $fillable = ['nombre', 'descripcion', 'visible'];
 }

@@ -1,6 +1,8 @@
 <?php
 
 namespace Database\Factories;
+use App\Models\User;
+use App\Models\Categoria;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,12 +22,12 @@ class ProductoFactory extends Factory
 		$usuario = User::inRandomOrder()->first();
         return [
             'nombre' => $this->faker->unique()->name(),
-            'precio' => $this->faker->randomFloat(5, 2),
+            'precio' => $this->faker->randomFloat(2, 0, 99999999.99),
             'stock' => $this->faker->randomDigit(),
             'descripcion' => $this->faker->text(),
             'estado' => $this->faker->word(),
-            'categoria_id' => $categoria.id(),
-            'user_id' => $usuario.id(),
+            'categoria_id' => $categoria->id,
+            'user_id' => $usuario->id,
         ];
     }
 }
