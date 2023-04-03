@@ -17,6 +17,7 @@ class ProductoFactory extends Factory
     public function definition(): array
     {
         $categoria = Categoria::inRandomOrder()->first();
+		$usuario = User::inRandomOrder()->first();
         return [
             'nombre' => $this->faker->unique()->name(),
             'precio' => $this->faker->randomFloat(5, 2),
@@ -24,6 +25,7 @@ class ProductoFactory extends Factory
             'descripcion' => $this->faker->text(),
             'estado' => $this->faker->word(),
             'categoria_id' => $categoria.id(),
+            'user_id' => $usuario.id(),
         ];
     }
 }
