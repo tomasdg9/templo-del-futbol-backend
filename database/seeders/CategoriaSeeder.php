@@ -14,7 +14,7 @@ class CategoriaSeeder extends Seeder
     public function run(): void
     {
         Categoria::factory()
-            ->count(20)
+            ->count(500)
             ->create();
     }
 }
