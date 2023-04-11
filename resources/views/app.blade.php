@@ -15,13 +15,13 @@
     </div>
       <ul class="nav-links">
         <li>
-          <a id="dashboard" onClick="cambiar(this.id)" href="#" class="active">
+          <a id="dashboard" onClick="cambiar(this.id)" href="panel" class="active">
             <i class='bx bx-grid-alt' ></i>
             <span class="links_name">Estadisticas</span>
           </a>
         </li>
         <li>
-          <a id="product" onClick="cambiar(this.id)" href="#">
+          <a id="product" onClick="cambiar(this.id)" href="productos" method="GET">
             <i class='bx bx-box' ></i>
             <span class="links_name">Productos</span>
           </a>
@@ -39,13 +39,13 @@
           </a>
         </li>
         <li>
-          <a id="clientes" onClick="cambiar(this.id)"href="#">
+          <a id="clientes" onClick="cambiar(this.id)"href="clientes">
             <i class='bx bx-coin-stack' ></i>
             <span class="links_name">Clientes</span>
           </a>
         </li>
         <li>
-          <a id="rproduct" onClick="cambiar(this.id)"href="#">
+          <a id="rproduct" onClick="cambiar(this.id)"href="reportes_productos">
             <i class='bx bx-book-alt' ></i>
             <span class="links_name">Reportes productos</span>
           </a>

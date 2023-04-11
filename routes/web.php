@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,12 @@ Route::get('/', function () {
 Route::get('/panel', function(){
     return view('panel.estadisticas');
 });
+
+Route::get('/productos', [ProductosController::class, 'index'])->name('productos');
+
+Route::post('/productos', [ProductosController::class, 'store'])->name('productos');
+
+Route::patch('/productos', [ProductosController::class, 'store'])->name('productos-edit');
+
+Route::delete('/productos', [ProductosController::class, 'store'])->name('productos-destroy');
+
