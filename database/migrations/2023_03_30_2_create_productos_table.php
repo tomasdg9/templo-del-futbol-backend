@@ -17,13 +17,13 @@ return new class extends Migration
 
             $table->string('nombre',55)->unique();
             $table->decimal('precio',10,2);
+            $table->boolean('activo');
             $table->unsignedInteger('stock');
             $table->text('descripcion')->nullable();
             $table->string('estado', 20);
 
             // Llave foranea.
             $table->foreignId('categoria_id')->constrained();
-            $table->foreignId('user_id')->constrained();
         });
     }
 

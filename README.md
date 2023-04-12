@@ -1,3 +1,37 @@
+## Informe
+
+* Observación
+Como administrador del sistema (en este caso sería un empleado de la empresa) utilizaremos la tabla users que nos brinda Laravel.
+
+* Proyecto Framework PHP - Laravel
+- ¿Qué entidades se podrán editar?
+Categoría
+Producto
+
+- ¿Qué reportes se podrán generar o visualizar?
+Se podrán generar reportes de creación de productos, de modificación de productos, creación de categorías, de pedidos realizados por un cliente y de compras totales colocando fecha de inicio y fecha de fin.
+Todos se podrán visualizar desde el panel administrativo del usuario en Laravel.
+
+- ¿Qué entidades se podrán obtener por API?
+Las entidades que se podrán obtener por API son los productos y las categorías. 
+
+- ¿Qué entidades se podrán modificar por API?
+Se podrán modificar,
+Producto -> Disminuye el stock en caso de comprarlo.
+Pedido -> Cuando el usuario realice la compra del producto deseado.
+Detalle_pedido -> Cada vez que el usuario realice la compra del producto.
+
+- Proyecto React - JavaScript
+
+- ¿Qué información podrá ver el usuario?
+El usuario podrá ver los productos con sus respectivas propiedades (nombre, descripción, precio, stock, etc), las categorías para filtrar los productos, sus compras realizadas, sus datos (email, telefono, etc).
+
+
+- ¿Qué acciones podrá realizar, ya sea la primera vez que ingrese a la aplicación como futuros accesos a la misma?
+La primera vez tendrá que ingresar sus datos para quedar registrado en la página web. Luego, podrá modificarlos cuando los desee. 
+También, podrá comprar productos, filtrar productos por categoría, por nombre, etc.
+
+
 ## Pasos
 
 - clonar el repo https://github.com/iaw-2023/laravel-template y mantener como owner la organización de la materia.
