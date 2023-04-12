@@ -17,7 +17,7 @@
         <i class='bx bx-chevron-down' ></i>
       </div>
     </nav>
-
+    
     <div class="home-content">
       <div class="overview-boxes">
         <div class="box">

@@ -15,7 +15,7 @@
     </div>
       <ul class="nav-links">
         <li>
-          <a id="dashboard" onClick="cambiar(this.id)" href="panel" class="active">
+          <a id="dashboard" onClick="cambiar(this.id)" href="panel">
             <i class='bx bx-grid-alt' ></i>
             <span class="links_name">Estadisticas</span>
           </a>

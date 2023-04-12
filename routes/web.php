@@ -19,14 +19,8 @@ Route::get('/', function () {
 });
 
 Route::get('/panel', function(){
-    return view('panel.estadisticas');
+    return view('estadisticas');
 });
 
-Route::get('/productos', [ProductosController::class, 'index'])->name('productos');
-
-Route::post('/productos', [ProductosController::class, 'store'])->name('productos');
-
-Route::patch('/productos', [ProductosController::class, 'store'])->name('productos-edit');
-
-Route::delete('/productos', [ProductosController::class, 'store'])->name('productos-destroy');
+Route::resource('productos', ProductosController::class);
 
