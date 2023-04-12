@@ -172,7 +172,7 @@
             </a>
             <span class="price">$2345</span>
           </li>
-<li>
+            <li>
             <a href="#">
              <!--<img src="images/shirt.jpg" alt="">-->
               <span class="product">Bilack Wear's Shirt</span>
@@ -185,5 +185,5 @@
     </div>
   </section>
 
-<script src="js/estadisticas.js"></script>
+
 @endsection

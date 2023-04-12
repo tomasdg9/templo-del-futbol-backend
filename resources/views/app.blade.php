@@ -5,7 +5,9 @@
     <title>Panel administrativo</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
    </head>
 <body>
   <div class="sidebar">
@@ -67,7 +69,7 @@
 
     @yield('content')
 
-
+    <script src="{{ asset('js/estadisticas.js') }}"></script>
 </body>
 </html>
 

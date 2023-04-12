@@ -9,4 +9,14 @@ class DetallePedido extends Model
 {
     use HasFactory;
 
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class);
+    }
+
+    public function pedido()
+    {
+        return $this->belongsTo(Pedido::class);
+    }
+    
 }

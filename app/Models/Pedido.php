@@ -14,4 +14,10 @@ class Pedido extends Model
         return $this->belongsToMany(Producto::class, 'detalle_pedidos', 'pedido_id', 'producto_id');
     }
 
+    /*
+    public function getCantidadPedidos()
+    {
+        return $this->productos()->count();
+    }*/
+
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClientesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/panel', function(){
-    return view('panel.estadisticas');
+    return view('estadisticas');
 });
+
+Route::resource('clientes', ClientesController::class);
