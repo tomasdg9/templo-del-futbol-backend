@@ -14,39 +14,32 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!--<ul class="nav navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Page</a>
-                </li>
-            </ul>-->
+            <ul class="nav navbar-nav ml-auto">
+                <a href="/clientes" class="btn btn-primary">Volver</a>
+            </ul>
         </div>
     </div>
 </nav>
 
-<h2>Selecciona el email de un cliente para ver sus estadisticas</h2>
+<h2>Estadisticas sobre el cliente {{$clientes->first()->email}}</h2>
+<p>Realizó {{$clientes->count()}} pedido(s).</p>
+<p>Primer pedido {{$clientes->first()->created_at}}</p>
+<p>Último pedido {{$clientes->last()->created_at}}</p>
+
 <table class="table">
     <thead>
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Email</th>
-        <th scope="col">Cantidad de pedidos</th>
+        <th scope="col">ID del pedido</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Cantidad productos</th>
       </tr>
     </thead>
     <tbody>
         @foreach ($clientes as $cliente) <!-- Misma complejidad -> O(2n) = O(n) -->
             <tr>
                 <th scope="row">{{$cliente->id}}</th>
-                <td><a href="{{ route('clientes.show', ['cliente' => $cliente->email]) }}">{{$cliente->email}}</a></td>
-                <td>{{$counts[$cliente->email]}}</td>
+                <td>{{$cliente->created_at}}</td>
+                <td>{{ $cliente->getCantidadProductos() }}</td>
             </tr>
         @endforeach
     </tbody>

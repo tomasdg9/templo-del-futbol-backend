@@ -18,11 +18,13 @@ class ClientesController extends Controller
          return view('clientes.index', ['clientes' => $clientes, 'counts' => $counts]); //view(X, Y). X la vista, Y los parametros que se pasan.
          //  los parametros de la vista se ejecutan con {{ }}
    }
-   public function show(string $id)
+   public function show(string $email)
    {
-       $cliente = Pedido::find($id);
-       return view('clientes.show', ['cliente' => $cliente]);
+        $clientes = Pedido::where('email', $email)->get();
+        return view('clientes.show', ['clientes' => $clientes]);
    }
+   /* Tenemos que poder actualizar y destruir a los clientes? 
+        Conllevaría agregar/editar pedidos, o destruirlos. */
    public function update(Request $request, string $id)
    {
        $cliente = Pedido::find($cliente);

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\CategoriasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,4 @@ Route::get('/panel', function(){
 });
 
 Route::resource('clientes', ClientesController::class);
+Route::resource('categorias', CategoriasController::class);
