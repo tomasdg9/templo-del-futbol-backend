@@ -58,7 +58,7 @@
                             <li class="topic">Precio</li>
                             @foreach ($productos as $producto) 
                             <li><a class="d-flex align-items-center gap-2">
-                                                {{ $producto->precio }}</a></li>
+                                                ${{ $producto->precio }}</a></li>
                             @endforeach
                         </ul>
                         <button type="button" class="btn btn-primary">
