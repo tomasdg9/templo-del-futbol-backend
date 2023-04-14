@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Producto;
+use App\Models\Categoria;
 
 class ProductosController extends Controller
 {
@@ -21,13 +22,20 @@ class ProductosController extends Controller
    {
         
         $productos = Producto::all();
-        
+        $productos = Producto::join('categorias', 'productos.categoria_id', '=', 'categorias.id')
+        ->select('productos.*', 'categorias.nombre as categoria_nombre')
+        ->get();
+
          return view('productos.index', ['productos' => $productos]); 
    }
 
    public function show(string $id)
    {
-       $producto = Producto::find($id);
+       $producto = Producto::join('categorias', 'productos.categoria_id', '=', 'categorias.id')
+       ->select('productos.*', 'categorias.nombre as categoria_nombre')
+       ->where('productos.id', $id) //con el where ya filtra por el id del producto y no hace falta obtenerlo con un find
+       ->first();
+
        return view('productos.show', ['producto' => $producto]);
    }
 /*

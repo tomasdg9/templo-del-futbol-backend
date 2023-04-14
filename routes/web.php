@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\DetallePedidosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,4 +24,4 @@ Route::get('/panel', function(){
 });
 
 Route::resource('productos', ProductosController::class);
-
+Route::resource('detalle_pedidos', DetallePedidosController::class);
