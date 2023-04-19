@@ -22,8 +22,7 @@ return new class extends Migration
             $table->string('estado', 20);
 
             // Llave foranea.
-            $table->foreignId('categoria_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('categoria_id')->constrained()->onDelete('cascade');
         });
     }
 

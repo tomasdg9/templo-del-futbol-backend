@@ -25,10 +25,10 @@ function cambiar(idElem){
 }
 
 /* Búsqueda de email en Clientes */
-document.querySelector('.bx-search').addEventListener('click', () => {
-	const email = document.getElementById("emailporbuscar").value;
-	const divEmails = document.getElementById("clientes-email");
-	const elementos = divEmails.querySelectorAll('a');
+function buscarEmail(){
+	let email = document.getElementById("emailCliente").value;
+	let emails = document.getElementById("clienteEmails");
+	let elementos = emails.querySelectorAll("td");
 	let clienteEncontrado = false;
 	elementos.forEach(elemento => {
 	  if (elemento.textContent === email) {
@@ -39,4 +39,12 @@ document.querySelector('.bx-search').addEventListener('click', () => {
 	if (!clienteEncontrado) {
 	  alert(`No se encontró ningún cliente con el email ${email}`);
 	}
-});
+}
+/* Cambiar botón de nombre en categorias */
+function cambiarNombre(idDocumento, primerTexto, segundoTexto){ // 
+	let boton = document.getElementById(idDocumento);
+	if(boton.textContent === primerTexto)
+		boton.textContent = segundoTexto
+	else
+		boton.textContent = primerTexto
+}

@@ -15,11 +15,15 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav navbar-nav ml-auto">
-                <a href="/clientes" class="btn btn-success">Crear</a>
+                <a href="/categorias/create" class="btn btn-success">Crear</a>
             </ul>
         </div>
     </div>
 </nav>
+
+@if (session('success'))
+                <h6 class="alert alert-success">{{ session('success') }}</h6>
+@endif
 
         <div class="container">
             <div class="row">
@@ -34,8 +38,7 @@
                                 <p><b>Modificación</b>: {{$categoria->updated_at}}</p>
                                 <p><b>Descripción</b>: {{$categoria->descripcion}}</p>
                                 <p><b>Visible</b>: {{ $categoria->visible ? 'Si' : 'No' }}</p>
-                                <a type="button" class="btn btn-warning">Editar</a>
-                                <a type="button" class="btn btn-danger">Eliminar</a>
+                                <a type="button" href="{{ route('categorias.show', ['categoria' => $categoria->id]) }}" class="btn btn-warning">Detalles</a>
                             </div>
                         </div>
                     </div>

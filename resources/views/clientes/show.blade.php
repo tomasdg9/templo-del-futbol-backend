@@ -25,21 +25,31 @@
 <p>Realizó {{$clientes->count()}} pedido(s).</p>
 <p>Primer pedido {{$clientes->first()->created_at}}</p>
 <p>Último pedido {{$clientes->last()->created_at}}</p>
-
+@php
+    $costoTotal = 0;
+@endphp
+@foreach ($clientes as $pedido) <!-- Ejecutamos dos foreach pero el rendimiento no se ve afectado tal que, O(2n) -> O(n) -->
+    @php
+        $costoTotal += $pedido->getCostoTotal();
+    @endphp
+@endforeach
+<p>Gastó en total ${{$costoTotal}}</p>
 <table class="table">
     <thead>
       <tr>
         <th scope="col">ID del pedido</th>
         <th scope="col">Fecha</th>
         <th scope="col">Cantidad productos</th>
+        <th scope="col">Gastó</th>
       </tr>
     </thead>
     <tbody>
-        @foreach ($clientes as $cliente) <!-- Misma complejidad -> O(2n) = O(n) -->
-            <tr>
-                <th scope="row">{{$cliente->id}}</th>
-                <td>{{$cliente->created_at}}</td>
-                <td>{{ $cliente->getCantidadProductos() }}</td>
+        @foreach ($clientes as $pedido) <!-- ACLARACIÓN: Interpretamos a "Cliente" como el email de un "Pedido" que puede ser repetido. -->
+            <tr>  <!-- Al hacer merge, agregar que se pueda re-dirigir al pedido correspondiente -->
+                <th scope="row">{{$pedido->id}}</th>
+                <td>{{$pedido->created_at}}</td>
+                <td>{{$pedido->getCantidadProductos()}}</td>
+                <td>${{$pedido->getCostoTotal()}}</td>
             </tr>
         @endforeach
     </tbody>

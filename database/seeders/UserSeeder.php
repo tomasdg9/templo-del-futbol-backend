@@ -5,6 +5,10 @@ use App\Models\User;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 
 class UserSeeder extends Seeder
 {
@@ -13,8 +17,16 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()
-            ->count(5)
-            ->create();
+
+        DB::table('users')->insert(['name' => 'IAW',
+        'email' => 'admin@iaw.com',
+        'email_verified_at' => now(),
+        'password' => Hash::make('admin123'),
+        'remember_token' => Str::random(10),
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+        ]);
+
+        User::factory()->count(5)->create();
     }
 }

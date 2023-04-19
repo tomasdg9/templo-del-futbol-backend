@@ -13,27 +13,17 @@
             <i class="fas fa-align-justify"></i>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!--<ul class="nav navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Page</a>
-                </li>
-            </ul>-->
+        <div class="text-right">
+            <form class="d-flex">
+                <input class="form-control me-2" type="text" id="emailCliente" placeholder="Email del cliente">
+                <button class="btn btn-primary" onClick="buscarEmail()" type="button">Buscar</button>
+            </form>
         </div>
     </div>
 </nav>
 
 <h2>Selecciona el email de un cliente para ver sus estadisticas</h2>
-<table class="table">
+<table class="table" id="clienteEmails">
     <thead>
       <tr>
         <th scope="col">ID</th>
@@ -42,11 +32,11 @@
       </tr>
     </thead>
     <tbody>
-        @foreach ($clientes as $cliente) <!-- Misma complejidad -> O(2n) = O(n) -->
+        @foreach ($clientes as $cliente)
             <tr>
                 <th scope="row">{{$cliente->id}}</th>
                 <td><a href="{{ route('clientes.show', ['cliente' => $cliente->email]) }}">{{$cliente->email}}</a></td>
-                <td>{{$counts[$cliente->email]}}</td>
+                <th>{{$counts[$cliente->email]}}</th>
             </tr>
         @endforeach
     </tbody>

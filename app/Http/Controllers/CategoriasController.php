@@ -7,60 +7,62 @@ use App\Models\Categoria;
 
 class CategoriasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $categorias = Categoria::all();
          return view('categorias.index', ['categorias' => $categorias]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('categorias.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'nombre' => 'required|unique:categorias|max:255',
+            'descripcion' =>'required|max:500',
+            'visible' => 'required'
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
+        $categoria = new Categoria;
+        $categoria->nombre = $request->nombre;
+        $categoria->descripcion = $request->descripcion;
+        $categoria->visible = $request->visible;
+        $categoria->save();
+        return redirect()->route('categorias.index')->with('success', 'La categoria '.$categoria->nombre.' fue agregada.');
+    }
     public function show(string $id)
     {
-        //
+        $categoria = Categoria::find($id);
+        return view('categorias.show', ['categoria' => $categoria]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        $categoria = Categoria::find($id);
+
+        $categoria->nombre = $request->nombre;
+        $categoria->descripcion = $request->descripcion;
+        $categoria->visible = $request->visible;
+        $categoria->save();
+        return redirect()->route('categorias.show', ['categoria' => $categoria->id])->with('success', 'Categoria actualizada');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+
+        $categoria = Categoria::find($id);
+        $namecategoria = $categoria->nombre;
+        /*$categoria->productos()->each(function($producto) {
+           $producto->delete(); // Esto hace que todo producto que tenga esta categoria que se eliminará asociada, se borre, ya que quedará sin categoría.
+        }); // Preguntar en la práctica -> ¿Hace falta definir esto? Porque en la migración ya definimos que se borren en cascada.
+        */$categoria->delete();
+        return redirect()->route('categorias.index')->with('success', 'Categoria '.$namecategoria.' eliminada');
     }
 }
