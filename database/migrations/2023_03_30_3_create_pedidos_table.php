@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
-            $table->string('email', 45)->unique();
+            $table->string('email', 45);//->unique();
             $table->text('descripcion');
         });
     }

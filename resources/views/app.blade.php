@@ -5,103 +5,63 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <title>Panel administrativo</title>
-    <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <!-- Our Custom CSS -->
     <link rel="stylesheet" href="{{asset('/css/style2.css')}}">
-    <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-
-    <!--css para el calendario-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
-
-    <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
 
 </head>
 
 <body>
 
     <div class="wrapper">
-        <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>NOMBRE TIENDA</h3>
+                <h3>El templo del Fútbol</h3>
             </div>
-
             <ul class="list-unstyled components">
-                <p>Panel administrativo</p>
-                <!--<li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li> -->
+                <p>Sesión de: @auth {{Auth::user()->name}} @endauth</p>
                 <li id="estadisticas" class="active">
-                    <a href="#">Estadisticas</a>
+                    <a href="{{route('principio')}}">Estadisticas</a>
                 </li>
 				 <li id="productos">
-                    <a href="#">Productos</a>
+                    <a href="#"><i class="fa fa-compass"></i> Productos</a>
                 </li>
-				 <li id="pedidos">
+				 <li id="pedidos"> <!-- Esto es DetallePedidos -->
                     <a href="#">Pedidos</a>
                 </li>
 				 <li id="categorias">
-                    <a href="#">Categorias</a>
+                    <a href="{{ route('categorias.index') }}">Categorias</a>
                 </li>
-				 <li id="clientes">
-                    <a href="#">Clientes</a>
+				 <li id="clientes"> <!-- Esto vendria a ser Pedidos que se mapearía como "Clientes" -->
+                    <a href="{{ route('clientes.index') }}">Clientes</a>
                 </li>
 				 <li id="rproductos">
                     <a href="#">Reportes productos</a>
                 </li>
-				 <li id="rpedidos">
+				 <li id="rpedidos"> <!-- Incluye sobre DetallePedidos y los "Clientes" -->
                     <a href="#">Reportes pedidos</a>
                 </li>
             </ul>
 
             <ul class="list-unstyled CTAs">
                 <li>
-                    <a href="#" class="download">Desconectarse</a>
+                    <a href="{{route('logout')}}" class="download">Desconectarse</a>
                 </li>
-                <!--<li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-                </li>-->
             </ul>
         </nav>
-
-        <!-- Page Content  -->
         <div id="content">
             @yield('content')
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-
             <script src="{{ asset('js/script.js') }}"></script>
             @yield('scripts')
         </div>
     </div>
-
-    <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-    <!-- jQuery Custom Scroller CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
     <script type="text/javascript">
@@ -117,5 +77,7 @@
         });
     </script>
 </body>
+
+</html>
 
 </html>
