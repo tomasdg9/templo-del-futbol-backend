@@ -20,8 +20,21 @@ class DetallePedidosController extends Controller
    public function index()
    {
         
-        $det_pedidos = DetallePedido::all();
-        
-        return view('detalle_pedidos.index'); 
+        $detalle_pedidos = DetallePedido::join('pedidos', 'detalle_pedidos.pedido_id', '=', 'pedidos.id')
+        ->join('productos', 'detalle_pedidos.producto_id', '=', 'productos.id')
+        ->select('detalle_pedidos.*', 'pedidos.email as cliente_email', 'productos.nombre as producto_nombre')
+        ->get();
+
+        return view('detalle_pedidos.index', ['detalle_pedidos' => $detalle_pedidos]); 
+   }
+
+   public function show(string $id){
+    $detalle_pedido = DetallePedido::join('pedidos', 'detalle_pedidos.pedido_id', '=', 'pedidos.id')
+    ->join('productos'. 'detalle_pedidos.producto_id', '=', 'productos.id')
+    ->select('detalle_pedidos.*', 'pedidos.email as cliente_email', 'productos.nombre as producto_nombre')
+    ->where('pedidos.id', $id) //con el where ya filtra por el id del pedido y no hace falta obtenerlo con un find
+    ->first();
+
+    return view('detalle_pedidos.show', ['detalle_pedido' => $detalle_pedido]);
    }
 }
