@@ -15,11 +15,15 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav navbar-nav ml-auto">
-                <a href="/productos" class="btn btn-primary">Crear nuevo producto</a>
+                <a href="/productos/create" class="btn btn-primary">Crear nuevo producto</a>
             </ul>
         </div>
     </div>
 </nav>
+
+@if (session('success'))
+                <h6 class="alert alert-success">{{ session('success') }}</h6>
+@endif
 
 <h2>Selecciona el nombre de un producto para ver más detalles</h2>
 <table class="table">
@@ -38,7 +42,7 @@
             <tr>
                 <th scope="row">{{$producto->id}}</th>
                 <td><a href="{{ route('productos.show', ['producto' => $producto->id]) }}">{{$producto->nombre}}</a></td>
-                <th scope="row">{{$producto->categoria_nombre}}</th>
+                <th scope="row">{{$producto->categoria->nombre}}</th>
                 <th scope="row">{{$producto->stock}}</th>
                 <th scope="row">{{($producto->activo) == 0 ? "NO": "SI"}}</th>
                 <th scope="row">${{ $producto->precio}}</th>

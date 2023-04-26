@@ -48,3 +48,14 @@ function cambiarNombre(idDocumento, primerTexto, segundoTexto){ //
 	else
 		boton.textContent = primerTexto
 }
+
+/* Busca la fecha actual y la inserta en idDoc*/ 
+function fechaActual(idDoc){
+	document.getElementById(idDoc).value = new Date().toISOString().slice(0,10);
+}
+
+function filtrarPedidos(){
+	var fechaInicio = document.getElementById("start").value;
+	var fechaFin = document.getElementById("finish").value;
+	
+}

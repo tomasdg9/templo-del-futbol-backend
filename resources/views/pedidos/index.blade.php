@@ -13,30 +13,26 @@
             <i class="fas fa-align-justify"></i>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav ml-auto">
-                <a href="/productos" class="btn btn-primary">Crear nuevo producto</a>
-            </ul>
-        </div>
     </div>
 </nav>
 
-<h2>Selecciona el cliente para ver más detalles</h2>
+<h2>Selecciona el cliente para ver más detalles sobre su pedidos</h2>
 <table class="table">
     <thead>
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Cliente</th>
-        <th scope="col">Nombre de producto</th>
+        <th scope="col">Cantidad de productos</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($detalle_pedidos as $detalle_pedido) 
             <tr>
                 <th scope="row">{{$detalle_pedido->id}}</th>
-                <td><a href="{{ route('detalle_pedidos.show', ['detalle_pedido' => $detalle_pedido->id]) }}">{{$detalle_pedido->cliente_email}}</a></td>
-                <td>{{$detalle_pedido->producto_nombre}}</td>
                 
+                <td><a href="{{ route('pedidos.show', ['pedido' => $detalle_pedido->id]) }}">{{$detalle_pedido->pedido->email}}</a></td>
+                
+                <th scope="row">{{$detalle_pedido->pedido->getCantidadProductos()}}</th>
             </tr>
         @endforeach
     </tbody>

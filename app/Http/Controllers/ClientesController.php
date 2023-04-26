@@ -27,7 +27,7 @@ class ClientesController extends Controller
         Conllevaría agregar/editar pedidos, o destruirlos. */
    public function update(Request $request, string $id)
    {
-       $cliente = Pedido::find($cliente);
+       $cliente = Pedido::find($id);
        $cliente->email = $request->email;
        $cliente->descripcion = $cliente->descripcion;
        $cliente->save();
@@ -35,7 +35,7 @@ class ClientesController extends Controller
    }
    public function destroy(string $id)
    {
-       $cliente = Pedido::find($cliente);
+       $cliente = Pedido::find($id);
        $cliente->delete();
        return redirect()->route('cliente.index')->with('success', 'Cliente eliminado con éxito');
    }

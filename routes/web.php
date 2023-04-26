@@ -1,13 +1,14 @@
 <?php
 
 use App\Http\Controllers\ProductosController;
-use App\Http\Controllers\DetallePedidosController;
 use App\Http\Controllers\ReportePedidosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\DetallePedidosController;
+use App\Http\Controllers\ReporteProductosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +29,10 @@ Route::resource('categorias', CategoriasController::class)->middleware('auth');
 
 
 
-Route::resource('productos', ProductosController::class);
-Route::resource('detalle_pedidos', DetallePedidosController::class);
-Route::resource('rpedidos', ReportePedidosController::class);
+Route::resource('rproductos', ReporteProductosController::class)->middleware('auth');
+Route::resource('productos', ProductosController::class)->middleware('auth');
+Route::resource('pedidos', DetallePedidosController::class)->middleware('auth');
+Route::resource('rpedidos', ReportePedidosController::class)->middleware('auth');
 // Login
 Route::get('/', function () {
     if (Auth::check()) { //Si ya inició sesión y quiere ir a la ruta raíz, se re-direcciona al principio.

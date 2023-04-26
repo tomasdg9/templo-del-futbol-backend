@@ -16,8 +16,8 @@
     </div>
 </nav>
 
-<h2>Selecciona fecha inicial y final para ver los pedidos</h2>
-<form  method="POST" action="{{route('rpedidos.store')}}">
+<h2>Selecciona fecha inicial y final para ver los productos</h2>
+<form  method="POST" action="{{route('rproductos.store')}}">
     @csrf
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top sticky-top">
         <div class="container-align">
@@ -37,18 +37,22 @@
     <thead>
       <tr>
         <th scope="col">ID</th>
-        <th scope="col">Cliente</th>
-        <th scope="col">Cantidad de productos</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Visible</th>
+        <th scope="col">Precio</th>
         </tr>
     </thead>
     <tbody>
-    @foreach ($pedidos as $pedido) 
+        @foreach ($productos as $producto) 
             <tr>
-                <th scope="row">{{$pedido->id}}</th>
-                
-                <td><a href="{{ route('pedidos.show', ['pedido' => $pedido->id]) }}">{{$pedido->pedido->email}}</a></td>
-                
-                <th scope="row">{{$pedido->pedido->getCantidadProductos()}}</th>
+                <th scope="row">{{$producto->id}}</th>
+                <td><a href="{{ route('productos.show', ['producto' => $producto->id]) }}">{{$producto->nombre}}</a></td>
+                <th scope="row">{{$producto->categoria->nombre}}</th>
+                <th scope="row">{{$producto->stock}}</th>
+                <th scope="row">{{($producto->activo) == 0 ? "NO": "SI"}}</th>
+                <th scope="row">${{ $producto->precio}}</th>
             </tr>
         @endforeach
     </tbody>
