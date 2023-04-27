@@ -1,6 +1,11 @@
-/*
-    DEMO STYLE
-*/
+/* DataTables personalizado */
+/* Estilos personalizados para los botones Next y Previous */
+.dataTables_wrapper .dataTables_paginate .paginate_button.next,
+.dataTables_wrapper .dataTables_paginate .paginate_button.previous {
+  background-color: #66d6f8;
+  color: #FFFFFF;
+  border: 1px solid #FF0000;
+}
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {

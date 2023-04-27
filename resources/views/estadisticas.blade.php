@@ -8,46 +8,189 @@
             <i class="fas fa-align-left"></i>
             <span>Esconder</span>
         </button>
-        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-align-justify"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Page</a>
-                </li>
-            </ul>
-        </div>
+        <div class="align-items-right mr-1">Hola</div>
     </div>
 </nav>
 
-<h2>Collapsible Sidebar Using Bootstrap 4</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div class="row">
+        <!-- Producto más vendido-->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                PRODUCTO MÁS VENDIDO</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$productoMasVendido->nombre}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Ganancias totales -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                GANANCIAS TOTALES</div>
+                                <?php
+                                $gananciasTotalesFormateadas = number_format($gananciasTotales, 2, ',', '.');
+                                ?>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">${{$gananciasTotalesFormateadas}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Ganancias de último mes -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                GANANCIAS ULT. MES</div>
+                                <?php
+                                $gananciasUltimoMesFormateadas = number_format($gananciasUltimoMes, 2, ',', '.');
+                                ?>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">${{$gananciasUltimoMesFormateadas}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Cliente más frecuente -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                CLIENTE FRECUENTE</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$clienteMasCompras->email}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
 
-<div class="line"></div>
+<div class="col-8 mx-auto">
+    <canvas id="grafico">
+            <script>
+                var fecha = new Date();
+                var meses = [];
+                var mesActual = fecha.getMonth()+1;
+                for(i = 12; i > 0; i--){
+                    if(mesActual - 1 === 0) {
+                        mesActual = 12;
+                    }
+                    else mesActual--;
+                    meses[i] = getMonthName(mesActual-1);
+                }
+                var ctx = document.getElementById('grafico').getContext('2d');
+                var grafico = new Chart(ctx, {
+                  type: 'bar',
+                  data: {
+                    labels: [meses[12], meses[11],meses[10],meses[9],meses[8],meses[7],meses[6],meses[5],meses[4],meses[3],meses[2],meses[1]],
+                    datasets: [{
+                      label: 'Ventas (últimos 12 meses)',
+                      data: [{{$gananciasAnio[12]}}, {{$gananciasAnio[11]}}, {{$gananciasAnio[10]}}, {{$gananciasAnio[9]}}, {{$gananciasAnio[8]}}, {{$gananciasAnio[7]}}, {{$gananciasAnio[6]}}, {{$gananciasAnio[5]}}, {{$gananciasAnio[4]}}, {{$gananciasAnio[3]}}, {{$gananciasAnio[2]}}, {{$gananciasAnio[1]}}],
+                      backgroundColor: '#3e95cd'
+                    }]
+                  },
+                  options: {
+                    legend: { display: false },
+                    title: {
+                      display: true,
+                      text: 'Ventas por mes'
+                    }
+                  }
+                });
+                function getMonthName(month) {
+                    var months = [
+                        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
+                        'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+                    ];
+                return months[month];
+                }
+            </script>
+    </canvas>
+</div>
 
-<h2>Lorem Ipsum Dolor</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<!-- Content Row -->
+<div class="row mt-3">
+    <!-- Content Column -->
+    <div class="col-lg-6 mb-4">
+        <!-- Color System -->
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card bg-primary text-white shadow">
+                    <div class="card-body">
+                        Cantidad de productos
+                        <div class="text-white-50 small"> {{$cantProductos}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card bg-success text-white shadow">
+                    <div class="card-body">
+                        Cantidad de clientes
+                        <div class="text-white-50 small"> {{$cantClientes}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card bg-info text-white shadow">
+                    <div class="card-body">
+                        Cantidad de pedidos
+                        <div class="text-white-50 small"> {{$cantPedidos}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card bg-warning text-white shadow">
+                    <div class="card-body">
+                        Cantidad de categorias
+                        <div class="text-white-50 small"> {{$cantCategorias}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="line"></div>
+    <div class="col-lg-6 mb-4">
+        <!-- Approach -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Información sobre el último pedido</h6>
+            </div>
+            <div class="card-body">
+                <p>ID: {{$ultimoPedido->id}}</p>
+                <p>Email: {{$ultimoPedido->email}}</p>
+                <p>Fecha: {{$ultimoPedido->created_at}}</p>
+                <p>Cantidad de productos: {{$ultimoPedido->getCantidadProductos()}}</p>
+                <div class="col-md-12 d-flex justify-content-center">
+                    <a type="button" class="btn btn-warning">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h2>Lorem Ipsum Dolor</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-<div class="line"></div>
-
-<h3>Lorem Ipsum Dolor</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
+</div>
 @endsection

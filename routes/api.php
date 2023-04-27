@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/user/{id}', 'App\Http\Controllers\CategoriasController@showUser');
+// if showUser(id, nombre)
+// then Route::get('/user/{id}-{nombre}', 'App\Http\Controllers\CategoriasController@showUser');

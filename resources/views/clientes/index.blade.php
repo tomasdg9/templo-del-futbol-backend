@@ -9,16 +9,6 @@
             <i class="fas fa-align-left"></i>
             <span>Esconder</span>
         </button>
-        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-align-justify"></i>
-        </button>
-
-        <div class="text-right">
-            <form class="d-flex">
-                <input class="form-control me-2" type="text" id="emailCliente" placeholder="Email del cliente">
-                <button class="btn btn-primary" onClick="buscarEmail()" type="button">Buscar</button>
-            </form>
-        </div>
     </div>
 </nav>
 
@@ -40,7 +30,7 @@
             </tr>
         @endforeach
     </tbody>
-  </table>
+</table>
 @endsection
 
 @section('scripts')

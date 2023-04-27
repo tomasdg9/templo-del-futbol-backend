@@ -20,14 +20,14 @@
                     Panel administrativo
                   </div>
                   <div class="card-body">
-                    <form method="POST" action="{{ route('inicia-sesion') }}">
+                    <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        @if (session('error'))
-                                <h6 class="alert alert-danger">{{ session('error') }}</h6>
-                        @endif
+                        @error('email')
+                                <h6 class="alert alert-danger">{{ $message }}</h6>
+                        @enderror
                       <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="email" name="email">
+                        <input type="email" class="form-control" id="email" name="email">
                       </div>
                       <div class="mb-3">
                         <label for="password" class="form-label">Contraseña</label>
@@ -35,7 +35,7 @@
                       </div>
                       <div class="text-center">
                       <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-                      <br><br><a href="#">Recuperar contraseña</a>
+                      <br><br><a href="{{route('password.request')}}">Recuperar contraseña</a>
                       </div>
                     </form>
                   </div>
@@ -43,7 +43,6 @@
               </div>
             </div>
           </div>
-
     </div>
 </body>
 </html>
