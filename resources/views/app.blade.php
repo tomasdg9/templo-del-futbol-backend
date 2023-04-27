@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Panel administrativo</title>
+
+    <!-- BootStrap y estilos -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('/css/style2.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
+    <!-- DataTables -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 
+    <!-- Grafico -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
 </head>
-
 <body>
-
     <div class="wrapper">
         <nav id="sidebar">
             <div class="sidebar-header">
@@ -25,31 +31,34 @@
             <ul class="list-unstyled components">
                 <p>Sesión de: @auth {{Auth::user()->name}} @endauth</p>
                 <li id="estadisticas" class="active">
-                    <a href="{{route('principio')}}">Estadisticas</a>
+                    <a href="{{ route('principio') }}"><i class="fas fa-calculator"></i> Estadisticas</a>
                 </li>
 				 <li id="productos">
-                    <a href="#"><i class="fa fa-compass"></i> Productos</a>
+                    <a href="#"><i class="fas fa-shopping-bag"></i> Productos</a>
                 </li>
 				 <li id="pedidos"> <!-- Esto es DetallePedidos -->
-                    <a href="#">Pedidos</a>
+                    <a href="#"><i class="fas fa-shopping-cart"></i> Pedidos</a>
                 </li>
 				 <li id="categorias">
-                    <a href="{{ route('categorias.index') }}">Categorias</a>
+                    <a href="{{ route('categorias.index') }}"><i class="fas fa-book"></i> Categorias</a>
                 </li>
 				 <li id="clientes"> <!-- Esto vendria a ser Pedidos que se mapearía como "Clientes" -->
-                    <a href="{{ route('clientes.index') }}">Clientes</a>
+                    <a href="{{ route('clientes.index') }}"><i class="fas fa-user"></i> Clientes</a>
                 </li>
 				 <li id="rproductos">
-                    <a href="#">Reportes productos</a>
+                    <a href="#"><i class="fas fa-cog"></i> Reportes productos</a>
                 </li>
 				 <li id="rpedidos"> <!-- Incluye sobre DetallePedidos y los "Clientes" -->
-                    <a href="#">Reportes pedidos</a>
+                    <a href="#"><i class="fas fa-cog"></i> Reportes pedidos</a>
                 </li>
             </ul>
 
             <ul class="list-unstyled CTAs">
                 <li>
-                    <a href="{{route('logout')}}" class="download">Desconectarse</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> Desconectarse</button>
+                    </form>
                 </li>
             </ul>
         </nav>
@@ -63,7 +72,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
     <script type="text/javascript">
         $(document).ready(function () {
             $("#sidebar").mCustomScrollbar({
@@ -77,6 +85,5 @@
         });
     </script>
 </body>
-
 </html>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+//use App\Models\User;
 
 class CategoriasController extends Controller
 {
@@ -65,4 +66,11 @@ class CategoriasController extends Controller
         */$categoria->delete();
         return redirect()->route('categorias.index')->with('success', 'Categoria '.$namecategoria.' eliminada');
     }
+
+   /* public function showUser($id)
+{
+    $user = User::find($id);
+    return response()->json($user);
+}*/
+
 }
