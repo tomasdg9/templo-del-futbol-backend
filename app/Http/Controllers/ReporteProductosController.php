@@ -16,6 +16,8 @@ class ReporteProductosController extends Controller
 
     public function store(Request $request){
         $productos = Producto::whereBetween('created_at', [$request->start, $request->finish])->get();
-        return view('rproductos.index', ['productos' => $productos]);
+        return redirect()->route('rproductos.index', ['productos'=> $productos]);
     }
+    //hacerlo desde un get
+    
 }

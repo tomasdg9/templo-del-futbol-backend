@@ -34,10 +34,10 @@
                     <a href="{{ route('principio') }}"><i class="fas fa-calculator"></i> Estadisticas</a>
                 </li>
 				 <li id="productos">
-                    <a href="#"><i class="fas fa-shopping-bag"></i> Productos</a>
+                    <a href="{{ route('productos.index') }}"><i class="fas fa-shopping-bag"></i> Productos</a>
                 </li>
 				 <li id="pedidos"> <!-- Esto es DetallePedidos -->
-                    <a href="#"><i class="fas fa-shopping-cart"></i> Pedidos</a>
+                    <a href="{{ route('pedidos.index') }}"><i class="fas fa-shopping-cart"></i> Pedidos</a>
                 </li>
 				 <li id="categorias">
                     <a href="{{ route('categorias.index') }}"><i class="fas fa-book"></i> Categorias</a>
@@ -46,10 +46,10 @@
                     <a href="{{ route('clientes.index') }}"><i class="fas fa-user"></i> Clientes</a>
                 </li>
 				 <li id="rproductos">
-                    <a href="#"><i class="fas fa-cog"></i> Reportes productos</a>
+                    <a href="{{ route('rproductos.index') }}"><i class="fas fa-cog"></i> Reportes productos</a>
                 </li>
 				 <li id="rpedidos"> <!-- Incluye sobre DetallePedidos y los "Clientes" -->
-                    <a href="#"><i class="fas fa-cog"></i> Reportes pedidos</a>
+                    <a href="{{ route('rpedidos.index') }}"><i class="fas fa-cog"></i> Reportes pedidos</a>
                 </li>
             </ul>
 

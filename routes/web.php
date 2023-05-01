@@ -31,8 +31,16 @@ Route::resource('categorias', CategoriasController::class)->middleware('auth');
 
 
 Route::resource('rproductos', ReporteProductosController::class)->middleware('auth');
+
 Route::resource('productos', ProductosController::class)->middleware('auth');
+Route::get('/productos/page/{page}', [ProductosController::class, 'indexPage'])->name('productos.indexPage')->middleware('auth');
+Route::get('/productos/page/1', [ProductosController::class, 'indexPage'])->name('productos.principio')->middleware('auth');
+Route::post('/productos/search', [ProductosController::class, 'searchByName'])->name('productos.searchByName')->middleware('auth');
+
+Route::get('/pedidos/page/{page}', [DetallePedidosController::class, 'indexPage'])->name('pedidos.indexPage')->middleware('auth');
+Route::get('/pedidos/page/1', [DetallePedidosController::class, 'indexPage'])->name('pedidos.principio')->middleware('auth');
 Route::resource('pedidos', DetallePedidosController::class)->middleware('auth');
+
 Route::resource('rpedidos', ReportePedidosController::class)->middleware('auth');
 // Login
 Route::get('/', function () {

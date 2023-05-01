@@ -12,18 +12,38 @@ class ProductosController extends Controller
 {
     /* Los productos pueden ser mostrados, modificados creados o eliminados.*/
    public function index()
-   {
-        
-        $productos = Producto::all();
-        return view('productos.index', ['productos' => $productos]); 
-   }
+     {
+          return redirect()->route('productos.indexPage', ['page' => 1]);
+     }
+
+     
+    // Para llamar a un método del controlador siempre tiene que estar configurado en web.php
+    public function indexPage(int $page){
+     $pageAux = $page - 1;
+     $productos = Producto::orderBy('id', 'asc')->skip(10*$pageAux)->take(10)->get();
+     $productosProx = Producto::orderBy('id', 'asc')->skip(10*($pageAux+1))->take(10)->get();
+     $tieneProx = (count($productosProx) > 0);
+     return view('productos.index', ['productos' => $productos, 'page' => $page, 'tieneProx' => $tieneProx]);
+ }
+
+ public function searchByName(Request $request){
+     $name = $request->input('name');
+     $producto = Producto::where('nombre', 'ilike', $name)->first();
+     if($producto){
+         return redirect()->route('productos.show', ['producto' => $producto->id]);
+     } else {
+         return redirect()->route('productos.indexPage', ['page' => 1])->with('error', 'El producto no existe');
+     }
+ }
 
    public function show(string $id)
    {
-        $producto = Producto::find($id);
-        $productos = Producto::all();
-
-       return view('productos.show', ['producto' => $producto, 'productos' => $productos]);
+     $producto = Producto::find($id);
+     $productos = Producto::all();
+     if($producto)
+          return view('productos.show', ['producto' => $producto, 'productos'=> $productos]);
+     else 
+          return redirect()->route('categorias.indexPage', ['page' => 1])->with('error', 'La categoria no existe');
    }
 
    public function update(Request $request, String $id){
@@ -88,7 +108,8 @@ class ProductosController extends Controller
         $producto->descripcion = $request->descripcion;
         $producto->estado = $request->estado;
         $producto->save();
-        return redirect()->route('productos.index')->with('success', 'El producto '.$producto->nombre.' fue creado con éxito.');
+        
+        return redirect()->route('productos.indexPage', ['page' => 1])->with('success', 'El producto'.$producto->nombre.' fue creado con éxito.');
    }
 
 }

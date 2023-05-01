@@ -71,7 +71,7 @@
             <th scope="row">{{$producto->id}}</th>
             <td>{{$producto->nombre}}</td>
             <td>{{($producto->activo) == 0 ? "NO": "SI"}}</td>
-            <td>{{$producto->categoria->nombre}}</td>
+            <td><a href="{{ route('categorias.show', ['categoria' => $producto->categoria->id]) }}">{{$producto->categoria->nombre}}</a></td>
             <td>${{$producto->precio}}</td>
             <td>{{$producto->stock}}</td>
             <td>{{$producto->descripcion}}</td>
@@ -80,8 +80,9 @@
     </tbody>
   </table>
   
-  <img src="\img\default_image.png" class="img-thumbnail" >
-
+  <div class="text-align-center">
+    <img src="\img\default_image.png" class="img-thumbnail" >
+  </div>
 
   <br><p>Para editar este producto, rellene el siguiente formulario y luego, presione el botón "<b>Modificar producto</b>"<p>
 <button id="botonFormulario" onClick="cambiarNombre('botonFormulario', 'Editar', 'Esconder')" type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#formulario">Editar</button>

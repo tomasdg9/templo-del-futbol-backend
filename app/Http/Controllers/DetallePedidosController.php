@@ -14,9 +14,17 @@ class DetallePedidosController extends Controller
     /* Los pedidos pueden ser mostrados.*/
    public function index()
      {
-          $detalle_pedidos = DetallePedido::all();
-          return view('pedidos.index', ['detalle_pedidos' => $detalle_pedidos]); 
+        return redirect()->route('pedidos.indexPage', ['page' => 1]);
      }
+
+    public function indexPage(int $page){
+      $pageAux = $page - 1;
+      $detalle_pedidos = DetallePedido::orderBy('id', 'asc')->skip(10*$pageAux)->take(10)->get();
+      $detalle_pedidosProx = DetallePedido::orderBy('id', 'asc')->skip(10*($pageAux+1))->take(10)->get();
+      $tieneProx = (count($detalle_pedidosProx) > 0);
+      return view('pedidos.index', ['detalle_pedidos' => $detalle_pedidos, 'page' => $page, 'tieneProx' => $tieneProx]);
+  }
+
 
    public function show(string $id){
     $detalle_pedido = DetallePedido::find($id);
