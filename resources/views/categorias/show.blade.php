@@ -12,7 +12,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav navbar-nav ml-auto">
-                <a href="/categorias/" class="btn btn-primary">Volver</a>
+                <a href="{{ url()->route('categorias.index') }}" class="btn btn-primary">Volver</a>
             </ul>
         </div>
     </div>
