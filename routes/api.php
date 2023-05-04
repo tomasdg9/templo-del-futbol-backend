@@ -24,5 +24,3 @@ Route::get('/categorias', 'App\Http\Controllers\CategoriasController@showAllByAP
 Route::post('/pedidos/crear', 'App\Http\Controllers\ClientesController@storeByAPI')->name('crearPedidoPorApi');
 Route::get('/pedidos', 'App\Http\Controllers\ClientesController@showAllByAPI');
 Route::get('/pedidos/{id}', 'App\Http\Controllers\ClientesController@showByAPI');
-
-Route::get('/estadisticas/productomasvendido', 'App\Http\Controllers\EstadisticasController@getProductoMasVendido');

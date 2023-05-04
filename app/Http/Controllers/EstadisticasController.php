@@ -14,14 +14,7 @@ use Carbon\Carbon;
 
 class EstadisticasController extends Controller
 {
-    public function getProductoMasVendido(){
-        $productoMasRepetido = DetallePedido::selectRaw('producto_id, COUNT(producto_id) as repeticiones')
-            ->groupBy('producto_id')
-            ->orderByDesc('repeticiones')
-            ->first();
-        $productoMasVendido = Producto::find($productoMasRepetido->producto_id);
-        return response()->json($productoMasVendido);
-    }
+
     // Esto tarda mucho porque consulta sobre todos los datos. Podriamos usar AJAX para que diga Calculando... Y cuando tenga el valor, lo retorne?
     public function index()
     {

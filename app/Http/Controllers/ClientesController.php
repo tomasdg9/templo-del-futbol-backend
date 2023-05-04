@@ -10,19 +10,6 @@ use App\Models\DetallePedido;
 class ClientesController extends Controller
 {
 
-    
-   /* Los clientes pueden ser mostrados, modificados o eliminados. Pero no se puede crear un pedido directamente desde el panel administrativo. */
-  /* public function index()
-   {
-        $clientes = Pedido::select('*')->distinct('email')->get();
-        $counts = [];
-        foreach ($clientes as $cliente) {
-            $counts[$cliente->email] = Pedido::where('email', $cliente->email)->count(); // Arreglo counts[email] = Cantidad de pedidos
-        }
-         return view('clientes.index', ['clientes' => $clientes, 'counts' => $counts]); //view(X, Y). X la vista, Y los parametros que se pasan.
-         //  los parametros de la vista se ejecutan con {{ }}
-   }
-*/
    public function show(string $email)
    {
         $clientes = Pedido::where('email', $email)->get();
@@ -53,7 +40,7 @@ class ClientesController extends Controller
    public function indexPage(int $page){
         $pageAux = $page - 1;
         $clientes = Pedido::orderBy('email', 'asc')->distinct('email')->skip(6*$pageAux)->take(6)->get();
-        $clientesProx = Pedido::orderBy('email', 'asc')->distinct('email')->skip(6*($pageAux+1))->take(6)->get();
+        $clientesProx = Pedido::orderBy('email', 'asc')->distinct('email')->skip(6*($pageAux+1))->take(6)->get(); // probar take(1)
         $tieneProx = (count($clientesProx) > 0);
         if( count($clientes) == 0)
             return redirect()->route('clientes.indexPage', ['page' => 1]);
