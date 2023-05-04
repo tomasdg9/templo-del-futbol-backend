@@ -61,7 +61,8 @@ class ProductosController extends Controller
           'stock' => 'required|integer',
           'descripcion' => 'max:500',
           'estado' => 'required|max:20',
-          'categoria' => 'required'
+          'categoria' => 'required',
+          'imagen' => 'required|url'
       ]);
 
         $producto->nombre = $request->nombre;        
@@ -70,6 +71,7 @@ class ProductosController extends Controller
         $producto->stock = $request->stock;
         $producto->descripcion = $request->descripcion;
         $producto->estado = $request->estado;
+        $producto->imagen = $request->imagen;
         $producto->save();
         return redirect()->route('productos.show', ['producto' => $producto->id])->with('success', 'Producto actualizado con éxito');
    }
@@ -95,7 +97,8 @@ class ProductosController extends Controller
             'stock' => 'required|integer',
             'descripcion' => 'max:500',
             'estado' => 'required|max:20',
-            'categoria' => 'required'
+            'categoria' => 'required',
+            'imagen' => 'required|url'
         ]);
 
         
@@ -107,9 +110,29 @@ class ProductosController extends Controller
         $producto->stock = $request->stock;
         $producto->descripcion = $request->descripcion;
         $producto->estado = $request->estado;
+        $producto->imagen = $request->imagen;
         $producto->save();
         
         return redirect()->route('productos.indexPage', ['page' => 1])->with('success', 'El producto'.$producto->nombre.' fue creado con éxito.');
    }
 
+   public function showAllByAPI(){
+        $productos = Producto::all();
+        return response()->json($productos);
+   }
+
+   public function showFilterByAPI(){
+        $productos = Producto::where('activo',true)->get();
+        return response()->json($productos);
+   }
+
+   public function showByAPI(String $id){
+        $producto = Producto::find($id);
+        if($producto)
+            return response()->json($producto);
+        else
+            return response()->json([
+                'mensaje' => 'Producto no encontrado'
+            ], 404);
+   }
 }

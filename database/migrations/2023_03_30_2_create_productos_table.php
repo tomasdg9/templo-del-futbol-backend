@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedInteger('stock');
             $table->text('descripcion')->nullable();
             $table->string('estado', 20);
+            $table->text('imagen');
 
             // Llave foranea.
             $table->foreignId('categoria_id')->constrained()->onDelete('cascade');

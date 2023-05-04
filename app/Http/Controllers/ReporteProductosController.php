@@ -10,14 +10,13 @@ use Illuminate\Http\Request;
 class ReporteProductosController extends Controller
 {
     public function index(){
-        
-        return view('rproductos.index', ['productos' => []]); 
+        $productos = session('productos', []);
+        return view('rproductos.index', ['productos' => $productos]);
     }
 
     public function store(Request $request){
         $productos = Producto::whereBetween('created_at', [$request->start, $request->finish])->get();
-        return redirect()->route('rproductos.index', ['productos'=> $productos]);
+        return redirect()->route('rproductos.index')->with('productos', $productos);
     }
-    //hacerlo desde un get
     
 }

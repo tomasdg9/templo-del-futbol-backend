@@ -81,7 +81,7 @@
   </table>
   
   <div class="text-align-center">
-    <img src="\img\default_image.png" class="img-thumbnail" >
+    <img src="{{$producto->imagen}}" class="img-thumbnail" >
   </div>
 
   <br><p>Para editar este producto, rellene el siguiente formulario y luego, presione el botón "<b>Modificar producto</b>"<p>
@@ -121,6 +121,10 @@
 
             <label for="exampleFormControlInput1" class="form-label">Estado</label>
             <input type="text" class="form-control mb-2" name="estado" id="exampleFormControlInput1" value="{{$producto->estado}}">
+
+            <label for="exampleFormControlInput1" class="form-label">Imagen</label>
+            <input type="text" class="form-control mb-2" name="imagen" id="exampleFormControlInput1" value="{{$producto->imagen}}">
+
 
             <label for="exampleFormControlInput1" name="labelcategoria" class="form-label">Categoria</label>
 
