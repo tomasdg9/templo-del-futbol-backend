@@ -22,6 +22,7 @@ class ProductoFactory extends Factory
         return [
             'nombre' => $this->faker->unique()->name(),
             'precio' => $this->faker->randomFloat(2, 0, 99999999.99),
+            'activo' => $this->faker->boolean(),
             'stock' => $this->faker->randomDigit(),
             'descripcion' => $this->faker->text(),
             'estado' => $this->faker->word(),
