@@ -10,12 +10,13 @@ use App\Models\Pedido;
 class ReportePedidosController extends Controller
 {
     public function index(){
-        return view('rpedidos.index', ['pedidos' => []]); 
+        $pedidos = session('pedidos', []);
+        return view('rpedidos.index', ['pedidos' => $pedidos]); 
     }
 
     public function store(Request $request){
         $pedidos = DetallePedido::whereBetween('created_at', [$request->start, $request->finish])->get();
-        return view('rpedidos.index', ['pedidos' => $pedidos]);
+        return redirect()->route('rpedidos.index')->with('pedidos', $pedidos);
     }
 
 }

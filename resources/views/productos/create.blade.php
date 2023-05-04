@@ -78,6 +78,8 @@
         <label for="exampleFormControlInput1" class="form-label">Estado (*)</label>
         <input type="text" class="form-control mb-2" name="estado" id="exampleFormControlInput1" placeholder="Ejemplo: Nuevo">
         
+        <label for="exampleFormControlInput1" class="form-label">Imagen (*)</label>
+        <input type="text" class="form-control mb-2" name="imagen" id="exampleFormControlInput1" placeholder="Ejemplo: https://imgur.com/a/mXpX6Ot">
 
         <label for="exampleFormControlInput1" name="categoria" class="form-label">Categoria (*)</label>
 
