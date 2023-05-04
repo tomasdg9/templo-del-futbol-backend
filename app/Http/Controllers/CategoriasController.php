@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
-//use App\Models\User;
 
 class CategoriasController extends Controller
 {
@@ -19,9 +18,12 @@ class CategoriasController extends Controller
         $categorias = Categoria::orderBy('id', 'asc')->skip(6*$pageAux)->take(6)->get();
         $categoriasProx = Categoria::orderBy('id', 'asc')->skip(6*($pageAux+1))->take(6)->get();
         $tieneProx = (count($categoriasProx) > 0);
-        return view('categorias.index', ['categorias' => $categorias, 'page' => $page, 'tieneProx' => $tieneProx]);
+        if( count($categorias) == 0)
+            return redirect()->route('categorias.indexPage', ['page' => 1]);
+        else
+            return view('categorias.index', ['categorias' => $categorias, 'page' => $page, 'tieneProx' => $tieneProx]);
     }
-    
+
     public function searchByName(Request $request){
         $name = $request->input('name');
         $categoria = Categoria::where('nombre', 'ilike', $name)->first();
@@ -57,7 +59,7 @@ class CategoriasController extends Controller
         $categoria = Categoria::find($id);
         if($categoria)
             return view('categorias.show', ['categoria' => $categoria]);
-        else 
+        else
             return redirect()->route('categorias.indexPage', ['page' => 1])->with('error', 'La categoria no existe');
     }
 
@@ -83,10 +85,21 @@ class CategoriasController extends Controller
         return redirect()->route('categorias.indexPage', ['page' => 1])->with('success', 'Categoria '.$namecategoria.' eliminada');
     }
 
-   /* public function showUser($id)
-{
-    $user = User::find($id);
-    return response()->json($user);
-}*/
+    // Métodos de la API
+    public function showByAPI(string $id)
+    {
+        $categoria = Categoria::find($id);
+        if($categoria)
+            return response()->json($categoria);
+        else
+            return response()->json([
+                'mensaje' => 'Categoria no encontrada'
+            ], 404);
+    }
+
+    public function showAllByAPI(){
+        $categorias = Categoria::all();
+        return response()->json($categorias);
+    }
 
 }
