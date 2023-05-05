@@ -22,9 +22,11 @@
 </nav>
 
 
-<h2>Detalles del pedido del cliente: {{$detalle_pedido->pedido->email}}</h2>
+<h2>Detalles del pedido del cliente: {{$detalle_pedido->email}}</h2>
 <p><b>Creado</b>: {{$detalle_pedido->created_at}}</p>
-<p><b>Costo Total</b>: ${{$detalle_pedido->pedido->getCostoTotal()}}</p>
+<p><b>Costo Total</b>: ${{$detalle_pedido->getCostoTotal()}}</p>
+<br>
+<p>Productos del pedido:</p>
 <table class="table">
     <thead>
       <tr>
@@ -36,13 +38,13 @@
         <th scope="col">Stock</th>
         <th scope="col">Descripcion</th>
         <th scope="col">Estado</th>
-        
+
       </tr>
     </thead>
     <tbody>
       @foreach($productos as $producto)
         <tr>
-            <th scope="row">{{$producto->id}}</th>
+            <th scope="row"><a href="/productos/{{$producto->id}}">{{$producto->id}}</a></th>
             <td><a href="{{ route('productos.show', ['producto' => $producto->id]) }}">{{$producto->nombre}}</a></td>
             <td>{{($producto->activo) == 0 ? "NO": "SI"}}</td>
             <td><a href="{{ route('categorias.show', ['categoria' => $producto->categoria->id]) }}">{{$producto->categoria->nombre}}</a></td>
@@ -54,7 +56,7 @@
       @endforeach
     </tbody>
   </table>
-  
+
 
 @endsection
 

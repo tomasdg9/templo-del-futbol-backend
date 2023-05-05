@@ -32,10 +32,18 @@
     <h6 class="alert alert-success">{{ session('success') }}</h6>
 @endif
 <h2>Estadisticas sobre la categoria {{$categoria->nombre}}</h2>
+<p><b>Descripción:</b> {{$categoria->descripcion}}</p>
+<p><b>Visible?</b>
+    @if ($categoria->visible == true)
+      Si
+    @else
+      No
+    @endif
+</p>
 <p>Tiene una cantidad de <b>{{$categoria->getCantidadProductos()}}</b> producto(s) asociado(s).</p>
 <p><b>Creada</b>: {{$categoria->created_at}}</p>
 <p><b>Última modificación</b>: {{$categoria->updated_at}}</p>
-<p>Productos asociados</p>
+<br><p>Productos asociados:</p>
 <table class="table">
     <thead>
       <tr>
@@ -46,7 +54,7 @@
     <tbody>
         @foreach ($categoria->productos as $producto)
             <tr>
-                <th scope="row">{{$producto->id}}</th>
+                <th scope="row"><a href="/productos/{{$producto->id}}">{{$producto->id}}</a></th>
                 <td>{{$producto->nombre}}</td>
             </tr>
         @endforeach
@@ -59,18 +67,28 @@
         @method('PATCH')
         @csrf
         <div class="mb-3 col">
-            <label for="exampleFormControlInput1" class="form-label">Nombre de la categoría</label>
-            <input type="text" class="form-control mb-2" name="nombre" id="exampleFormControlInput1" value="{{$categoria->nombre}}">
-            <label for="exampleFormControlInput1" class="form-label">Descripción</label>
-            <textarea rows="5" class="form-control mb-2" name="descripcion" id="exampleFormControlInput1"">{{$categoria->descripcion}}</textarea>
-            <label for="exampleFormControlInput1" class="form-label">Visible?</label>
+            <label for="exampleFormControlInput1" class="form-label">Nombre de la categoría (*)</label>
+            <input type="text" class="form-control mb-2" name="nombre" id="exampleFormControlInput1" value="{{ old('nombre', $categoria->nombre) }}">
+            <label for="exampleFormControlInput1" class="form-label">Descripción (*)</label>
+            <textarea rows="5" class="form-control mb-2" name="descripcion" id="exampleFormControlInput1"">{{ old('descripcion', $categoria->descripcion) }}</textarea>
+            <label for="exampleFormControlInput1" class="form-label">Visible? (*)</label>
             <select id="inputState" class="form-control" name="visible">
-                @if($categoria->visible)
-                  <option value="true" selected>Si</option>
-                  <option value="false">No</option>
+                @if(old('visible') == null)
+                  @if($categoria->visible)
+                    <option value="true" selected>Si</option>
+                    <option value="false">No</option>
+                  @else
+                    <option value="true">Si</option>
+                    <option value="false" selected>No</option>
+                  @endif
                 @else
-                  <option value="true">Si</option>
-                  <option value="false" selected>No</option>
+                  @if(old('visible'))
+                    <option value="true" selected>Si</option>
+                    <option value="false">No</option>
+                  @else
+                    <option value="true">Si</option>
+                    <option value="false" selected>No</option>
+                  @endif
                 @endif
               </select>
             <input type="submit" value="Modificar categoria" class="btn btn-primary my-2" />

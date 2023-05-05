@@ -33,6 +33,7 @@
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Email</th>
+        <th scope="col">Cantidad de pedidos</th>
       </tr>
     </thead>
     <tbody>
@@ -40,6 +41,7 @@
             <tr>
                 <th scope="row">{{$cliente->id}}</th>
                 <td><a href="{{ route('clientes.show', ['cliente' => $cliente->email]) }}">{{$cliente->email}}</a></td>
+                <td>{{$cliente->cantidadPedidos}}</td>
             </tr>
         @endforeach
     </tbody>
@@ -52,7 +54,7 @@
                 <a href="/clientes/page/{{$page-1}}" class="btn btn-success mr-2">< Anterior</a>
             @endif
             @if ($tieneProx)
-                <a href="/clientes/page/{{$page+1}}" class="btn btn-success">Siguiente ></a>        
+                <a href="/clientes/page/{{$page+1}}" class="btn btn-success">Siguiente ></a>
             @endif
         </div>
     </div>

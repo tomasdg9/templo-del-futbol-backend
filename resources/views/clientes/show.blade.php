@@ -45,8 +45,8 @@
     </thead>
     <tbody>
         @foreach ($clientes as $pedido) <!-- ACLARACIÓN: Interpretamos a "Cliente" como el email de un "Pedido" que puede ser repetido. -->
-            <tr>  <!-- Al hacer merge, agregar que se pueda re-dirigir al pedido correspondiente -->
-                <th scope="row">{{$pedido->id}}</th>
+            <tr>
+                <th scope="row"><a href="/pedidos/{{$pedido->id}}">{{$pedido->id}}</a></th>
                 <td>{{$pedido->created_at}}</td>
                 <td>{{$pedido->getCantidadProductos()}}</td>
                 <td>${{$pedido->getCostoTotal()}}</td>

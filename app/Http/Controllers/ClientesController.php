@@ -15,8 +15,7 @@ class ClientesController extends Controller
         $clientes = Pedido::where('email', $email)->get();
         return view('clientes.show', ['clientes' => $clientes]);
    }
-   /* Tenemos que poder actualizar y destruir a los clientes?
-        Conllevaría agregar/editar pedidos, o destruirlos. */
+   /* Los pedidos no se eliminan ni se actualizan. Entonces estos métodos no van
    public function update(Request $request, string $id)
    {
        $cliente = Pedido::find($id);
@@ -31,7 +30,7 @@ class ClientesController extends Controller
        $cliente->delete();
        return redirect()->route('cliente.index')->with('success', 'Cliente eliminado con éxito');
    }
-
+*/
    public function index()
     {
         return redirect()->route('clientes.indexPage', ['page' => 1]);
@@ -42,6 +41,11 @@ class ClientesController extends Controller
         $clientes = Pedido::orderBy('email', 'asc')->distinct('email')->skip(6*$pageAux)->take(6)->get();
         $clientesProx = Pedido::orderBy('email', 'asc')->distinct('email')->skip(6*($pageAux+1))->take(6)->get(); // probar take(1)
         $tieneProx = (count($clientesProx) > 0);
+
+        $clientes = $clientes->map(function($cliente) {
+            $cliente->cantidadPedidos = count(Pedido::where('email', $cliente->email)->get());
+            return $cliente;
+        });
         if( count($clientes) == 0)
             return redirect()->route('clientes.indexPage', ['page' => 1]);
         else
@@ -58,7 +62,10 @@ class ClientesController extends Controller
         }
     }
 
-   // Métodos de la API
+    // Métodos de la API
+
+   // Crea un pedido.
+   // Es un post, se necesita "email", "descripcion" y una lista de ID's de productos de la forma "X1-X2-X3-...-Xn" donde X1 es el ID de un producto.
    public function storeByAPI(Request $request){
 
         // Código para crear un nuevo pedido.
@@ -102,21 +109,46 @@ class ClientesController extends Controller
         }
    }
 
-       // Métodos de la API
-       public function showByAPI(string $id)
-       {
-           $cliente = Pedido::find($id);
-           if($cliente)
-               return response()->json($cliente);
-           else
-               return response()->json([
-                   'mensaje' => 'Cliente no encontrado'
-               ], 404);
-       }
+   // Muestra un pedido según su ID.
+    public function showByAPI(string $id)
+    {
+        $cliente = Pedido::find($id);
+        if($cliente)
+            return response()->json($cliente);
+        else
+            return response()->json([
+                'mensaje' => 'Cliente no encontrado'
+            ], 404);
+    }
 
-       public function showAllByAPI(){
-           $clientes = Pedido::all();
-           return response()->json($clientes);
-       }
+    // Muestra los pedidos de un cliente según su "email"
+    public function showEmailByAPI(string $email)
+    {
+        $cliente = Pedido::where('email', 'ilike', $email)->get();
+        if(count($cliente)>0)
+            return response()->json($cliente);
+        else
+            return response()->json([
+                'mensaje' => 'Cliente no encontrado'
+            ], 404);
+    }
+
+    // Muestra todos los pedidos.
+    public function showAllByAPI(){
+        $clientes = Pedido::all();
+        return response()->json($clientes);
+    }
+
+    // Muestra la página "page" de pedidos. Puede haber emails repetidos. Es para mostrar pedidos, no clientes.
+    public function showPageByAPI(string $page){
+        $pageAux = $page - 1;
+        $clientes = Pedido::orderBy('id', 'asc')->skip(6*$pageAux)->take(6)->get();
+        if( count($clientes) == 0)
+        return response()->json([
+            'mensaje' => 'Página de pedidos no encontrada'
+        ], 404);
+        else
+            return response()->json($clientes);
+    }
 
 }

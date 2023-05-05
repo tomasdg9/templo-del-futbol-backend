@@ -90,6 +90,9 @@
 </div>
 
 <div class="col-8 mx-auto">
+    <div class="col-md-12 d-flex justify-content-center">
+        <p>Grafico desde el mes pasado (izquierda) hasta el año pasado (derecha).</p>
+    </div>
     <canvas id="grafico">
             <script>
                 var fecha = new Date();
@@ -130,6 +133,7 @@
                 }
             </script>
     </canvas>
+
 </div>
 
 <!-- Content Row -->
@@ -185,7 +189,7 @@
                 <p>Fecha: {{$ultimoPedido->created_at}}</p>
                 <p>Cantidad de productos: {{$ultimoPedido->getCantidadProductos()}}</p>
                 <div class="col-md-12 d-flex justify-content-center">
-                    <a type="button" class="btn btn-warning">Ver detalles</a>
+                    <a href="/pedidos/{{$ultimoPedido->id}}" type="button" class="btn btn-warning">Ver detalles</a>
                 </div>
             </div>
         </div>

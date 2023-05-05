@@ -59,9 +59,6 @@ Route::get('/', function () {
     }
 })->name('login');
 
-Route::post('/inicia-sesion', [LoginController::class, 'login'])->name('inicia-sesion');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-
 
 Route::get('/home', function(){
     return redirect()->route('principio');

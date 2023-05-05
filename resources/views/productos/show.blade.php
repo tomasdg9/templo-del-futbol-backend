@@ -81,7 +81,7 @@
   </table>
   
   <div class="text-align-center">
-    <img src="{{$producto->imagen}}" class="img-thumbnail" >
+    <img src="{{$producto->imagen}}" width="300" height="80%" loading="lazy">
   </div>
 
   <br><p>Para editar este producto, rellene el siguiente formulario y luego, presione el botón "<b>Modificar producto</b>"<p>
@@ -90,17 +90,11 @@
     <form  method="POST" action="{{route('productos.update',['producto' => $producto->id])}}">
         @method('PATCH')
         @csrf 
-
         <div class="mb-3 col">
-
-        
-
             <label for="exampleFormControlInput1" class="form-label">Nombre del producto</label>
             <input type="text" class="form-control mb-2" name="nombre" id="exampleFormControlInput1" value="{{$producto->nombre}}">
-
             <label for="exampleFormControlInput1" class="form-label">Precio</label>
             <input type="text" class="form-control mb-2" name="precio" id="exampleFormControlInput1" value="{{$producto->precio}}">
-            
             <label for="exampleFormControlInput1" class="form-label">Visibilidad</label>
             <select id="inputState" class="form-control" name="activo">
                 @if($producto->activo)
@@ -111,12 +105,10 @@
                   <option value="false" selected>No</option>
                 @endif
               </select>
-            
             <label for="exampleFormControlInput1" class="form-label">Stock</label>
             <input type="text" class="form-control mb-2" name="stock" id="exampleFormControlInput1" value="{{$producto->stock}}">
             
-            
-              <label for="exampleFormControlInput1" class="form-label">Descripción</label>
+            <label for="exampleFormControlInput1" class="form-label">Descripción</label>
             <textarea rows="5" class="form-control mb-2" name="descripcion" id="exampleFormControlInput1">{{$producto->descripcion}}</textarea>
 
             <label for="exampleFormControlInput1" class="form-label">Estado</label>
@@ -125,19 +117,17 @@
             <label for="exampleFormControlInput1" class="form-label">Imagen</label>
             <input type="text" class="form-control mb-2" name="imagen" id="exampleFormControlInput1" value="{{$producto->imagen}}">
 
-
             <label for="exampleFormControlInput1" name="labelcategoria" class="form-label">Categoria</label>
 
-                <select id="inputState" class="form-control" name="categoria">
-                 @foreach ($productos as $productoact)
-                     <option value="{{ $productoact->categoria->id }}" {{ $productoact->categoria->nombre == $producto->categoria->nombre ? 'selected' : '' }}>
-                     {{ $productoact->categoria->nombre }}
+            <select id="inputState" class="form-control" name="categoria">
+                @foreach ($categorias as $categoria)
+                    <option value="{{ $categoria->id }}" {{ $categoria->nombre == $producto->categoria->nombre ? 'selected' : '' }}>
+                    {{ $categoria->nombre }}
                     </option>
                 @endforeach
-                </select>
-
-
-              <input type="submit" value="Modificar producto" class="btn btn-primary my-2" />
+            </select>
+            
+            <input type="submit" value="Modificar producto" class="btn btn-primary my-2" />
         </div>
     </form>
 
