@@ -25,8 +25,16 @@ use App\Http\Controllers\EstadisticasController;
 */
 
 Route::get('/estadisticas', EstadisticasController::class . '@index')->middleware('auth')->name('principio');
+
 Route::resource('clientes', ClientesController::class)->middleware('auth');
+Route::get('/clientes/page/{page}', [ClientesController::class, 'indexPage'])->name('clientes.indexPage');
+Route::post('/clientes/search', [ClientesController::class, 'searchByName'])->name('clientes.searchByName');
+
+
 Route::resource('categorias', CategoriasController::class)->middleware('auth');
+Route::get('/categorias/page/{page}', [CategoriasController::class, 'indexPage'])->name('categorias.indexPage');
+Route::post('/categorias/search', [CategoriasController::class, 'searchByName'])->name('categorias.searchByName');
+
 
 
 

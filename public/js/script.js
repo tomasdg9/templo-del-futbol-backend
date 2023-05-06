@@ -1,5 +1,5 @@
 /* Tabla de "Clientes" */
-let tablaClienteEmails = new DataTable('#clienteEmails', {
+/*let tablaClienteEmails = new DataTable('#clienteEmails', {
     "language": {
         "search": "Buscar:",
         "lengthMenu": "Mostrar _MENU_ entradas",
@@ -14,7 +14,7 @@ let tablaClienteEmails = new DataTable('#clienteEmails', {
             "previous": "Anterior"
         }
     }
-});
+});*/
 
 /* Categorias. Texto de páginas, Botón "Anterior", "Siguiente" y "Buscar categoria" */
 var items = $('div[name="categoria"]');
@@ -114,3 +114,48 @@ function filtrarPedidos(){
 	var fechaFin = document.getElementById("finish").value;
 	
 }
+var page = 1;
+/* AJAX Clientes */
+$(document).ready(function() {
+    $('#siguientePag').click(function() {
+        page++;
+        console.log(page);
+        $.ajax({
+            url: '/api/clientes/' + page,
+            type: 'GET',
+            success: function(response) {
+          // Obtenemos el elemento tbody de la tabla
+var tbody = document.getElementById('tablaClientes');
+
+// Limpiamos la tabla antes de agregar nuevos elementos
+tbody.innerHTML = '';
+
+// Recorremos el JSON y creamos una fila por cada objeto
+for(var i=0; i<response.length; i++) {
+    var cliente = response[i];
+
+    // Creamos una nueva fila
+    var row = document.createElement('tr');
+
+    // Agregamos el ID en una columna
+    var idColumn = document.createElement('td');
+    idColumn.textContent = cliente.id;
+    row.appendChild(idColumn);
+
+    // Agregamos el Email en una columna
+    var emailColumn = document.createElement('td');
+    emailColumn.textContent = cliente.email;
+    row.appendChild(emailColumn);
+
+    // Agregamos la fila a la tabla
+    tbody.appendChild(row);
+}
+
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});

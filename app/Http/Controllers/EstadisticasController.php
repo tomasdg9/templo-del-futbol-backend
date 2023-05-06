@@ -14,6 +14,8 @@ use Carbon\Carbon;
 
 class EstadisticasController extends Controller
 {
+
+    // Esto tarda mucho porque consulta sobre todos los datos. Podriamos usar AJAX para que diga Calculando... Y cuando tenga el valor, lo retorne?
     public function index()
     {
         /* Producto más vendido */
