@@ -8,7 +8,7 @@
             <i class="fas fa-align-left"></i>
             <span>Esconder</span>
         </button>
-        <div class="align-items-right mr-1">Hola</div>
+        <div class="align-items-right mr-1"></div>
     </div>
 </nav>
 

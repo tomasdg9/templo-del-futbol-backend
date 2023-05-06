@@ -61,6 +61,4 @@
 @section('scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>cambiar('rpedidos')</script>
-    <!--<script>fechaActual('start')</script>
-    <script>fechaActual('finish')</script>-->
 @endsection

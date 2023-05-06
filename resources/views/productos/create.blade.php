@@ -61,39 +61,37 @@
     @endif
 
         <label for="exampleFormControlInput1" class="form-label">Nombre del producto (*)</label>
-        <input type="text" class="form-control mb-2" name="nombre" id="exampleFormControlInput1" placeholder="Ejemplo: Botines Predator 2.0">
+        <input type="text" class="form-control mb-2" name="nombre" id="exampleFormControlInput1" placeholder="Ejemplo: Botines Predator 2.0" value="{{old('nombre')}}">
 
         <label for="exampleFormControlInput1" class="form-label">Precio (*)</label>
-        <input type="text" class="form-control mb-2" name="precio" id="exampleFormControlInput1" placeholder="Ejemplo: 49999">
+        <input type="text" class="form-control mb-2" name="precio" id="exampleFormControlInput1" placeholder="Ejemplo: 49999" value="{{old('precio')}}">
 
         <label for="exampleFormControlInput1" name="activo" class="form-label">Visibilidad (*)</label>
 
-        <select id="inputState" class="form-control" name="activo">
+        <select id="inputState" class="form-control" name="activo" value="{{old('activo')}}">
             <option value="true" selected>Si</option>
             <option value="false">No</option>
         </select>
 
         <label for="exampleFormControlInput1" class="form-label">Stock (*)</label>
-        <input type="text" class="form-control mb-2" name="stock" id="exampleFormControlInput1" placeholder="Ejemplo: 4">
+        <input type="text" class="form-control mb-2" name="stock" id="exampleFormControlInput1" placeholder="Ejemplo: 4" value="{{old('stock')}}">
 
         <label for="exampleFormControlInput1" class="form-label">Descripcion</label>
-        <textarea rows="5" class="form-control mb-2" name="descripcion" id="exampleFormControlInput1" placeholder="Ejemplo: Botines con tapones para ir a trabar fuerte"></textarea>
+        <textarea rows="5" class="form-control mb-2" name="descripcion" id="exampleFormControlInput1" placeholder="Ejemplo: Botines con tapones para ir a trabar fuerte" value="{{old('descripcion')}}"></textarea>
 
         <label for="exampleFormControlInput1" class="form-label">Estado (*)</label>
-        <input type="text" class="form-control mb-2" name="estado" id="exampleFormControlInput1" placeholder="Ejemplo: Nuevo">
+        <input type="text" class="form-control mb-2" name="estado" id="exampleFormControlInput1" placeholder="Ejemplo: Nuevo" value="{{old('estado')}}">
         
         <label for="exampleFormControlInput1" class="form-label">Imagen (*)</label>
-        <input type="text" class="form-control mb-2" name="imagen" id="exampleFormControlInput1" placeholder="Ejemplo: https://imgur.com/a/mXpX6Ot">
+        <input type="text" class="form-control mb-2" name="imagen" id="exampleFormControlInput1" placeholder="Ejemplo: https://imgur.com/a/mXpX6Ot" value="{{old('imagen')}}">
 
         <label for="exampleFormControlInput1" name="categoria" class="form-label">Categoria (*)</label>
 
-        <select id="inputState" class="form-control" name="categoria">
+        <select id="inputState" class="form-control" name="categoria" value="{{old('categoria')}}">
             @foreach ($productos as $producto)
                 <option value="{{ $producto->categoria->id }}" selected>{{$producto->categoria->nombre}}</option>
             @endforeach
         </select>
-
-
 
         <input type="submit" value="Crear producto" class="btn btn-primary my-2" />
     </div>

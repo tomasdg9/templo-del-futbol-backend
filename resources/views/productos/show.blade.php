@@ -98,38 +98,33 @@
 
         
 
-            <label for="exampleFormControlInput1" class="form-label">Nombre del producto</label>
-            <input type="text" class="form-control mb-2" name="nombre" id="exampleFormControlInput1" value="{{$producto->nombre}}">
+            <label for="exampleFormControlInput1" class="form-label">Nombre del producto (*)</label>
+            <input type="text" class="form-control mb-2" name="nombre" id="exampleFormControlInput1" value="{{old('nombre') == ''?$producto->nombre : old('nombre')}}">
 
-            <label for="exampleFormControlInput1" class="form-label">Precio</label>
-            <input type="text" class="form-control mb-2" name="precio" id="exampleFormControlInput1" value="{{$producto->precio}}">
+            <label for="exampleFormControlInput1" class="form-label">Precio (*)</label>
+            <input type="text" class="form-control mb-2" name="precio" id="exampleFormControlInput1" value="{{old('precio') == ''?$producto->precio : old('precio')}}">
             
-            <label for="exampleFormControlInput1" class="form-label">Visibilidad</label>
+            <label for="exampleFormControlInput1" class="form-label">Visibilidad (*)</label>
             <select id="inputState" class="form-control" name="activo">
-                @if($producto->activo)
-                  <option value="true" selected>Si</option>
-                  <option value="false">No</option>
-                @else
-                  <option value="true">Si</option>
-                  <option value="false" selected>No</option>
-                @endif
+                  <option value="true" {{ old('visible') == 'true' ? 'selected' : '' }}>Si</option>
+                  <option value="false" {{ old('visible') == 'false' ? 'selected' : '' }}>No</option>
               </select>
             
-            <label for="exampleFormControlInput1" class="form-label">Stock</label>
-            <input type="text" class="form-control mb-2" name="stock" id="exampleFormControlInput1" value="{{$producto->stock}}">
+            <label for="exampleFormControlInput1" class="form-label">Stock (*)</label>
+            <input type="text" class="form-control mb-2" name="stock" id="exampleFormControlInput1" value="{{old('stock') == ''?$producto->stock : old('stock')}}">
             
             
               <label for="exampleFormControlInput1" class="form-label">Descripción</label>
-            <textarea rows="5" class="form-control mb-2" name="descripcion" id="exampleFormControlInput1">{{$producto->descripcion}}</textarea>
+            <textarea rows="5" class="form-control mb-2" name="descripcion" id="exampleFormControlInput1" value="{{old('descripcion') == ''?$producto->descripcion : old('descripcion')}}">{{$producto->descripcion}}</textarea>
 
-            <label for="exampleFormControlInput1" class="form-label">Estado</label>
-            <input type="text" class="form-control mb-2" name="estado" id="exampleFormControlInput1" value="{{$producto->estado}}">
+            <label for="exampleFormControlInput1" class="form-label">Estado (*)</label>
+            <input type="text" class="form-control mb-2" name="estado" id="exampleFormControlInput1" value="{{old('estado') == ''?$producto->estado : old('estado')}}">
 
-            <label for="exampleFormControlInput1" class="form-label">Imagen</label>
-            <input type="text" class="form-control mb-2" name="imagen" id="exampleFormControlInput1" value="{{$producto->imagen}}">
+            <label for="exampleFormControlInput1" class="form-label">Imagen (*) (La imagen para ser visible no tiene que tener problemas con derechos de autor, y solo debe ser por url)</label>
+            <input type="text" class="form-control mb-2" name="imagen" id="exampleFormControlInput1" value="{{old('imagen') == ''?$producto->imagen : old('imagen')}}">
 
 
-            <label for="exampleFormControlInput1" name="labelcategoria" class="form-label">Categoria</label>
+            <label for="exampleFormControlInput1" name="labelcategoria" class="form-label">Categoria (*)</label>
 
                 <select id="inputState" class="form-control" name="categoria">
                  @foreach ($productos as $productoact)

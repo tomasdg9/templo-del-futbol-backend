@@ -22,13 +22,21 @@
                 <a href="{{ url()->route('productos.principio') }}" class="btn btn-primary">Ir al principio</a>
             </ul>
         </div>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav ml-auto">
-                <a href="/productos/create" class="btn btn-primary">Crear nuevo producto</a>
-            </ul>
-        </div>
     </div>
 </nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <div class="form-group">
+                @if (session('error'))
+                    <h6 class="alert alert-danger">{{ session('error') }}</h6>
+                @endif
+                <a href="/productos/create" class="btn btn-success">Crear nuevo producto</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 @if (session('success'))
                 <h6 class="alert alert-success">{{ session('success') }}</h6>

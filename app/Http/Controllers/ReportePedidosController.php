@@ -15,7 +15,9 @@ class ReportePedidosController extends Controller
     }
 
     public function store(Request $request){
-        $pedidos = DetallePedido::whereBetween('created_at', [$request->start, $request->finish])->get();
+        $pedidos = DetallePedido::where('created_at', '>=', $request->start)
+        ->where('created_at', '<=', $request->finish)
+        ->get();
         return redirect()->route('rpedidos.index')->with('pedidos', $pedidos);
     }
 

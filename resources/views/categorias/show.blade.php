@@ -59,11 +59,11 @@
         @method('PATCH')
         @csrf
         <div class="mb-3 col">
-            <label for="exampleFormControlInput1" class="form-label">Nombre de la categoría</label>
+            <label for="exampleFormControlInput1" class="form-label">Nombre de la categoría (*)</label>
             <input type="text" class="form-control mb-2" name="nombre" id="exampleFormControlInput1" value="{{$categoria->nombre}}">
             <label for="exampleFormControlInput1" class="form-label">Descripción</label>
             <textarea rows="5" class="form-control mb-2" name="descripcion" id="exampleFormControlInput1"">{{$categoria->descripcion}}</textarea>
-            <label for="exampleFormControlInput1" class="form-label">Visible?</label>
+            <label for="exampleFormControlInput1" class="form-label">Visibilidad (*)</label>
             <select id="inputState" class="form-control" name="visible">
                 @if($categoria->visible)
                   <option value="true" selected>Si</option>

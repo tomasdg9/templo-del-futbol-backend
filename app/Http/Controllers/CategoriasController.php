@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use Illuminate\Validation\Rule;
 
 class CategoriasController extends Controller
 {
@@ -71,6 +72,16 @@ class CategoriasController extends Controller
     {
         $categoria = Categoria::find($id);
 
+        $request->validate([
+            'nombre' => [
+                'required',
+                'min:3',
+                Rule::unique('categorias')->ignore($categoria->id),
+                'max:55'
+            ],
+            'descripcion' =>'max:500',
+            'visible' => 'required'
+        ]);
         $categoria->nombre = $request->nombre;
         $categoria->descripcion = $request->descripcion;
         $categoria->visible = $request->visible;
