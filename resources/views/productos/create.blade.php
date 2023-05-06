@@ -52,6 +52,10 @@
         <div class="alert alert-danger">El estado es incorrecto.</div>
     @enderror
 
+    @error('imagen')
+        <div class="alert alert-danger">La imagen es incorrecta.</div>
+    @enderror
+
     @if (session('success'))
             <h6 class="alert alert-success">{{ session('success') }}</h6>
     @endif

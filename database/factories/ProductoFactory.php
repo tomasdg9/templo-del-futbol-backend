@@ -27,7 +27,7 @@ class ProductoFactory extends Factory
             'descripcion' => $this->faker->text(),
             'estado' => $this->faker->word(),
             'categoria_id' => $categoria->id,
-            'imagen' => 'public\img\default_image.png'
+            'imagen' => '\img\default_image.png'
         ];
     }
 }
