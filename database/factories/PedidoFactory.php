@@ -19,7 +19,6 @@ class PedidoFactory extends Factory
         return [
             'email' => $this->faker->unique()->email,
             'descripcion' => $this->faker->text(),
-
         ];
     }
 }
