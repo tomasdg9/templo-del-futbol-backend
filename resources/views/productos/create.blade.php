@@ -82,7 +82,7 @@
         <label for="exampleFormControlInput1" class="form-label">Estado (*)</label>
         <input type="text" class="form-control mb-2" name="estado" id="exampleFormControlInput1" placeholder="Ejemplo: Nuevo" value="{{old('estado')}}">
         
-        <label for="exampleFormControlInput1" class="form-label">Imagen (*)</label>
+        <label for="exampleFormControlInput1" class="form-label">Imagen (*) (La imagen para ser visible no tiene que tener problemas con derechos de autor, y solo debe ser por url)</label>
         <input type="text" class="form-control mb-2" name="imagen" id="exampleFormControlInput1" placeholder="Ejemplo: https://imgur.com/a/mXpX6Ot" value="{{old('imagen')}}">
 
         <label for="exampleFormControlInput1" name="categoria" class="form-label">Categoria (*)</label>

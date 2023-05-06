@@ -72,16 +72,10 @@ class CategoriasController extends Controller
     {
         $categoria = Categoria::find($id);
         $request->validate([
-            'nombre' => 'required|unique:categorias,nombre,'.$categoria->id.'|max:255',
-            'descripcion' =>'required|max:500',
-            'visible' => 'required'
-        ]);
-
-        $request->validate([
             'nombre' => [
                 'required',
                 'min:3',
-                Rule::unique('categorias')->ignore($categoria->id),
+                Rule::unique('categorias')->ignore($categoria->id), //esto se hace para que el nombre pueda ser el mismo que el anterior
                 'max:55'
             ],
             'descripcion' =>'max:500',

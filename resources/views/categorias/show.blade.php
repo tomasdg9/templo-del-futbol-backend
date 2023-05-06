@@ -72,7 +72,7 @@
             <input type="text" class="form-control mb-2" name="nombre" id="exampleFormControlInput1" value="{{ old('nombre', $categoria->nombre) }}">
             <label for="exampleFormControlInput1" class="form-label">Descripción (*)</label>
             <textarea rows="5" class="form-control mb-2" name="descripcion" id="exampleFormControlInput1"">{{ old('descripcion', $categoria->descripcion) }}</textarea>
-            <label for="exampleFormControlInput1" class="form-label">Visible? (*)</label>
+            <label for="exampleFormControlInput1" class="form-label">Visibilidad (*)</label>
             <select id="inputState" class="form-control" name="visible">
                 @if(old('visible') == null)
                   @if($categoria->visible)
