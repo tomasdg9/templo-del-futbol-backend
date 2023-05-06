@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 
 class DetallePedidosController extends Controller
 {
-    
-    
+
+
     /* Los pedidos pueden ser mostrados.*/
    public function index()
      {
@@ -27,8 +27,8 @@ class DetallePedidosController extends Controller
 
 
    public function show(string $id){
-    $detalle_pedido = DetallePedido::find($id);
-    $productos = $detalle_pedido->pedido->productos;
-    return view('pedidos.show', ['detalle_pedido' => $detalle_pedido, 'productos' =>$productos]);
+    $pedido = Pedido::find($id); // Busca el pedido con id=$id
+    $productos = $pedido->productos; // Busca los productos de ese pedido.
+        return view('pedidos.show', ['detalle_pedido' => $pedido, 'productos' =>$productos]);
    }
 }

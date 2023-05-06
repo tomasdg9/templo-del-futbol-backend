@@ -39,11 +39,11 @@ class ProductosController extends Controller
    public function show(string $id)
    {
      $producto = Producto::find($id);
-     $productos = Producto::all();
+     $categorias = Categoria::all();
      if($producto)
-          return view('productos.show', ['producto' => $producto, 'productos'=> $productos]);
+          return view('productos.show', ['producto' => $producto, 'categorias'=> $categorias]);
      else 
-          return redirect()->route('categorias.indexPage', ['page' => 1])->with('error', 'La categoria no existe');
+          return redirect()->route('productos.indexPage', ['page' => 1])->with('error', 'El producto no existe');
    }
 
    public function update(Request $request, String $id){

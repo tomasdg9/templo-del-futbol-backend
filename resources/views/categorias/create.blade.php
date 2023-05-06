@@ -43,7 +43,7 @@
         <label for="exampleFormControlInput1" class="form-label">Nombre de la categoría (*)</label>
         <input type="text" class="form-control mb-2" name="nombre" id="exampleFormControlInput1" placeholder="Ejemplo: Remeras deportivas" value="{{old('nombre')}}">
 
-        <label for="exampleFormControlInput1" class="form-label">Descripcion</label>
+        <label for="exampleFormControlInput1" class="form-label">Descripcion (*)</label>
         <textarea rows="5" class="form-control mb-2" name="descripcion" id="exampleFormControlInput1" placeholder="Ejemplo: Remera ideales para el entrenamiento de cualquier deporte. Tela Dri-Fit inspirada en Nike" value="{{old('descripcion')}}"></textarea>
 
         <label for="exampleFormControlInput1" class="form-label">Visibilidad (*)</label>
@@ -52,7 +52,7 @@
             <option value="true" {{ old('visible') == 'true' ? 'selected' : '' }}>Si</option>
             <option value="false" {{ old('visible') == 'false' ? 'selected' : '' }}>No</option>
         </select>
-        
+
         <input type="submit" value="Crear categoria" class="btn btn-primary my-2" />
     </div>
 </form>

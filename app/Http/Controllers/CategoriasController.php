@@ -71,6 +71,11 @@ class CategoriasController extends Controller
     public function update(Request $request, string $id)
     {
         $categoria = Categoria::find($id);
+        $request->validate([
+            'nombre' => 'required|unique:categorias,nombre,'.$categoria->id.'|max:255',
+            'descripcion' =>'required|max:500',
+            'visible' => 'required'
+        ]);
 
         $request->validate([
             'nombre' => [
@@ -111,6 +116,17 @@ class CategoriasController extends Controller
     public function showAllByAPI(){
         $categorias = Categoria::all();
         return response()->json($categorias);
+    }
+
+    public function showPageByAPI(string $page){
+        $pageAux = $page - 1;
+        $categorias = Categoria::orderBy('id', 'asc')->skip(6*$pageAux)->take(6)->get();
+        if( count($categorias) == 0)
+        return response()->json([
+            'mensaje' => 'Página de categorías no encontrada'
+        ], 404);
+        else
+            return response()->json($categorias);
     }
 
 }

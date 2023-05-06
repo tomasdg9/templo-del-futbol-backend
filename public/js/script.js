@@ -1,20 +1,3 @@
-/* Tabla de "Clientes" */
-/*let tablaClienteEmails = new DataTable('#clienteEmails', {
-    "language": {
-        "search": "Buscar:",
-        "lengthMenu": "Mostrar _MENU_ entradas",
-        "zeroRecords": "No se encontraron registros coincidentes",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-        "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
-        "infoFiltered": "(filtrado de _MAX_ entradas totales)",
-        "paginate": {
-            "first": "Primero",
-            "last": "Último",
-            "next": "Siguiente",
-            "previous": "Anterior"
-        }
-    }
-});*/
 
 /* Categorias. Texto de páginas, Botón "Anterior", "Siguiente" y "Buscar categoria" */
 var items = $('div[name="categoria"]');
@@ -56,31 +39,6 @@ $("#prevButton").click(function() {
         textoMostrnado.text("Mostrando "+paginaActual+" de "+cantidadPaginas+" páginas");
     }
 });
-
-/* Buscar categoria por nombre */
-/*$('#searchCategoria').on('input',function(e){
-    var textoInput = $("#searchCategoria").val();
-    if(textoInput == ''){
-        reiniciarPaginas();
-    } else {
-        items.children().hide();
-        items.children('div[name="'+textoInput+'"]').show();
-    }
-});*/
-
-
-/* Ocultar nombres */
-/*let sidebar = document.querySelector(".sidebar");
-let sidebarBtn = document.querySelector(".sidebarBtn");
-sidebarBtn.onClick(function() {
-	  sidebar.classList.toggle("active");
-	  if(sidebar.classList.contains("active")){
-		sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
-	  }
-	  else
-		sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-	  });
-*/
 
 /* Cambio del recuadro mas oscuro cuando se presiona en un nav-link */
 function cambiar(idElem){
@@ -159,3 +117,4 @@ for(var i=0; i<response.length; i++) {
         });
     });
 });
+
