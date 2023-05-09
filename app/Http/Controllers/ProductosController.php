@@ -116,16 +116,57 @@ class ProductosController extends Controller
         return redirect()->route('productos.indexPage', ['page' => 1])->with('success', 'El producto '.$producto->nombre.' fue creado con éxito.');
    }
 
+/**
+ * @OA\Get(
+ *     path="/rest/productos",
+ *     summary="Muestra todos los productos",
+ *     @OA\Response(
+ *         response=200,
+ *         description="Todos los productos")
+ * )
+ */
    public function showAllByAPI(){
         $productos = Producto::all();
         return response()->json($productos);
    }
 
+
+/**
+ * @OA\Get(
+ *     path="/rest/productos/filtrar",
+ *     summary="Muestra todos los productos activos",
+ *     @OA\Response(
+ *         response=200,
+ *         description="Todos los productos activos")
+ * )
+ */
    public function showFilterByAPI(){
         $productos = Producto::where('activo',true)->get();
         return response()->json($productos);
    }
-
+   
+/**
+ * @OA\Get(
+ *     path="/rest/productos/{id}",
+ *     summary="Muestra el producto segun su id",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="ID del producto",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="string"
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Producto segun id")
+ *     ,
+ *     @OA\Response(
+ *         response=404,
+ *         description="Producto no encontrado")
+ * )
+ */
    public function showByAPI(String $id){
         $producto = Producto::find($id);
         if($producto)

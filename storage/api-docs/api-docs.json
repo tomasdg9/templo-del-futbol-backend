@@ -1,0 +1,257 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API el Templo del Futbol",
+        "description": "Esta es una API que brinda servicios sobre productos, clientes y categorias",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/rest/categorias/{id}": {
+            "get": {
+                "summary": "Muestra categorias segun id",
+                "operationId": "1f0993211f05e356114f268a9bc9731d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la categoria",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Categoría no encontrada"
+                    },
+                    "200": {
+                        "description": "Categoría encontrada"
+                    }
+                }
+            }
+        },
+        "/rest/categorias": {
+            "get": {
+                "summary": "Muestra todas las categorias",
+                "operationId": "8d991ab5c3a566d8e3e0b6906cd7aac5",
+                "responses": {
+                    "200": {
+                        "description": "Lista de todas las categorías"
+                    }
+                }
+            }
+        },
+        "/rest/categorias/page/{page}": {
+            "get": {
+                "summary": "Muestra las categorias por pagina",
+                "operationId": "6ff158041689066d6623e97ffec3e097",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "pagina de la categoria",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pagina de categorías"
+                    },
+                    "404": {
+                        "description": "Pagina no encontrada"
+                    }
+                }
+            }
+        },
+        "/rest/productos/categoria/{id}": {
+            "get": {
+                "summary": "Muestra los productos de una categoria por id de la categoria",
+                "operationId": "8516641cc2535824ca662766a4c1b504",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la categoria",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Productos por categoría"
+                    },
+                    "404": {
+                        "description": "Categoria no encontrada o sin productos"
+                    }
+                }
+            }
+        },
+        "/rest/pedidos/crear": {
+            "post": {
+                "summary": "Crea un nuevo pedido por API",
+                "operationId": "9f859f0ed0e04140d58cfcd38a15821c",
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "path",
+                        "description": "Request de los pedidos",
+                        "required": true,
+                        "schema": {
+                            "type": "request"
+                        }
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "Error al crear pedido"
+                    },
+                    "200": {
+                        "description": "Pedido creado con exito"
+                    },
+                    "500": {
+                        "description": "Error al crear pedido"
+                    }
+                }
+            }
+        },
+        "/rest/pedidos/{id}": {
+            "get": {
+                "summary": "Muestra pedido segun id por API",
+                "operationId": "111e627629b75f30f4048be33b598669",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del pedido",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cliente y su id"
+                    },
+                    "404": {
+                        "description": "Cliente no encontrado"
+                    }
+                }
+            }
+        },
+        "/rest/pedidos/email/{email}": {
+            "get": {
+                "summary": "Muestra cliente segun su email por API",
+                "operationId": "9df5b09b6a853824965702b45ed2acdd",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "email del cliente",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cliente segun su email"
+                    },
+                    "404": {
+                        "description": "Cliente no encontrado"
+                    }
+                }
+            }
+        },
+        "/rest/pedidos": {
+            "get": {
+                "summary": "Muestra todos los pedidos por API",
+                "operationId": "7eb81763d3132d7259b9892441e23d65",
+                "responses": {
+                    "200": {
+                        "description": "Pedidos"
+                    }
+                }
+            }
+        },
+        "/rest/pedidos/page/{page}": {
+            "get": {
+                "summary": "Muestra los pedidos por pagina",
+                "operationId": "ce7ec54a3f4fdbc860e8d3570ab2ae4e",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "pagina del pedido",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pagina de pedidos"
+                    },
+                    "404": {
+                        "description": "Pagina no encontrada"
+                    }
+                }
+            }
+        },
+        "/rest/productos": {
+            "get": {
+                "summary": "Muestra todos los productos",
+                "operationId": "7fdc9bb0fa6786c4d3da00ae63661aab",
+                "responses": {
+                    "200": {
+                        "description": "Todos los productos"
+                    }
+                }
+            }
+        },
+        "/rest/productos/filtrar": {
+            "get": {
+                "summary": "Muestra todos los productos activos",
+                "operationId": "5c855b7f627e9d4b42995167da55438c",
+                "responses": {
+                    "200": {
+                        "description": "Todos los productos activos"
+                    }
+                }
+            }
+        },
+        "/rest/productos/{id}": {
+            "get": {
+                "summary": "Muestra el producto segun su id",
+                "operationId": "5d7bcd13c60694e18ac72748f7ffe9f7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del producto",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Producto segun id"
+                    },
+                    "404": {
+                        "description": "Producto no encontrado"
+                    }
+                }
+            }
+        }
+    }
+}

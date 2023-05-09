@@ -95,7 +95,28 @@ class CategoriasController extends Controller
         return redirect()->route('categorias.indexPage', ['page' => 1])->with('success', 'Categoria '.$namecategoria.' eliminada');
     }
 
-    // Métodos de la API
+
+/**
+ * @OA\Get(
+ *     path="/rest/categorias/{id}",
+ *     summary="Muestra categorias segun id",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="ID de la categoria",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="string"
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Categoría no encontrada"),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Categoría encontrada")
+ * )
+ */
     public function showByAPI(string $id)
     {
         $categoria = Categoria::find($id);
@@ -107,11 +128,43 @@ class CategoriasController extends Controller
             ], 404);
     }
 
+/**
+ * @OA\Get(
+ *     path="/rest/categorias",
+ *     summary="Muestra todas las categorias",
+ *     
+ *     @OA\Response(
+ *         response=200,
+ *         description="Lista de todas las categorías")
+ * )
+ */
     public function showAllByAPI(){
         $categorias = Categoria::all();
         return response()->json($categorias);
     }
 
+/**
+ * @OA\Get(
+ *     path="/rest/categorias/page/{page}",
+ *     summary="Muestra las categorias por pagina",
+ *     @OA\Parameter(
+ *         name="page",
+ *         in="path",
+ *         description="pagina de la categoria",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="string"
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Pagina de categorías")
+ *     ,
+ *     @OA\Response(
+ *         response=404,
+ *         description="Pagina no encontrada")
+ * )
+ */
     public function showPageByAPI(string $page){
         $pageAux = $page - 1;
         $categorias = Categoria::orderBy('id', 'asc')->skip(6*$pageAux)->take(6)->get();
@@ -123,6 +176,29 @@ class CategoriasController extends Controller
             return response()->json($categorias);
     }
 
+/**
+ * @OA\Get(
+ *     path="/rest/productos/categoria/{id}",
+ *     summary="Muestra los productos de una categoria por id de la categoria",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="ID de la categoria",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="string"
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Productos por categoría")
+ *     ,
+ *     @OA\Response(
+ *         response=404,
+ *         description="Categoria no encontrada o sin productos")
+ * 
+ * )
+ */
     public function getProductosByCategoria(string $id){
         $categoria = Categoria::find($id);
         $productos = $categoria->productos;

@@ -15,22 +15,7 @@ class ClientesController extends Controller
         $clientes = Pedido::where('email', $email)->get();
         return view('clientes.show', ['clientes' => $clientes]);
    }
-   /* Los pedidos no se eliminan ni se actualizan. Entonces estos métodos no van
-   public function update(Request $request, string $id)
-   {
-       $cliente = Pedido::find($id);
-       $cliente->email = $request->email;
-       $cliente->descripcion = $cliente->descripcion;
-       $cliente->save();
-       return redirect()->route('cliente.index')->with('success', 'Cliente actualizado con éxito');
-   }
-   public function destroy(string $id)
-   {
-       $cliente = Pedido::find($id);
-       $cliente->delete();
-       return redirect()->route('cliente.index')->with('success', 'Cliente eliminado con éxito');
-   }
-*/
+
    public function index()
     {
         return redirect()->route('clientes.indexPage', ['page' => 1]);
@@ -62,11 +47,32 @@ class ClientesController extends Controller
         }
     }
 
-    // Métodos de la API
-
-   // Crea un pedido.
-   // Es un post, se necesita "email", "descripcion" y una lista de ID's de productos de la forma "X1-X2-X3-...-Xn" donde X1 es el ID de un producto.
-   public function storeByAPI(Request $request){
+/**
+ * @OA\Post(
+ *     path="/rest/pedidos/crear",
+ *     summary="Crea un nuevo pedido por API",
+ *     @OA\Parameter(
+ *         name="request",
+ *         in="path",
+ *         description="Request de los pedidos",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="request"
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=422,
+ *         description="Error al crear pedido")
+ *     ,
+ *     @OA\Response(
+ *         response=200,
+ *         description="Pedido creado con exito"),
+ *     @OA\Response(
+ *         response=500,
+ *         description="Error al crear pedido")
+ *     )
+ */
+ public function storeByAPI(Request $request){
 
         // Código para crear un nuevo pedido.
         // Los ids de los productos se deben recibir como una cadena del estilo: X1-X2-X3-...-XN Donde Xi es un numero >= 0
@@ -109,7 +115,28 @@ class ClientesController extends Controller
         }
    }
 
-   // Muestra un pedido según su ID.
+/**
+ * @OA\Get(
+ *     path="/rest/pedidos/{id}",
+ *     summary="Muestra pedido segun id por API",
+ *      @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="ID del pedido",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="string"
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Cliente y su id")
+ *     ,
+ *     @OA\Response(
+ *         response=404,
+ *         description="Cliente no encontrado")
+ * )
+ */
     public function showByAPI(string $id)
     {
         $cliente = Pedido::find($id);
@@ -121,7 +148,30 @@ class ClientesController extends Controller
             ], 404);
     }
 
-    // Muestra los pedidos de un cliente según su "email"
+/**
+ * @OA\Get(
+ *     path="/rest/pedidos/email/{email}",
+ *     summary="Muestra cliente segun su email por API",
+ *      @OA\Parameter(
+ *         name="email",
+ *         in="path",
+ *         description="email del cliente",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="string"
+ *         )
+ *     ),
+ * 
+ *     @OA\Response(
+ *         response=200,
+ *         description="Cliente segun su email")
+ *     ,
+ *     @OA\Response(
+ *         response=404,
+ *         description="Cliente no encontrado")
+ * 
+ * )
+ */
     public function showEmailByAPI(string $email)
     {
         $cliente = Pedido::where('email', 'ilike', $email)->get();
@@ -133,14 +183,44 @@ class ClientesController extends Controller
             ], 404);
     }
 
-    // Muestra todos los pedidos.
+/**
+ * @OA\Get(
+ *     path="/rest/pedidos",
+ *     summary="Muestra todos los pedidos por API",
+ *     @OA\Response(
+ *         response=200,
+ *         description="Pedidos")
+ * )
+ */
     public function showAllByAPI(){
         $clientes = Pedido::all();
         return response()->json($clientes);
     }
 
-    // Muestra la página "page" de pedidos. Puede haber emails repetidos. Es para mostrar pedidos, no clientes.
-    public function showPageByAPI(string $page){
+/**
+ * @OA\Get(
+ *     path="/rest/pedidos/page/{page}",
+ *     summary="Muestra los pedidos por pagina",
+ *     @OA\Parameter(
+ *         name="page",
+ *         in="path",
+ *         description="pagina del pedido",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="string"
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Pagina de pedidos")
+ *     ,
+ *     @OA\Response(
+ *         response=404,
+ *         description="Pagina no encontrada")
+ * 
+ * )
+ */
+public function showPageByAPI(string $page){
         $pageAux = $page - 1;
         $clientes = Pedido::orderBy('id', 'asc')->skip(6*$pageAux)->take(6)->get();
         if( count($clientes) == 0)
