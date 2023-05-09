@@ -123,4 +123,20 @@ class CategoriasController extends Controller
             return response()->json($categorias);
     }
 
+    public function getProductosByCategoria(string $id){
+        $categoria = Categoria::find($id);
+        $productos = $categoria->productos;
+        if($categoria)
+            if( count($productos) == 0)
+            return response()->json([
+                'mensaje' => 'La categoría no tiene productos'
+            ], 404);
+            else
+                return response()->json($productos);
+        else
+            return response()->json([
+                'mensaje' => 'Categoria no encontrada'
+            ], 404);
+    }
+
 }

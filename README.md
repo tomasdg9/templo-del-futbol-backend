@@ -1,5 +1,6 @@
 ## Informe
 
+Vercel funcionando. El link será enviado a Carolina.
 
 * Proyecto Framework PHP - Laravel<br>
 - ¿Qué entidades se podrán editar?<br>
@@ -15,9 +16,9 @@ Las entidades que se podrán obtener por API son los productos y las categorías
 
 - ¿Qué entidades se podrán modificar por API?<br>
 Se podrán modificar,<br>
-Producto -> Disminuye el stock en caso de comprarlo.<br>
-Pedido -> Cuando el usuario realice la compra del producto deseado.<br>
-Detalle_pedido -> Cada vez que el usuario realice la compra del producto.<br>
+Producto -> Disminuye el stock en caso de comprarlo. (Esto será agregado como un extra en la etapa siguiente)<br>
+Pedido -> Cuando el usuario realice la compra del producto deseado (Esto lleva a la modificación de la entidad de abajo).<br>
+DetallePedido -> Cada vez que el usuario realice la compra del producto.<br>
 
 - Proyecto React - JavaScript<br>
 
@@ -32,7 +33,7 @@ También, podrá comprar productos, filtrar productos por categoría, por nombre
 * Observación
 Como administrador del sistema (en este caso sería un empleado de la empresa) utilizaremos la tabla users que nos brinda Laravel.
 
-
+<!--
 ## Pasos
 
 - clonar el repo https://github.com/iaw-2023/laravel-template y mantener como owner la organización de la materia.
@@ -118,3 +119,4 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+-->

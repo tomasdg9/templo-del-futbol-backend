@@ -34,4 +34,4 @@ Route::get('/pedidos/page/{page}', 'App\Http\Controllers\ClientesController@show
 // API Productos
 Route::get('/productos/{id}', 'App\Http\Controllers\ProductosController@showByAPI');
 Route::get('/productos', 'App\Http\Controllers\ProductosController@showAllByAPI');
-
+Route::get('/productos/categoria/{id}', 'App\Http\Controllers\CategoriasController@getProductosByCategoria');

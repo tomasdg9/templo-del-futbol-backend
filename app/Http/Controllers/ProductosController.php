@@ -16,7 +16,7 @@ class ProductosController extends Controller
           return redirect()->route('productos.indexPage', ['page' => 1]);
      }
 
-     
+
     // Para llamar a un método del controlador siempre tiene que estar configurado en web.php
     public function indexPage(int $page){
      $pageAux = $page - 1;
@@ -42,7 +42,7 @@ class ProductosController extends Controller
      $categorias = Categoria::all();
      if($producto)
           return view('productos.show', ['producto' => $producto, 'categorias'=> $categorias]);
-     else 
+     else
           return redirect()->route('productos.indexPage', ['page' => 1])->with('error', 'El producto no existe');
    }
 
@@ -65,7 +65,7 @@ class ProductosController extends Controller
           'imagen' => 'required|url'
       ]);
 
-        $producto->nombre = $request->nombre;        
+        $producto->nombre = $request->nombre;
         $producto->precio = $request->precio;
         $producto->activo = $request->activo;
         $producto->stock = $request->stock;
@@ -89,7 +89,7 @@ class ProductosController extends Controller
    }
 
     public function store(Request $request){
-     
+
         $request->validate([
             'nombre' => 'required|min:3|unique:productos|max:55',
             'precio' => 'required|regex:/^\d+(\.\d{1,2})?$/|max:12', //'regex:/^\d+(\.\d{1,2})?$/' es para que valide la entrada decimal
@@ -101,7 +101,7 @@ class ProductosController extends Controller
             'imagen' => 'required|url'
         ]);
 
-        
+
         $producto = new Producto;
         $producto->nombre = $request->nombre;
         $producto->precio = $request->precio;
@@ -112,8 +112,8 @@ class ProductosController extends Controller
         $producto->estado = $request->estado;
         $producto->imagen = $request->imagen;
         $producto->save();
-        
-        return redirect()->route('productos.indexPage', ['page' => 1])->with('success', 'El producto'.$producto->nombre.' fue creado con éxito.');
+
+        return redirect()->route('productos.indexPage', ['page' => 1])->with('success', 'El producto '.$producto->nombre.' fue creado con éxito.');
    }
 
    public function showAllByAPI(){
