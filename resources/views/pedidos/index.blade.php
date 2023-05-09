@@ -9,19 +9,6 @@
             <i class="fas fa-align-left"></i>
             <span>Esconder</span>
         </button>
-        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-align-justify"></i>
-        </button>
-
-        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-align-justify"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav ml-auto">
-                <a href="{{ url()->route('pedidos.principio') }}" class="btn btn-primary">Ir al principio</a>
-            </ul>
-        </div>
     </div>
 </nav>
 
@@ -36,12 +23,12 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($detalle_pedidos as $detalle_pedido) 
+        @foreach ($detalle_pedidos as $detalle_pedido)
             <tr>
                 <th scope="row">{{$detalle_pedido->id}}</th>
-                
+
                 <td><a href="{{ route('pedidos.show', ['pedido' => $detalle_pedido->id]) }}">{{$detalle_pedido->pedido->email}}</a></td>
-                
+
                 <th scope="row">{{$detalle_pedido->pedido->getCantidadProductos()}}</th>
             </tr>
         @endforeach
@@ -55,7 +42,7 @@
                 <a href="/pedidos/page/{{$page-1}}" class="btn btn-success mr-2">< Anterior</a>
             @endif
             @if ($tieneProx)
-                <a href="/pedidos/page/{{$page+1}}" class="btn btn-success">Siguiente ></a>        
+                <a href="/pedidos/page/{{$page+1}}" class="btn btn-success">Siguiente ></a>
             @endif
         </div>
     </div>

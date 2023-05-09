@@ -15,7 +15,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav navbar-nav ml-auto">
-                <a href="/productos" class="btn btn-primary">Volver</a>
+                <a href="{{ url()->route('productos.principio') }}" class="btn btn-primary">Ir al principio</a>
             </ul>
         </div>
     </div>
@@ -81,7 +81,7 @@
 
         <label for="exampleFormControlInput1" class="form-label">Estado (*)</label>
         <input type="text" class="form-control mb-2" name="estado" id="exampleFormControlInput1" placeholder="Ejemplo: Nuevo" value="{{old('estado')}}">
-        
+
         <label for="exampleFormControlInput1" class="form-label">Imagen (*) (La imagen para ser visible no tiene que tener problemas con derechos de autor, y solo debe ser por url)</label>
         <input type="text" class="form-control mb-2" name="imagen" id="exampleFormControlInput1" placeholder="Ejemplo: https://imgur.com/a/mXpX6Ot" value="{{old('imagen')}}">
 

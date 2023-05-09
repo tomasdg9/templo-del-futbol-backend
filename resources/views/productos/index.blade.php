@@ -4,24 +4,10 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top sticky-top">
     <div class="container-fluid">
-
         <button type="button" id="sidebarCollapse" class="btn btn-info">
             <i class="fas fa-align-left"></i>
             <span>Esconder</span>
         </button>
-        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-align-justify"></i>
-        </button>
-
-        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-align-justify"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav ml-auto">
-                <a href="{{ url()->route('productos.principio') }}" class="btn btn-primary">Ir al principio</a>
-            </ul>
-        </div>
     </div>
 </nav>
 
@@ -66,7 +52,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($productos as $producto) 
+        @foreach ($productos as $producto)
             <tr>
                 <th scope="row">{{$producto->id}}</th>
                 <td><a href="{{ route('productos.show', ['producto' => $producto->id]) }}">{{$producto->nombre}}</a></td>
@@ -85,7 +71,7 @@
                 <a href="/productos/page/{{$page-1}}" class="btn btn-success mr-2">< Anterior</a>
             @endif
             @if ($tieneProx)
-                <a href="/productos/page/{{$page+1}}" class="btn btn-success">Siguiente ></a>        
+                <a href="/productos/page/{{$page+1}}" class="btn btn-success">Siguiente ></a>
             @endif
         </div>
     </div>

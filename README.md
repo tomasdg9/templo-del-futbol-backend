@@ -1,6 +1,8 @@
 ## Informe
 
-Vercel funcionando. El link será enviado a Carolina.
+<img src="http://imgfz.com/i/Prh8nST.jpeg" width="400" alt="Laravel Logo">
+
+<b>Vercel funcionando. El link será enviado a Carolina.</b>
 
 * Proyecto Framework PHP - Laravel<br>
 - ¿Qué entidades se podrán editar?<br>

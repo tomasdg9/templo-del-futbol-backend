@@ -10,15 +10,6 @@
             <span>Esconder</span>
         </button>
 
-        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-align-justify"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav ml-auto">
-                <a href="{{ url()->route('principio') }}" class="btn btn-primary">Volver</a>
-            </ul>
-        </div>
     </div>
 </nav>
 
@@ -48,7 +39,7 @@
         <button type="submit" class="btn btn-primary mb-2">Buscar</button>
     </form>
 </div>
-   
+
 <div class="container">
     <div class="row">
         @foreach ($categorias as $categoria)
@@ -85,7 +76,7 @@
                 <a href="/categorias/page/{{$page-1}}" class="btn btn-success mr-2">< Anterior</a>
             @endif
             @if ($tieneProx)
-                <a href="/categorias/page/{{$page+1}}" class="btn btn-success">Siguiente ></a>        
+                <a href="/categorias/page/{{$page+1}}" class="btn btn-success">Siguiente ></a>
             @endif
         </div>
     </div>

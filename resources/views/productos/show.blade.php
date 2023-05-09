@@ -15,7 +15,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav navbar-nav ml-auto">
-                <a href="/productos" class="btn btn-primary">Volver</a>
+                <a href="{{ url()->route('productos.principio') }}" class="btn btn-primary">Ir al principio</a>
             </ul>
         </div>
     </div>
@@ -41,7 +41,7 @@
         @error('activo')
             <div class="alert alert-danger">La visibilidad no es correcta.</div>
         @enderror
-        
+
         @error('estado')
             <div class="alert alert-danger">El estado no es correcto.</div>
         @enderror
@@ -66,7 +66,7 @@
         <th scope="col">Stock</th>
         <th scope="col">Descripcion</th>
         <th scope="col">Estado</th>
-        
+
       </tr>
     </thead>
     <tbody>
@@ -82,7 +82,7 @@
         </tr>
     </tbody>
   </table>
-  
+
   <div class="text-align-center">
     <img src="{{$producto->imagen}}" width="300" height="80%" loading="lazy">
   </div>
@@ -92,7 +92,7 @@
 <div id="formulario" class="collapse">
     <form  method="POST" action="{{route('productos.update',['producto' => $producto->id])}}">
         @method('PATCH')
-        @csrf 
+        @csrf
         <div class="mb-3 col">
 
             <label for="exampleFormControlInput1" class="form-label">Nombre del producto (*)</label>
@@ -100,7 +100,7 @@
 
             <label for="exampleFormControlInput1" class="form-label">Precio (*)</label>
             <input type="text" class="form-control mb-2" name="precio" id="exampleFormControlInput1" value="{{old('precio') == ''?$producto->precio : old('precio')}}">
-            
+
             <label for="exampleFormControlInput1" class="form-label">Visibilidad (*)</label>
 
             <select id="inputState" class="form-control" name="activo">
@@ -108,11 +108,11 @@
                   <option value="false" {{ old('visible') == 'false' ? 'selected' : '' }}>No</option>
               </select>
 
-            
+
             <label for="exampleFormControlInput1" class="form-label">Stock (*)</label>
             <input type="text" class="form-control mb-2" name="stock" id="exampleFormControlInput1" value="{{old('stock') == ''?$producto->stock : old('stock')}}">
-            
-            
+
+
               <label for="exampleFormControlInput1" class="form-label">Descripción</label>
             <textarea rows="5" class="form-control mb-2" name="descripcion" id="exampleFormControlInput1" value="{{old('descripcion') == ''?$producto->descripcion : old('descripcion')}}">{{$producto->descripcion}}</textarea>
 
@@ -134,7 +134,7 @@
                     </option>
                 @endforeach
             </select>
-            
+
             <input type="submit" value="Modificar producto" class="btn btn-primary my-2" />
         </div>
     </form>
