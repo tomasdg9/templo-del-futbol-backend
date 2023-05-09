@@ -15,6 +15,10 @@ class ReportePedidosController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'start' => 'required',
+            'finish'=> 'required'
+        ]);
         $pedidos = DetallePedido::where('created_at', '>=', $request->start)
         ->where('created_at', '<=', $request->finish)
         ->get();

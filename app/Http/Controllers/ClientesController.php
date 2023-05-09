@@ -38,6 +38,9 @@ class ClientesController extends Controller
     }
 
     public function searchByName(Request $request){
+        $request->validate([
+            'email' => 'required'
+        ]);
         $email = $request->input('email');
         $cliente = Pedido::where('email', 'ilike', $email)->first();
         if($cliente){

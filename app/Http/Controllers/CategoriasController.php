@@ -26,6 +26,9 @@ class CategoriasController extends Controller
     }
 
     public function searchByName(Request $request){
+        $request->validate([
+            'name' => 'required'
+        ]);
         $name = $request->input('name');
         $categoria = Categoria::where('nombre', 'ilike', $name)->first();
         if($categoria){

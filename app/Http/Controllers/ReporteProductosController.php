@@ -15,6 +15,10 @@ class ReporteProductosController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'start' => 'required',
+            'finish'=> 'required'
+        ]);
         $productos = Producto::where('created_at', '>=', $request->start)
         ->where('created_at', '<=', $request->finish)
         ->get();

@@ -27,6 +27,9 @@ class ProductosController extends Controller
  }
 
  public function searchByName(Request $request){
+    $request->validate([
+        'name' => 'required'
+    ]);
      $name = $request->input('name');
      $producto = Producto::where('nombre', 'ilike', $name)->first();
      if($producto){
