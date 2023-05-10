@@ -1,8 +1,8 @@
 ## Informe
 
-<img src="http://imgfz.com/i/Prh8nST.jpeg" width="400" alt="Laravel Logo">
+<center><img src="http://imgfz.com/i/Prh8nST.jpeg" width="400" alt="Laravel Logo">
 
-<b>Vercel funcionando. El link será enviado a Carolina.</b>
+<b>Vercel funcionando. El link será enviado a Carolina por email.</b>
 
 * Proyecto Framework PHP - Laravel<br>
 - ¿Qué entidades se podrán editar?<br>
@@ -34,7 +34,7 @@ También, podrá comprar productos, filtrar productos por categoría, por nombre
 
 * Observación
 Como administrador del sistema (en este caso sería un empleado de la empresa) utilizaremos la tabla users que nos brinda Laravel.
-
+</center>
 <!--
 ## Pasos
 
