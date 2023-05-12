@@ -88,7 +88,7 @@ class ProductosController extends Controller
         $producto = Producto::find($id);
         $nameproducto = $producto->nombre;
         $producto->delete();
-        return redirect()->route('productos.index')->with('success', 'Producto '.$nameproducto.' eliminado con éxito');
+        return redirect()->route('productos.indexPage', ['page' => 1])->with('success', 'Producto '.$nameproducto.' eliminado con éxito');
    }
 
     public function store(Request $request){
