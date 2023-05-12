@@ -27,9 +27,9 @@
             <tr>
                 <th scope="row">{{$detalle_pedido->id}}</th>
 
-                <td><a href="{{ route('pedidos.show', ['pedido' => $detalle_pedido->id]) }}">{{$detalle_pedido->pedido->email}}</a></td>
+                <td><a href="{{ route('pedidos.show', ['pedido' => $detalle_pedido->id]) }}">{{$detalle_pedido->email}}</a></td>
 
-                <th scope="row">{{$detalle_pedido->pedido->getCantidadProductos()}}</th>
+                <th scope="row">{{$detalle_pedido->getCantidadProductos()}}</th>
             </tr>
         @endforeach
     </tbody>

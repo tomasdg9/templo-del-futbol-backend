@@ -19,8 +19,8 @@ class DetallePedidosController extends Controller
 
     public function indexPage(int $page){
       $pageAux = $page - 1;
-      $detalle_pedidos = DetallePedido::orderBy('id', 'asc')->skip(10*$pageAux)->take(10)->get();
-      $detalle_pedidosProx = DetallePedido::orderBy('id', 'asc')->skip(10*($pageAux+1))->take(10)->get();
+	  $detalle_pedidos = Pedido::orderBy('id', 'asc')->skip(10*$pageAux)->take(10)->get();
+      $detalle_pedidosProx = Pedido::orderBy('id', 'asc')->skip(10*($pageAux+1))->take(10)->get(); // probar take(1)
       $tieneProx = (count($detalle_pedidosProx) > 0);
       return view('pedidos.index', ['detalle_pedidos' => $detalle_pedidos, 'page' => $page, 'tieneProx' => $tieneProx]);
   }
