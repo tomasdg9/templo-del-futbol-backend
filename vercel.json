@@ -15,6 +15,14 @@
             "dest": "/img/$1"
         },
         {
+            "src": "/docs/(.*)",
+            "dest": "/docs/$1"
+        },
+        {
+            "src": "/docs/asset/(.*)",
+            "dest": "/docs/asset/$1"
+        },
+        {
             "src": "/css/(.*)",
             "dest": "/css/$1"
         },

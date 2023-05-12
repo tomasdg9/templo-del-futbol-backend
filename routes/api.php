@@ -32,6 +32,7 @@ Route::get('/pedidos/email/{email}', 'App\Http\Controllers\ClientesController@sh
 Route::get('/pedidos/page/{page}', 'App\Http\Controllers\ClientesController@showPageByAPI');
 
 // API Productos
+Route::get('/productos/filtrar', 'App\Http\Controllers\ProductosController@showFilterByAPI');
 Route::get('/productos/{id}', 'App\Http\Controllers\ProductosController@showByAPI');
 Route::get('/productos', 'App\Http\Controllers\ProductosController@showAllByAPI');
 Route::get('/productos/categoria/{id}', 'App\Http\Controllers\CategoriasController@getProductosByCategoria');
