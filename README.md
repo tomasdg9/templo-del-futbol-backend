@@ -4,9 +4,9 @@
   <img src="http://imgfz.com/i/Prh8nST.jpeg" width="400" alt="Laravel Logo">
 </div>
 
-<h2 align="center">Vercel funcionando. El link será enviado a Carolina por email.</h2>
+<h2 align="center">El templo del Fútbol ⚽</h2>
 
-<h3 align="center">Proyecto Framework PHP - Laravel</h3>
+<h3 align="center">Proyecto Framework PHP - Laravel (Vercel en PR)</h3>
 
 <p align="center">
   <strong>¿Qué entidades se podrán editar?</strong>
