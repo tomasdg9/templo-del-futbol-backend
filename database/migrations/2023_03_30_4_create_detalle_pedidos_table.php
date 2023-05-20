@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('detalle_pedidos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
             // Llaves foraneas
-            $table->foreignId('producto_id')->constrained();
-            $table->foreignId('pedido_id')->constrained();
+            $table->foreignId('producto_id')->constrained()->onDelete('cascade');
+            $table->foreignId('pedido_id')->constrained()->onDelete('cascade');
         });
     }
 

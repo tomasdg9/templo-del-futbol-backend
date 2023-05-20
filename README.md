@@ -1,38 +1,68 @@
 ## Informe
 
+<div align="center">
+  <img src="http://imgfz.com/i/Prh8nST.jpeg" width="400" alt="Laravel Logo">
+</div>
 
-* Proyecto Framework PHP - Laravel<br>
-- ¿Qué entidades se podrán editar?<br>
-Categoría<br>
-Producto<br>
+<h2 align="center">El templo del Fútbol ⚽</h2>
 
-- ¿Qué reportes se podrán generar o visualizar? <br>     
-Se podrán generar reportes de creación de productos, de modificación de productos, creación de categorías, de pedidos realizados por un cliente y de compras totales colocando fecha de inicio y fecha de fin. <br>
-Todos se podrán visualizar desde el panel administrativo del usuario en Laravel.
+<h3 align="center">Proyecto Framework PHP - Laravel (Vercel en PR)</h3>
 
-- ¿Qué entidades se podrán obtener por API?<br>
-Las entidades que se podrán obtener por API son los productos y las categorías. 
+<p align="center">
+  <strong>¿Qué entidades se podrán editar?</strong>
+</p>
+<p align="center">
+  Categoría<br>
+  Producto
+</p>
 
-- ¿Qué entidades se podrán modificar por API?<br>
-Se podrán modificar,<br>
-Producto -> Disminuye el stock en caso de comprarlo.<br>
-Pedido -> Cuando el usuario realice la compra del producto deseado.<br>
-Detalle_pedido -> Cada vez que el usuario realice la compra del producto.<br>
+<p align="center">
+  <strong>¿Qué reportes se podrán generar o visualizar?</strong>
+</p>
+<p align="center">
+  Se podrán generar reportes de creación de productos, de modificación de productos, creación de categorías, de pedidos realizados por un cliente y de compras totales colocando fecha de inicio y fecha de fin. <br>
+  Todos se podrán visualizar desde el panel administrativo del usuario en Laravel.
+</p>
 
-- Proyecto React - JavaScript<br>
+<p align="center">
+  <strong>¿Qué entidades se podrán obtener por API?</strong>
+</p>
+<p align="center">
+  Las entidades que se podrán obtener por API son los productos y las categorías.
+</p>
 
-- ¿Qué información podrá ver el usuario?<br>
-El usuario podrá ver los productos con sus respectivas propiedades (nombre, descripción, precio, stock, etc), las categorías para filtrar los productos, sus compras realizadas, sus datos (email, telefono, etc).<br>
+<p align="center">
+  <strong>¿Qué entidades se podrán modificar por API?</strong>
+</p>
+<p align="center">
+  Se podrán modificar,<br>
+  Producto -> Disminuye el stock en caso de comprarlo. (Esto será agregado como un extra en la etapa siguiente)<br>
+  Pedido -> Cuando el usuario realice la compra del producto deseado (Esto lleva a la modificación de la entidad de abajo).<br>
+  DetallePedido -> Cada vez que el usuario realice la compra del producto.
+</p>
 
+<h3 align="center">Proyecto React - JavaScript</h3>
 
-- ¿Qué acciones podrá realizar, ya sea la primera vez que ingrese a la aplicación como futuros accesos a la misma?<br>
-La primera vez tendrá que ingresar sus datos para quedar registrado en la página web. Luego, podrá modificarlos cuando los desee. <br>
-También, podrá comprar productos, filtrar productos por categoría, por nombre, etc.<br>
+<p align="center">
+  <strong>¿Qué información podrá ver el usuario?</strong>
+</p>
+<p align="center">
+  El usuario podrá ver los productos con sus respectivas propiedades (nombre, descripción, precio, stock, etc), las categorías para filtrar los productos, sus compras realizadas, sus datos (email, telefono, etc).
+</p>
 
-* Observación
-Como administrador del sistema (en este caso sería un empleado de la empresa) utilizaremos la tabla users que nos brinda Laravel.
+<p align="center">
+  <strong>¿Qué acciones podrá realizar, ya sea la primera vez que ingrese a la aplicación como futuros accesos a la misma?</strong>
+</p>
+<p align="center">
+  La primera vez tendrá que ingresar sus datos para quedar registrado en la página web. Luego, podrá modificarlos cuando los desee. <br>
+  También, podrá comprar productos, filtrar productos por categoría, por nombre, etc.
+</p>
 
+<p align="center">
+  <em>Observación: Como administrador del sistema (en este caso sería un empleado de la empresa) utilizaremos la tabla users que nos brinda Laravel.</em>
+</p>
 
+<!--
 ## Pasos
 
 - clonar el repo https://github.com/iaw-2023/laravel-template y mantener como owner la organización de la materia.
@@ -118,3 +148,4 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+-->

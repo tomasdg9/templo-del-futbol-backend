@@ -11,16 +11,11 @@ class Producto extends Model
 
     public function categoria()
     {
-        return $this->belongsTo(Categoria::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Categoria::class, 'categoria_id');
     }
 
     public function pedidos()
     {
-        return $this->belongsToMany(Pedido::class, 'detalle_pedidos', 'producto_id', 'pedido_id');
+        return $this->belongsToMany(Pedido::class, 'detalle_pedidos');
     }
 }
