@@ -137,15 +137,20 @@ class ProductosController extends Controller
 /**
  * @OA\Get(
  *     path="/rest/productos/filtrar",
- *     summary="Muestra todos los productos activos",
+ *     summary="Muestra todos los productos activos y que su categoria esté visible",
  *     @OA\Response(
  *         response=200,
- *         description="Todos los productos activos")
+ *         description="Todos los productos activos con categoria visible")
  * )
  */
    public function showFilterByAPI(){
-        $productos = Producto::where('activo',true)->get();
-        return response()->json($productos);
+        //$productos = Producto::where('activo',true)->get();
+        $productos = Producto::where('activo', true)
+			->whereHas('categoria', function ($query) {
+				$query->where('visible', true);
+			})
+			->get();
+		return response()->json($productos);
    }
    
 /**
