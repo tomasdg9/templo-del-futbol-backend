@@ -134,15 +134,15 @@ class CategoriasController extends Controller
 /**
  * @OA\Get(
  *     path="/rest/categorias",
- *     summary="Muestra todas las categorias",
- *     
+ *     summary="Muestra todas las categorias visibles",
+ *
  *     @OA\Response(
  *         response=200,
- *         description="Lista de todas las categorías")
+ *         description="Lista de todas las categorías visibles")
  * )
  */
     public function showAllByAPI(){
-        $categorias = Categoria::all();
+        $categorias = Categoria::where('visible', true);
         return response()->json($categorias);
     }
 
@@ -199,7 +199,7 @@ class CategoriasController extends Controller
  *     @OA\Response(
  *         response=404,
  *         description="Categoria no encontrada o sin productos")
- * 
+ *
  * )
  */
     public function getProductosByCategoria(string $id){
