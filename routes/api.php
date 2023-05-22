@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/categorias/{id}', 'App\Http\Controllers\CategoriasController@showByAPI');
 Route::get('/categorias/page/{page}', 'App\Http\Controllers\CategoriasController@showPageByAPI');
 Route::get('/categorias', 'App\Http\Controllers\CategoriasController@showAllByAPI');
+Route::get('/categorias/buscar/{name}', 'App\Http\Controllers\CategoriasController@searchByAPI');
 
 // API Pedidos (Clientes)
 Route::post('/pedidos/crear', 'App\Http\Controllers\ClientesController@storeByAPI')->name('crearPedidoPorApi');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
 use App\Models\Categoria;
 use Illuminate\Validation\Rule;
@@ -146,6 +148,22 @@ class CategoriasController extends Controller
         return response()->json($categorias);
     }
 
+public function searchByAPI(string $name)
+    {
+		if($name == "")
+			$categorias = Categoria::all();
+		else
+			$categorias = DB::table('categorias')
+				->whereRaw("LOWER(SUBSTRING(nombre, 1, LENGTH(?))) = LOWER(?)", [$name, $name])
+				->get();
+        if($categorias)
+            return response()->json($categorias);
+        else
+            return response()->json([
+                'mensaje' => 'Categoria no encontrada'
+            ], 404);
+    }
+	
 /**
  * @OA\Get(
  *     path="/rest/categorias/page/{page}",
