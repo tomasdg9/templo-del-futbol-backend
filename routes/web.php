@@ -39,6 +39,8 @@ Route::post('/categorias/search', [CategoriasController::class, 'searchByName'])
 
 
 Route::resource('rproductos', ReporteProductosController::class)->middleware('auth');
+Route::get('/rproductos/page/{page}', [ReporteProductosController::class, 'indexPage'])->name('rproductos.indexPage')->middleware('auth');
+Route::get('/rproductos/page/1', [ReporteProductosController::class, 'indexPage'])->name('rproductos.principio')->middleware('auth');
 
 Route::resource('productos', ProductosController::class)->middleware('auth');
 Route::get('/productos/page/{page}', [ProductosController::class, 'indexPage'])->name('productos.indexPage')->middleware('auth');

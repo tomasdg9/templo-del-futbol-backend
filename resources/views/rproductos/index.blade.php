@@ -57,6 +57,17 @@
         @endforeach
     </tbody>
   </table>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+            @if ($page > 1)
+                <a href="/productos/page/{{$page-1}}" class="btn btn-success mr-2">< Anterior</a>
+            @endif
+            @if ($tieneProx)
+                <a href="/productos/page/{{$page+1}}" class="btn btn-success">Siguiente ></a>
+            @endif
+        </div>
+    </div>
 
 
 
