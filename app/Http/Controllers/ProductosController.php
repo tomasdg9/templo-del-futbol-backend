@@ -88,7 +88,13 @@ class ProductosController extends Controller
    public function destroy(string $id){
         $producto = Producto::find($id);
         $nameproducto = $producto->nombre;
+        $pedidosConEseProducto = $producto->pedidos;
         $producto->delete();
+        // Re entrega -> Cuando se elimina un producto, se busca en los pedidos que tenia asociado. Si un pedido tenia unicamente ese producto asociado, se borra el pedido.
+        foreach ($pedidosConEseProducto as $pedido) {
+            if($pedido->getCantidadProductos() == 0)
+                $pedido->delete();
+        }
         return redirect()->route('productos.indexPage', ['page' => 1])->with('success', 'Producto '.$nameproducto.' eliminado con éxito');
    }
 
@@ -153,7 +159,7 @@ class ProductosController extends Controller
 			->get();
 		return response()->json($productos);
    }
-   
+
 /**
  * @OA\Get(
  *     path="/rest/productos/{id}",
