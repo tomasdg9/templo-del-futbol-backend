@@ -142,7 +142,7 @@ class CategoriasController extends Controller
  * )
  */
     public function showAllByAPI(){
-        $categorias = Categoria::where('visible', true);
+        $categorias = Categoria::where('visible', true)->get();
         return response()->json($categorias);
     }
 
