@@ -65,7 +65,20 @@ class ProductosController extends Controller
           'descripcion' => 'max:500',
           'estado' => 'required|max:20',
           'categoria' => 'required',
-          'imagen' => 'required|url'
+          'imagen' => ['required', function ($attribute, $value, $fail) {
+            // Verificar si se proporcionó una URL válida
+            if (filter_var($value, FILTER_VALIDATE_URL)) {
+                return true;
+            }
+    
+            // Verificar si el archivo existe en la carpeta del proyecto
+            if (file_exists(public_path($value))) {
+                return true;
+            }
+    
+            // El archivo no existe ni es una URL válida
+            return false;
+        }]
       ]);
 
         $producto->nombre = $request->nombre;
@@ -81,7 +94,8 @@ class ProductosController extends Controller
 
    public function create(){
         $productos = Producto::all();
-        return view('productos.create', ['productos' => $productos]);
+        $categorias = Categoria::all();
+        return view('productos.create', ['productos' => $productos, 'categorias'=> $categorias]);
    }
 
    public function destroy(string $id){
