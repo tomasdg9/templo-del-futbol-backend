@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Categoria;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class ProductosController extends Controller
@@ -190,5 +191,14 @@ class ProductosController extends Controller
             return response()->json([
                 'mensaje' => 'Producto no encontrado'
             ], 404);
+   }
+   
+   public function searchCategoriaNameByAPI(String $nombre, String $categoria){
+			$productos = DB::table('productos')
+				->whereRaw("LOWER(SUBSTRING(nombre, 1, LENGTH(?))) = LOWER(?)", [$nombre, $nombre])
+				->where('categoria_id', $categoria)->where('activo', true)
+				->get();
+				
+         return response()->json($productos);
    }
 }

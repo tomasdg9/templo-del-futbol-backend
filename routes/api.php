@@ -37,3 +37,6 @@ Route::get('/productos/filtrar', 'App\Http\Controllers\ProductosController@showF
 Route::get('/productos/{id}', 'App\Http\Controllers\ProductosController@showByAPI');
 Route::get('/productos', 'App\Http\Controllers\ProductosController@showAllByAPI');
 Route::get('/productos/categoria/{id}', 'App\Http\Controllers\CategoriasController@getProductosByCategoria');
+
+
+Route::get('/productos/buscarporcategoria/{nombre}/{categoria}', 'App\Http\Controllers\ProductosController@searchCategoriaNameByAPI');
