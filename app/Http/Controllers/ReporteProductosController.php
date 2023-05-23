@@ -12,7 +12,11 @@ class ReporteProductosController extends Controller
 {
     public function index(){
         $productos = session('productos', []);
-        return redirect()->route('rproductos.indexPage', ['productos' => $productos, 'page' => 1]);
+        $tieneProx = session('tieneProx', "");
+        $page = session('page', "");
+        $inicio = session('inicio', "");
+        $fin = session('fin', "");
+        return view('rproductos.index', ['productos' => $productos, 'tieneProx' => $tieneProx, 'page' => $page, 'inicio' => $inicio, 'fin' => $fin]);
     }
 
     public function store(Request $request){
@@ -20,31 +24,27 @@ class ReporteProductosController extends Controller
             'start' => 'required',
             'finish'=> 'required'
         ]);
-        $productos = Producto::where('created_at', '>=', $request->start)
-        ->where('created_at', '<=', $request->finish)
-        ->get();
-        return redirect()->route('rproductos.indexPage', ['page' => 1])->with(['productos'=> $productos]);
+        return redirect('/rproductos/page/'.$request->start.'/'.$request->finish.'/1');
     }
 
-    public function indexPage(int $page, Collection $productos)
-{
-    $productosPaginados = [];
-    $tieneProx = false;
-    $perPage = 10;
-    $pageAux = $page - 1;
 
-    if(count($productos)>0){
-        $productosPaginados = $productos->forPage($page, $perPage);
-        $productosProx = $productos->forPage($page + 1, $perPage);
-        $tieneProx = $productosProx->isNotEmpty();
+    public function showPage($inicio, $fin, $page){
+        $pageAux = $page - 1;
+
+        if($page <= 0)
+            $pageAux = 0;
+
+        $productos = Producto::where('created_at', '>=', $inicio)
+            ->where('created_at', '<=', $fin)
+            ->skip($pageAux*10)->take(10)->get();
+
+        $productosProx = Producto::where('created_at', '>=', $inicio)
+            ->where('created_at', '<=', $fin)
+            ->skip((($pageAux)+1)*10)->take(10)->get();
+
+        $tieneProx = (count($productosProx) > 0);
+        return redirect()->route('rproductos.index')->with('productos', $productos)->with('tieneProx', $tieneProx)->with('page', $page)->with('inicio', $inicio)->with('fin', $fin);
     }
-    
-    return view('rproductos.index', [
-        'productos' => $productosPaginados,
-        'page' => $page,
-        'tieneProx' => $tieneProx
-    ]);
-}
-   
-    
+
+
 }

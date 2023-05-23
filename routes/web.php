@@ -52,6 +52,10 @@ Route::get('/pedidos/page/1', [DetallePedidosController::class, 'indexPage'])->n
 Route::resource('pedidos', DetallePedidosController::class)->middleware('auth');
 
 Route::resource('rpedidos', ReportePedidosController::class)->middleware('auth');
+
+Route::get('/rpedidos/page/{inicio}/{fin}/{page}', 'App\Http\Controllers\ReportePedidosController@showPage');
+Route::get('/rproductos/page/{inicio}/{fin}/{page}', 'App\Http\Controllers\ReporteProductosController@showPage');
+
 // Login
 Route::get('/', function () {
     if (Auth::check()) { //Si ya inició sesión y quiere ir a la ruta raíz, se re-direcciona al principio.
