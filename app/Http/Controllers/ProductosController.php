@@ -184,13 +184,21 @@ class ProductosController extends Controller
  * )
  */
    public function showByAPI(String $id){
-        $producto = Producto::find($id);
-        if($producto)
-            return response()->json($producto);
-        else
-            return response()->json([
-                'mensaje' => 'Producto no encontrado'
-            ], 404);
+    $producto = Producto::find($id);
+    
+    if ($producto) {
+        $categoria = Categoria::find($producto->categoria_id);
+        $nombreCategoria = $categoria->nombre;
+        
+        $productoData = $producto->toArray();
+        $productoData['nombre_categoria'] = $nombreCategoria;
+        
+        return response()->json($productoData);
+    } else {
+        return response()->json([
+            'mensaje' => 'Producto no encontrado'
+        ], 404);
+    }
    }
    
    public function searchCategoriaNameByAPI(String $nombre, String $categoria){
