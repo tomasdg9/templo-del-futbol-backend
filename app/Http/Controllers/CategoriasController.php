@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use App\Models\Producto;
 use Illuminate\Validation\Rule;
 
 class CategoriasController extends Controller
@@ -223,7 +224,8 @@ public function searchByAPI(string $name)
     public function getProductosByCategoria(string $id){
         $categoria = Categoria::find($id);
         if($categoria) {
-			$productos = $categoria->productos;
+			$productos = Producto::where('categoria_id', $id)->where('activo', true)->get();
+			//$productos = $categoria->productos;
             if( count($productos) == 0)
             return response()->json([
                 'mensaje' => 'La categoría no tiene productos'

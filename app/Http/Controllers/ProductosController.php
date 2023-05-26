@@ -201,4 +201,17 @@ class ProductosController extends Controller
 				
          return response()->json($productos);
    }
+   
+   public function getMasNuevos() {
+    $productos = Producto::where('activo', true)
+        ->whereHas('categoria', function ($query) {
+            $query->where('visible', true);
+        })
+        ->orderBy('created_at', 'desc') // Ordenar por fecha de creación en orden descendente
+        ->take(4)
+        ->get();
+
+    return response()->json($productos);
+	}
+
 }
