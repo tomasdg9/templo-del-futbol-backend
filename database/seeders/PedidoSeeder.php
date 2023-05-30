@@ -14,7 +14,7 @@ class PedidoSeeder extends Seeder
     public function run(): void
     {
         Pedido::factory()
-            ->count(100)
+            ->count(200)
             ->create();
     }
 }
