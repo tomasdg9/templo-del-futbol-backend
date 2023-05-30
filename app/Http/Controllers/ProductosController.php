@@ -27,6 +27,14 @@ class ProductosController extends Controller
      return view('productos.index', ['productos' => $productos, 'page' => $page, 'tieneProx' => $tieneProx]);
  }
 
+ public function indexSearch(){
+    $productos = session('productos', []);
+    $tieneProx = session('tieneProx', "");
+    $page = session('page', "");
+    $name = session('name',"");
+    return view('productos.indexsearch', ['productos' => $productos, 'tieneProx' => $tieneProx, 'page' => $page, 'name' => $name]);
+ }
+
  public function pageSearchByName(string $name, int $page){
     $pageAux = $page - 1;
 
@@ -40,7 +48,7 @@ class ProductosController extends Controller
         ->skip((($pageAux)+1)*10)->take(10)->get();
 
     $tieneProx = (count($productosProx) > 0);
-    return redirect()->route('productos.index')->with('productos', $productos)->with('tieneProx', $tieneProx)->with('page', $page);
+    return redirect()->route('productos.indexSearch')->with('productos', $productos)->with('tieneProx', $tieneProx)->with('page', $page)->with('name', $name);
  }
 
  public function searchByName(Request $request){
@@ -50,7 +58,7 @@ class ProductosController extends Controller
 
     $name = $request->input('name');
 
-    return redirect('/productos/page/'.$name.'/1');
+    return redirect('/productos/search/'.$name.'/1');
     /*
     if($productos){ falta chequear esta condicion
         return redirect()->route('productos.show', ['producto' => $productos->id]);
