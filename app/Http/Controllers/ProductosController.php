@@ -232,4 +232,23 @@ class ProductosController extends Controller
     return response()->json($productos);
 	}
 
+
+public function searchByAPI(string $name)
+    {
+		if($name == "")
+			$productos = Producto::all();
+		else
+			$productos = DB::table('productos')
+				->whereRaw("LOWER(SUBSTRING(nombre, 1, LENGTH(?))) = LOWER(?)", [$name, $name])
+				->where('activo', true)
+				->get();
+				
+        if($productos)
+            return response()->json($productos);
+        else
+            return response()->json([
+                'mensaje' => 'Producto no encontrado'
+            ], 404);
+    }
+	
 }
