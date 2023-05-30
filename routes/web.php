@@ -29,14 +29,13 @@ Route::get('/estadisticas', EstadisticasController::class . '@index')->middlewar
 Route::resource('clientes', ClientesController::class)->middleware('auth');
 Route::get('/clientes/page/{page}', [ClientesController::class, 'indexPage'])->name('clientes.indexPage');
 Route::post('/clientes/search', [ClientesController::class, 'searchByName'])->name('clientes.searchByName');
+Route::get('/clientes/search/1', 'App\Http\Controllers\ClientesController@indexSearch')->name('clientes.indexSearch')->middleware('auth');
 
 
 Route::resource('categorias', CategoriasController::class)->middleware('auth');
 Route::get('/categorias/page/{page}', [CategoriasController::class, 'indexPage'])->name('categorias.indexPage');
 Route::post('/categorias/search', [CategoriasController::class, 'searchByName'])->name('categorias.searchByName');
-
-
-
+Route::get('/categorias/search/1', 'App\Http\Controllers\CategoriasController@indexSearch')->name('categorias.indexSearch')->middleware('auth');
 
 Route::resource('rproductos', ReporteProductosController::class)->middleware('auth');
 Route::get('/rproductos/page/{page}', [ReporteProductosController::class, 'indexPage'])->name('rproductos.indexPage')->middleware('auth');
@@ -46,6 +45,7 @@ Route::resource('productos', ProductosController::class)->middleware('auth');
 Route::get('/productos/page/{page}', [ProductosController::class, 'indexPage'])->name('productos.indexPage')->middleware('auth');
 Route::get('/productos/page/1', [ProductosController::class, 'indexPage'])->name('productos.principio')->middleware('auth');
 Route::post('/productos/search', [ProductosController::class, 'searchByName'])->name('productos.searchByName')->middleware('auth');
+Route::get('/productos/search/1', 'App\Http\Controllers\ProductosController@indexSearch')->name('productos.indexSearch')->middleware('auth');
 
 Route::get('/pedidos/page/{page}', [DetallePedidosController::class, 'indexPage'])->name('pedidos.indexPage')->middleware('auth');
 Route::get('/pedidos/page/1', [DetallePedidosController::class, 'indexPage'])->name('pedidos.principio')->middleware('auth');
@@ -56,9 +56,7 @@ Route::resource('rpedidos', ReportePedidosController::class)->middleware('auth')
 Route::get('/rpedidos/page/{inicio}/{fin}/{page}', 'App\Http\Controllers\ReportePedidosController@showPage')->middleware('auth');
 Route::get('/rproductos/page/{inicio}/{fin}/{page}', 'App\Http\Controllers\ReporteProductosController@showPage')->middleware('auth');
 
-Route::get('/productos/search/{name}/{page}', [ProductosController::class, 'pageSearchByName'])->name('productos.pageSearchByName')->middleware('auth');
-Route::get('/productos/search/1', 'App\Http\Controllers\ProductosController@indexSearch')->name('productos.indexSearch')->middleware('auth');
-Route::get('/rproductos/search/{name}/1', [ProductosController::class, 'pageSearchByName'])->name('productos.searchPrincipio')->middleware('auth');
+
 
 
 // Login

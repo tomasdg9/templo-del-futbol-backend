@@ -41,8 +41,8 @@
     @endif
 </p>
 <p>Tiene una cantidad de <b>{{$categoria->getCantidadProductos()}}</b> producto(s) asociado(s).</p>
-<p><b>Creada</b>: {{$categoria->created_at}}</p>
-<p><b>Última modificación</b>: {{$categoria->updated_at}}</p>
+<p><b>Creada</b>: {{\Carbon\Carbon::parse($categoria->created_at)->format('d-m-Y H:i') }}</p>
+<p><b>Última modificación</b>: {{\Carbon\Carbon::parse($categoria->updated_at)->format('d-m-Y H:i') }}</p>
 <br><p>Productos asociados:</p>
 <table class="table">
     <thead>

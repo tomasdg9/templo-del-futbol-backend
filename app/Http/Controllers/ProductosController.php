@@ -32,14 +32,7 @@ class ProductosController extends Controller
     $tieneProx = session('tieneProx', "");
     $page = session('page', "");
     $name = session('name',"");
-    return view('productos.indexsearch', ['productos' => $productos, 'tieneProx' => $tieneProx, 'page' => $page, 'name' => $name]);
- }
-
- public function pageSearchByName(string $name, int $page){
-
-    $productos = Producto::where('nombre', 'like', '%' . $name . '%')->get();
-
-    return redirect()->route('productos.indexSearch')->with('productos', $productos);
+    return view('productos.index', ['productos' => $productos, 'tieneProx' => $tieneProx, 'page' => $page]);
  }
 
  public function searchByName(Request $request){
@@ -48,14 +41,12 @@ class ProductosController extends Controller
     ]);
 
     $name = $request->input('name');
-
-    return redirect('/productos/search/'.$name.'/1');
-    /*
-    if($productos){ falta chequear esta condicion
-        return redirect()->route('productos.show', ['producto' => $productos->id]);
+    $productos = Producto::where('nombre', 'like', '%' . $name . '%')->get();
+    if($productos){
+        return redirect()->route('productos.indexSearch')->with('productos', $productos);
     } else {
         return redirect()->route('productos.indexPage', ['page' => 1])->with('error', 'No existen productos correspondientes a la busqueda');
-    }*/
+    }
 }
 
 

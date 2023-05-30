@@ -37,18 +37,32 @@ class ClientesController extends Controller
             return view('clientes.index', ['clientes' => $clientes, 'page' => $page, 'tieneProx' => $tieneProx]);
     }
 
-    public function searchByName(Request $request){
+    public function indexSearch(){
+        $clientes = session('clientes', []);
+        $tieneProx = session('tieneProx', "");
+        $page = session('page', "");
+        $name = session('name',"");
+        $clientes = $clientes->map(function($cliente) {
+            $cliente->cantidadPedidos = count(Pedido::where('email', $cliente->email)->get());
+            return $cliente;
+        });
+        return view('clientes.index', ['clientes' => $clientes, 'tieneProx' => $tieneProx, 'page' => $page]);
+     }
+    
+     public function searchByName(Request $request){
         $request->validate([
             'email' => 'required'
         ]);
         $email = $request->input('email');
-        $cliente = Pedido::where('email', 'ilike', $email)->first();
-        if($cliente){
-            return redirect()->route('clientes.show', ['cliente' => $cliente->email]);
+
+        $clientes = Pedido::where('email', 'like', '%' . $email . '%')->get();
+        if($clientes){
+            return redirect()->route('clientes.indexSearch')->with('clientes', $clientes);
         } else {
-            return redirect()->route('clientes.indexPage', ['page' => 1])->with('error', 'El cliente no existe');
+            return redirect()->route('clientes.indexPage', ['page' => 1])->with('error', 'No existen clientes correspondientes a la busqueda');
         }
     }
+
 
 /**
  * @OA\Post(

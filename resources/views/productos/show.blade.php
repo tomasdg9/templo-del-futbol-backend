@@ -52,8 +52,8 @@
                 <h6 class="alert alert-success">{{ session('success') }}</h6>
         @endif
 
-<p><b>Creado</b>: {{$producto->created_at}}</p>
-<p><b>Última modificación</b>: {{$producto->updated_at}}</p>
+<p><b>Creado</b>: {{\Carbon\Carbon::parse($producto->created_at)->format('d-m-Y H:i') }}</p>
+<p><b>Última modificación</b>: {{\Carbon\Carbon::parse($producto->updated_at)->format('d-m-Y H:i') }}</p>
 
 <table class="table">
     <thead>
@@ -75,7 +75,7 @@
             <td>{{$producto->nombre}}</td>
             <td>{{($producto->activo) == 0 ? "NO": "SI"}}</td>
             <td><a href="{{ route('categorias.show', ['categoria' => $producto->categoria->id]) }}">{{$producto->categoria->nombre}}</a></td>
-            <td>${{$producto->precio}}</td>
+            <td>${{number_format($producto->precio, 2, ',', '.')}}</td>
             <td>{{$producto->stock}}</td>
             <td>{{$producto->descripcion}}</td>
             <td>{{$producto->estado}}</td>

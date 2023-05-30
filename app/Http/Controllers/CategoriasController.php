@@ -28,16 +28,25 @@ class CategoriasController extends Controller
             return view('categorias.index', ['categorias' => $categorias, 'page' => $page, 'tieneProx' => $tieneProx]);
     }
 
-    public function searchByName(Request $request){
+    public function indexSearch(){
+        $categorias = session('categorias', []);
+        $tieneProx = session('tieneProx', "");
+        $page = session('page', "");
+        $name = session('name',"");
+        return view('categorias.index', ['categorias' => $categorias, 'tieneProx' => $tieneProx, 'page' => $page]);
+     }
+    
+     public function searchByName(Request $request){
         $request->validate([
             'name' => 'required'
         ]);
+        
         $name = $request->input('name');
-        $categoria = Categoria::where('nombre', 'ilike', $name)->first();
-        if($categoria){
-            return redirect()->route('categorias.show', ['categoria' => $categoria->id]);
+        $categorias = Categoria::where('nombre', 'like', '%' . $name . '%')->get();
+        if($categorias){
+            return redirect()->route('categorias.indexSearch')->with('categorias', $categorias);
         } else {
-            return redirect()->route('categorias.indexPage', ['page' => 1])->with('error', 'La categoria no existe');
+            return redirect()->route('categorias.indexPage', ['page' => 1])->with('error', 'No existen categorias correspondientes a la busqueda');
         }
     }
 
