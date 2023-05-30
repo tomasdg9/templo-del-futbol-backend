@@ -27,18 +27,37 @@ class ProductosController extends Controller
      return view('productos.index', ['productos' => $productos, 'page' => $page, 'tieneProx' => $tieneProx]);
  }
 
+ public function indexSearch(){
+    $productos = session('productos', []);
+    $tieneProx = session('tieneProx', "");
+    $page = session('page', "");
+    $name = session('name',"");
+    return view('productos.indexsearch', ['productos' => $productos, 'tieneProx' => $tieneProx, 'page' => $page, 'name' => $name]);
+ }
+
+ public function pageSearchByName(string $name, int $page){
+
+    $productos = Producto::where('nombre', 'like', '%' . $name . '%')->get();
+
+    return redirect()->route('productos.indexSearch')->with('productos', $productos);
+ }
+
  public function searchByName(Request $request){
     $request->validate([
         'name' => 'required'
     ]);
-     $name = $request->input('name');
-     $producto = Producto::where('nombre', 'ilike', $name)->first();
-     if($producto){
-         return redirect()->route('productos.show', ['producto' => $producto->id]);
-     } else {
-         return redirect()->route('productos.indexPage', ['page' => 1])->with('error', 'El producto no existe');
-     }
- }
+
+    $name = $request->input('name');
+
+    return redirect('/productos/search/'.$name.'/1');
+    /*
+    if($productos){ falta chequear esta condicion
+        return redirect()->route('productos.show', ['producto' => $productos->id]);
+    } else {
+        return redirect()->route('productos.indexPage', ['page' => 1])->with('error', 'No existen productos correspondientes a la busqueda');
+    }*/
+}
+
 
    public function show(string $id)
    {

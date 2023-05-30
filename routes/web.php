@@ -53,8 +53,13 @@ Route::resource('pedidos', DetallePedidosController::class)->middleware('auth');
 
 Route::resource('rpedidos', ReportePedidosController::class)->middleware('auth');
 
-Route::get('/rpedidos/page/{inicio}/{fin}/{page}', 'App\Http\Controllers\ReportePedidosController@showPage');
-Route::get('/rproductos/page/{inicio}/{fin}/{page}', 'App\Http\Controllers\ReporteProductosController@showPage');
+Route::get('/rpedidos/page/{inicio}/{fin}/{page}', 'App\Http\Controllers\ReportePedidosController@showPage')->middleware('auth');
+Route::get('/rproductos/page/{inicio}/{fin}/{page}', 'App\Http\Controllers\ReporteProductosController@showPage')->middleware('auth');
+
+Route::get('/productos/search/{name}/{page}', [ProductosController::class, 'pageSearchByName'])->name('productos.pageSearchByName')->middleware('auth');
+Route::get('/productos/search/1', 'App\Http\Controllers\ProductosController@indexSearch')->name('productos.indexSearch')->middleware('auth');
+Route::get('/rproductos/search/{name}/1', [ProductosController::class, 'pageSearchByName'])->name('productos.searchPrincipio')->middleware('auth');
+
 
 // Login
 Route::get('/', function () {
