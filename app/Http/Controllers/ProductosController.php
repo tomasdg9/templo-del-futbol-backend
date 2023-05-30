@@ -36,19 +36,10 @@ class ProductosController extends Controller
  }
 
  public function pageSearchByName(string $name, int $page){
-    $pageAux = $page - 1;
 
-    if($page <= 0)
-        $pageAux = 0;
+    $productos = Producto::where('nombre', 'like', '%' . $name . '%')->get();
 
-    $productos = Producto::where('nombre', 'like', '%' . $name . '%')
-        ->skip($pageAux*10)->take(10)->get();
-
-    $productosProx = Producto::where('nombre', 'like', '%' . $name . '%')
-        ->skip((($pageAux)+1)*10)->take(10)->get();
-
-    $tieneProx = (count($productosProx) > 0);
-    return redirect()->route('productos.indexSearch')->with('productos', $productos)->with('tieneProx', $tieneProx)->with('page', $page)->with('name', $name);
+    return redirect()->route('productos.indexSearch')->with('productos', $productos);
  }
 
  public function searchByName(Request $request){

@@ -58,7 +58,6 @@ Route::get('/rproductos/page/{inicio}/{fin}/{page}', 'App\Http\Controllers\Repor
 
 Route::get('/productos/search/{name}/{page}', [ProductosController::class, 'pageSearchByName'])->name('productos.pageSearchByName')->middleware('auth');
 Route::get('/productos/search/1', 'App\Http\Controllers\ProductosController@indexSearch')->name('productos.indexSearch')->middleware('auth');
-//Route::get('/productos/search/{page}', 'App\Http\Controllers\ProductosController@indexSearch')->name('productos.indexSearch')->middleware('auth');
 Route::get('/rproductos/search/{name}/1', [ProductosController::class, 'pageSearchByName'])->name('productos.searchPrincipio')->middleware('auth');
 
 
