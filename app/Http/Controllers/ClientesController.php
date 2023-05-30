@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\Producto;
 use App\Models\DetallePedido;
 
 class ClientesController extends Controller
@@ -105,6 +106,11 @@ class ClientesController extends Controller
             $detallePedido->pedido_id = $pedido->id;
             $detallePedido->producto_id = $element;
             $detallePedido->save();
+			
+			// Reducir stock.
+			$producto = Producto::find($detallePedido->producto_id);
+			$producto->stock = ($producto->stock)-1;
+			$producto->save();
         }
 
         if($pedido && $pedido->id){

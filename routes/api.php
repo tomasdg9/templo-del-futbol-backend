@@ -33,11 +33,11 @@ Route::get('/pedidos/email/{email}', 'App\Http\Controllers\ClientesController@sh
 Route::get('/pedidos/page/{page}', 'App\Http\Controllers\ClientesController@showPageByAPI');
 
 // API Productos
+Route::get('/productos/buscar/{name}', 'App\Http\Controllers\ProductosController@searchByAPI');
 Route::get('/productos/filtrar', 'App\Http\Controllers\ProductosController@showFilterByAPI');
 Route::get('/productos/masnuevos', 'App\Http\Controllers\ProductosController@getMasNuevos');
 Route::get('/productos/buscarporcategoria/{nombre}/{categoria}', 'App\Http\Controllers\ProductosController@searchCategoriaNameByAPI');
 Route::get('/productos/categoria/{id}', 'App\Http\Controllers\CategoriasController@getProductosByCategoria');
 Route::get('/productos/{id}', 'App\Http\Controllers\ProductosController@showByAPI');
 Route::get('/productos', 'App\Http\Controllers\ProductosController@showAllByAPI');
-
 
