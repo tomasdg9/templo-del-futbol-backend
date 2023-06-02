@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Pedido;
 use App\Models\Producto;
 use App\Models\DetallePedido;
+use Illuminate\Support\Facades\DB;
 
 class ClientesController extends Controller
 {
