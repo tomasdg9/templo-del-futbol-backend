@@ -196,7 +196,7 @@ class ProductosController extends Controller
    public function showByAPI(String $id){
     $producto = Producto::find($id);
     
-    if ($producto) {
+    if ($producto && $producto->activo == true) {
         $categoria = Categoria::find($producto->categoria_id);
         $nombreCategoria = $categoria->nombre;
         
