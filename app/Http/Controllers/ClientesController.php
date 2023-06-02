@@ -90,53 +90,73 @@ class ClientesController extends Controller
  *         description="Error al crear pedido")
  *     )
  */
- public function storeByAPI(Request $request){
+ public function storeByAPI(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'email' => 'required|max:255',
+        'descripcion' =>'required|max:500',
+        'ids' => 'required|regex:/^\d+(?:-\d+)*$/',
+    ]);
 
-        // Código para crear un nuevo pedido.
-        // Los ids de los productos se deben recibir como una cadena del estilo: X1-X2-X3-...-XN Donde Xi es un numero >= 0
+    if ($validator->fails()) {
+        return response()->json([
+            'message' => 'Error al crear el pedido',
+            'errors' => $validator->errors(),
+        ], 422);
+    }
 
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|max:255',
-            'descripcion' =>'required|max:500',
-            'ids' => 'required|regex:/^\d+(?:-\d+)*$/', // Verficia que los IDs de los productos cumplan con el siguiente formato: X1-X2-X3-...-XN donde Xi es un numero >= 0
-        ]);
+    DB::beginTransaction(); // Iniciar transacción
 
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Error al crear el pedido',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
+    try {
         $pedido = new Pedido;
         $pedido->email = $request->email;
         $pedido->descripcion = $request->descripcion;
         $pedido->save();
+
         $ids = $request->ids;
         $ids_array = explode('-', $request->ids);
+        $insufficientStock = [];
 
         foreach ($ids_array as $element) {
-            $detallePedido = new DetallePedido;
-            $detallePedido->pedido_id = $pedido->id;
-            $detallePedido->producto_id = $element;
-            $detallePedido->save();
-			
-			// Reducir stock.
-			$producto = Producto::find($detallePedido->producto_id);
-			$producto->stock = ($producto->stock)-1;
-			$producto->save();
+            $producto = Producto::find($element);
+
+            if ($producto->stock > 0) {
+                $detallePedido = new DetallePedido;
+                $detallePedido->pedido_id = $pedido->id;
+                $detallePedido->producto_id = $element;
+                $detallePedido->save();
+
+                // Reducir stock.
+                $producto->stock -= 1;
+                $producto->save();
+            } else {
+                $insufficientStock[] = $element;
+            }
         }
 
-        if($pedido && $pedido->id){
-            return response()->json([
-                'mensaje' => 'Pedido creado con éxito',
-            ]);
-        }else{
+        if (!empty($insufficientStock)) {
+            DB::rollback(); // Revertir la transacción
             return response()->json([
                 'mensaje' => 'Error al crear el pedido',
-            ], 500);
+                'insufficientStock' => $insufficientStock,
+            ], 422);
         }
-   }
+
+        DB::commit(); // Confirmar la transacción
+
+        return response()->json([
+            'mensaje' => 'Pedido creado con éxito',
+        ]);
+    } catch (\Exception $e) {
+        DB::rollback(); // Revertir la transacción en caso de error
+
+        return response()->json([
+            'mensaje' => 'Error al crear el pedido',
+        ], 500);
+    }
+}
+
+
 
 /**
  * @OA\Get(
