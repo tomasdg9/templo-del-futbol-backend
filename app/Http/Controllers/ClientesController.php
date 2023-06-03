@@ -117,6 +117,7 @@ class ClientesController extends Controller
         $ids = $request->ids;
         $ids_array = explode('-', $request->ids);
         $insufficientStock = [];
+		$noDisponible = false;
 
         foreach ($ids_array as $element) {
             $producto = Producto::find($element);
@@ -127,6 +128,9 @@ class ClientesController extends Controller
                 $detallePedido->producto_id = $element;
                 $detallePedido->save();
 
+				if($producto->activo == false) {
+					$noDisponible = true;
+				}
                 // Reducir stock.
                 $producto->stock -= 1;
                 $producto->save();
@@ -142,6 +146,14 @@ class ClientesController extends Controller
                 'insufficientStock' => $insufficientStock,
             ], 422);
         }
+		
+		if($noDisponible == true){
+			DB::rollback(); // Revertir la transacción
+            return response()->json([
+                'mensaje' => 'Error al crear el pedido',
+                'noDisponible' => $noDisponible,
+            ], 422);
+		}
 
         DB::commit(); // Confirmar la transacción
 
