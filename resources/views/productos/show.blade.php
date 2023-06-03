@@ -39,7 +39,7 @@
         @enderror
 
         @error('activo')
-            <div class="alert alert-danger">La visibilidad no es correcta.</div>
+            <div class="alert alert-danger">La disponibilidad no es correcta.</div>
         @enderror
 
         @error('estado')
@@ -60,7 +60,7 @@
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Nombre</th>
-        <th scope="col">Visible</th>
+        <th scope="col">Disponibilidad</th>
         <th scope="col">Categoria</th>
         <th scope="col">Precio</th>
         <th scope="col">Stock</th>
@@ -101,7 +101,7 @@
             <label for="exampleFormControlInput1" class="form-label">Precio (*)</label>
             <input type="text" class="form-control mb-2" name="precio" id="exampleFormControlInput1" value="{{old('precio') == ''?$producto->precio : old('precio')}}">
 
-            <label for="exampleFormControlInput1" class="form-label">Visibilidad (*)</label>
+            <label for="exampleFormControlInput1" class="form-label">Disponibilidad (*)</label>
 
             <select id="inputState" class="form-control" name="activo">
                   <option value="true" {{ old('visible') == 'true' ? 'selected' : '' }}>Si</option>
@@ -140,11 +140,11 @@
     </form>
 
     <br><br>
-    <form action="{{ route('productos.destroy', [$producto->id]) }}" method="POST">
+    <!--<form action="{{ route('productos.destroy', [$producto->id]) }}" method="POST">
         @method('DELETE')
         @csrf
         <button class="btn btn-danger btn-sm">Eliminar producto</button>
-    </form>
+    </form>-->
     </div>
 
 

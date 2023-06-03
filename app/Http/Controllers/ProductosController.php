@@ -96,6 +96,7 @@ class ProductosController extends Controller
         return view('productos.create', ['productos' => $productos, 'categorias'=> $categorias]);
    }
 
+   /* Re entrega. No se elimina el producto, simplemente la disponibilidad (atributo "visible") se pone en false.
    public function destroy(string $id){
         $producto = Producto::find($id);
         $nameproducto = $producto->nombre;
@@ -107,7 +108,7 @@ class ProductosController extends Controller
                 $pedido->delete();
         }
         return redirect()->route('productos.indexPage', ['page' => 1])->with('success', 'Producto '.$nameproducto.' eliminado con éxito');
-   }
+   }*/
 
     public function store(Request $request){
 

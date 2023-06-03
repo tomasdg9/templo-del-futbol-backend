@@ -47,7 +47,7 @@
         <th scope="col">Nombre</th>
         <th scope="col">Categoria</th>
         <th scope="col">Stock</th>
-        <th scope="col">Visible</th>
+        <th scope="col">Disponible</th>
         <th scope="col">Precio</th>
         </tr>
     </thead>
