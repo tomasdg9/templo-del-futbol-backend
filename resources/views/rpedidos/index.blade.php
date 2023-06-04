@@ -25,7 +25,7 @@
             <input type="date" id="start" name="start" min="2018-01-01" max="2024-12-31">
             <label for="start">Fecha final: </label>
             <input type="date" id="finish" name="finish" min="2018-01-01" max="2024-12-31">
-            
+
             <button type="submit" class="btn btn-info">
                 <span>Filtrar</span>
             </button>
@@ -42,17 +42,30 @@
         </tr>
     </thead>
     <tbody>
-    @foreach ($pedidos as $pedido) 
+    @foreach ($pedidos as $pedido)
             <tr>
                 <th scope="row">{{$pedido->id}}</th>
-                
+
                 <td><a href="{{ route('pedidos.show', ['pedido' => $pedido->id]) }}">{{$pedido->pedido->email}}</a></td>
-                
+
                 <th scope="row">{{$pedido->pedido->getCantidadProductos()}}</th>
             </tr>
         @endforeach
     </tbody>
   </table>
+
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+            @if ($page > 1)
+                <a href="/rpedidos/page/{{$inicio}}/{{$fin}}/{{$page-1}}" class="btn btn-success mr-2">< Anterior</a>
+            @endif
+            @if ($tieneProx)
+            <a href="/rpedidos/page/{{$inicio}}/{{$fin}}/{{$page+1}}" class="btn btn-success">Siguiente ></a>
+            @endif
+        </div>
+    </div>
+</div>
 
 
 

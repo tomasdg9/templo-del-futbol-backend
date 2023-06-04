@@ -96,37 +96,17 @@
             "post": {
                 "summary": "Crea un nuevo pedido por API",
                 "operationId": "9f859f0ed0e04140d58cfcd38a15821c",
-                "requestBody": {
-                    "description": "Es un post, se necesita 'email', 'descripcion' y una lista de ID's llamada 'id' de productos de la forma 'X1-X2-X3-...-Xn' donde Xi es el ID de un producto.",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "required": [
-                                  "email",
-                                  "descripcion",
-                                  "ids"
-                                ],
-                                "properties": {
-                                  "email": {
-                                    "type": "string",
-                                    "format": "email",
-                                    "example": "user@example.com"
-                                  },
-                                  "descripcion": {
-                                    "type": "string",
-                                    "example": "Descripción del pedido"
-                                  },
-                                  "ids": {
-                                    "type": "string",
-                                    "example": "X1-X2-X3"
-                                  }
-                                }
-                            }
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "path",
+                        "description": "Request de los pedidos",
+                        "required": true,
+                        "schema": {
+                            "type": "request"
                         }
                     }
-                },
+                ],
                 "responses": {
                     "422": {
                         "description": "Error al crear pedido"

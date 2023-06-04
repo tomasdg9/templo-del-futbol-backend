@@ -54,8 +54,8 @@
                             {{$categoria->getCantidadProductos()}} productos
                         </div>
                         <br>
-                        <p><b>Creación</b>: {{$categoria->created_at}}</p>
-                        <p><b>Modificación</b>: {{$categoria->updated_at}}</p>
+                        <p><b>Creación</b>: {{\Carbon\Carbon::parse($categoria->created_at)->format('d-m-Y H:i') }}</p>
+                        <p><b>Modificación</b>: {{\Carbon\Carbon::parse($categoria->updated_at)->format('d-m-Y H:i') }}</p>
                         <p><b>Descripción</b>: {{$categoria->descripcion}}</p>
                         <p><b>Visible</b>: {{ $categoria->visible ? 'Si' : 'No' }}</p>
                         <div class="col-md-12 d-flex justify-content-center">

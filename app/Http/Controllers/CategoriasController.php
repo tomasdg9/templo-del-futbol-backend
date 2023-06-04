@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use App\Models\Producto;
 use Illuminate\Validation\Rule;
 
 class CategoriasController extends Controller
@@ -25,16 +28,25 @@ class CategoriasController extends Controller
             return view('categorias.index', ['categorias' => $categorias, 'page' => $page, 'tieneProx' => $tieneProx]);
     }
 
-    public function searchByName(Request $request){
+    public function indexSearch(){
+        $categorias = session('categorias', []);
+        $tieneProx = session('tieneProx', "");
+        $page = session('page', "");
+        $name = session('name',"");
+        return view('categorias.index', ['categorias' => $categorias, 'tieneProx' => $tieneProx, 'page' => $page]);
+     }
+    
+     public function searchByName(Request $request){
         $request->validate([
             'name' => 'required'
         ]);
+        
         $name = $request->input('name');
-        $categoria = Categoria::where('nombre', 'ilike', $name)->first();
-        if($categoria){
-            return redirect()->route('categorias.show', ['categoria' => $categoria->id]);
+        $categorias = Categoria::where('nombre', 'like', '%' . $name . '%')->get();
+        if($categorias){
+            return redirect()->route('categorias.indexSearch')->with('categorias', $categorias);
         } else {
-            return redirect()->route('categorias.indexPage', ['page' => 1])->with('error', 'La categoria no existe');
+            return redirect()->route('categorias.indexPage', ['page' => 1])->with('error', 'No existen categorias correspondientes a la busqueda');
         }
     }
 
@@ -134,18 +146,34 @@ class CategoriasController extends Controller
 /**
  * @OA\Get(
  *     path="/rest/categorias",
- *     summary="Muestra todas las categorias",
- *     
+ *     summary="Muestra todas las categorias visibles",
+ *
  *     @OA\Response(
  *         response=200,
- *         description="Lista de todas las categorías")
+ *         description="Lista de todas las categorías visibles")
  * )
  */
     public function showAllByAPI(){
-        $categorias = Categoria::all();
+        $categorias = Categoria::where('visible', true)->get();
         return response()->json($categorias);
     }
 
+public function searchByAPI(string $name)
+    {
+		if($name == "")
+			$categorias = Categoria::all();
+		else
+			$categorias = DB::table('categorias')
+				->whereRaw("LOWER(SUBSTRING(nombre, 1, LENGTH(?))) = LOWER(?)", [$name, $name])
+				->get();
+        if($categorias)
+            return response()->json($categorias);
+        else
+            return response()->json([
+                'mensaje' => 'Categoria no encontrada'
+            ], 404);
+    }
+	
 /**
  * @OA\Get(
  *     path="/rest/categorias/page/{page}",
@@ -199,19 +227,21 @@ class CategoriasController extends Controller
  *     @OA\Response(
  *         response=404,
  *         description="Categoria no encontrada o sin productos")
- * 
+ *
  * )
  */
     public function getProductosByCategoria(string $id){
         $categoria = Categoria::find($id);
-        $productos = $categoria->productos;
-        if($categoria)
+        if($categoria) {
+			$productos = Producto::where('categoria_id', $id)->where('activo', true)->get();
+			//$productos = $categoria->productos;
             if( count($productos) == 0)
             return response()->json([
                 'mensaje' => 'La categoría no tiene productos'
             ], 404);
             else
                 return response()->json($productos);
+		}
         else
             return response()->json([
                 'mensaje' => 'Categoria no encontrada'

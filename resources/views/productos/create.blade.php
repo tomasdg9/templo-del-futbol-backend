@@ -88,9 +88,11 @@
         <label for="exampleFormControlInput1" name="categoria" class="form-label">Categoria (*)</label>
 
         <select id="inputState" class="form-control" name="categoria" value="{{old('categoria')}}">
-            @foreach ($productos as $producto)
-                <option value="{{ $producto->categoria->id }}" selected>{{$producto->categoria->nombre}}</option>
-            @endforeach
+                @foreach ($categorias as $categoria)
+                    <option value="{{ $categoria->id }}">
+                    {{ $categoria->nombre }}
+                    </option>
+                @endforeach
         </select>
 
         <input type="submit" value="Crear producto" class="btn btn-primary my-2" />

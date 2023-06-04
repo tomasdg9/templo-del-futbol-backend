@@ -21,7 +21,7 @@
          @csrf
         <div class="form-group mx-sm-3 mb-2">
             <label for="name" class="sr-only">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="cliente@email.com">
+            <input class="form-control" id="email" name="email" placeholder="cliente@email.com">
         </div>
         <button type="submit" class="btn btn-primary mb-2">Buscar</button>
     </form>

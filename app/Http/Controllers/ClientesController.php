@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\Producto;
 use App\Models\DetallePedido;
+use Illuminate\Support\Facades\DB;
 
 class ClientesController extends Controller
 {
@@ -37,18 +39,32 @@ class ClientesController extends Controller
             return view('clientes.index', ['clientes' => $clientes, 'page' => $page, 'tieneProx' => $tieneProx]);
     }
 
-    public function searchByName(Request $request){
+    public function indexSearch(){
+        $clientes = session('clientes', []);
+        $tieneProx = session('tieneProx', "");
+        $page = session('page', "");
+        $name = session('name',"");
+        $clientes = $clientes->map(function($cliente) {
+            $cliente->cantidadPedidos = count(Pedido::where('email', $cliente->email)->get());
+            return $cliente;
+        });
+        return view('clientes.index', ['clientes' => $clientes, 'tieneProx' => $tieneProx, 'page' => $page]);
+     }
+    
+     public function searchByName(Request $request){
         $request->validate([
             'email' => 'required'
         ]);
         $email = $request->input('email');
-        $cliente = Pedido::where('email', 'ilike', $email)->first();
-        if($cliente){
-            return redirect()->route('clientes.show', ['cliente' => $cliente->email]);
+
+        $clientes = Pedido::where('email', 'like', '%' . $email . '%')->get();
+        if($clientes){
+            return redirect()->route('clientes.indexSearch')->with('clientes', $clientes);
         } else {
-            return redirect()->route('clientes.indexPage', ['page' => 1])->with('error', 'El cliente no existe');
+            return redirect()->route('clientes.indexPage', ['page' => 1])->with('error', 'No existen clientes correspondientes a la busqueda');
         }
     }
+
 
 /**
  * @OA\Post(
@@ -75,48 +91,86 @@ class ClientesController extends Controller
  *         description="Error al crear pedido")
  *     )
  */
- public function storeByAPI(Request $request){
+ public function storeByAPI(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'email' => 'required|max:255',
+        'descripcion' =>'required|max:500',
+        'ids' => 'required|regex:/^\d+(?:-\d+)*$/',
+    ]);
 
-        // Código para crear un nuevo pedido.
-        // Los ids de los productos se deben recibir como una cadena del estilo: X1-X2-X3-...-XN Donde Xi es un numero >= 0
+    if ($validator->fails()) {
+        return response()->json([
+            'message' => 'Error al crear el pedido',
+            'errors' => $validator->errors(),
+        ], 422);
+    }
 
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|max:255',
-            'descripcion' =>'required|max:500',
-            'ids' => 'required|regex:/^\d+(?:-\d+)*$/', // Verficia que los IDs de los productos cumplan con el siguiente formato: X1-X2-X3-...-XN donde Xi es un numero >= 0
-        ]);
+    DB::beginTransaction(); // Iniciar transacción
 
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Error al crear el pedido',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
+    try {
         $pedido = new Pedido;
         $pedido->email = $request->email;
         $pedido->descripcion = $request->descripcion;
         $pedido->save();
+
         $ids = $request->ids;
         $ids_array = explode('-', $request->ids);
+        $insufficientStock = [];
+		$noDisponible = false;
 
         foreach ($ids_array as $element) {
-            $detallePedido = new DetallePedido;
-            $detallePedido->pedido_id = $pedido->id;
-            $detallePedido->producto_id = $element;
-            $detallePedido->save();
+            $producto = Producto::find($element);
+
+            if ($producto->stock > 0) {
+                $detallePedido = new DetallePedido;
+                $detallePedido->pedido_id = $pedido->id;
+                $detallePedido->producto_id = $element;
+                $detallePedido->precio = $producto->precio;
+                $detallePedido->save();
+
+				if($producto->activo == false) {
+					$noDisponible = true;
+				}
+                // Reducir stock.
+                $producto->stock -= 1;
+                $producto->save();
+            } else {
+                $insufficientStock[] = $element;
+            }
         }
 
-        if($pedido && $pedido->id){
-            return response()->json([
-                'mensaje' => 'Pedido creado con éxito',
-            ]);
-        }else{
+        if (!empty($insufficientStock)) {
+            DB::rollback(); // Revertir la transacción
             return response()->json([
                 'mensaje' => 'Error al crear el pedido',
-            ], 500);
+                'insufficientStock' => $insufficientStock,
+            ], 422);
         }
-   }
+		
+		if($noDisponible == true){
+			DB::rollback(); // Revertir la transacción
+            return response()->json([
+                'mensaje' => 'Error al crear el pedido',
+                'noDisponible' => $noDisponible,
+            ], 422);
+		}
+
+        DB::commit(); // Confirmar la transacción
+
+        return response()->json([
+            'mensaje' => 'Pedido creado con éxito',
+        ]);
+    } catch (\Exception $e) {
+        DB::rollback(); // Revertir la transacción en caso de error
+
+        return response()->json([
+            'mensaje' => 'Error al crear el pedido',
+        ], 500);
+    }
+}
+
+
 
 /**
  * @OA\Get(

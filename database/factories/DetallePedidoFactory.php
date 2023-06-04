@@ -23,6 +23,7 @@ class DetallePedidoFactory extends Factory
         $pedido = Pedido::inRandomOrder()->first();
         return [
             'producto_id' => $producto->id,
+            'precio' => $producto->precio,
             'pedido_id' => $pedido->id,
         ];
     }

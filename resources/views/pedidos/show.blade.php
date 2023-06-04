@@ -22,9 +22,9 @@
 </nav>
 
 
-<h2>Detalles del pedido del cliente: {{$detalle_pedido->email}}</h2>
-<p><b>Creado</b>: {{$detalle_pedido->created_at}}</p>
-<p><b>Costo Total</b>: ${{$detalle_pedido->getCostoTotal()}}</p>
+<h2>Detalles del pedido del cliente: {{$pedido->email}}</h2>
+<p><b>Creado</b>: {{\Carbon\Carbon::parse($pedido->created_at)->format('d-m-Y H:i') }}</p>
+<p><b>Costo Total</b>: ${{number_format($pedido->getCostoTotal(), 2, ',', '.')}}</p>
 <br>
 <p>Productos del pedido:</p>
 <table class="table">
@@ -42,16 +42,16 @@
       </tr>
     </thead>
     <tbody>
-      @foreach($productos as $producto)
+      @foreach($detalle_pedidos as $detalle_pedido)
         <tr>
-            <th scope="row"><a href="/productos/{{$producto->id}}">{{$producto->id}}</a></th>
-            <td><a href="{{ route('productos.show', ['producto' => $producto->id]) }}">{{$producto->nombre}}</a></td>
-            <td>{{($producto->activo) == 0 ? "NO": "SI"}}</td>
-            <td><a href="{{ route('categorias.show', ['categoria' => $producto->categoria->id]) }}">{{$producto->categoria->nombre}}</a></td>
-            <td>${{$producto->precio}}</td>
-            <td>{{$producto->stock}}</td>
-            <td>{{$producto->descripcion}}</td>
-            <td>{{$producto->estado}}</td>
+            <th scope="row"><a href="/productos/{{$detalle_pedido->producto->id}}">{{$detalle_pedido->producto->id}}</a></th>
+            <td><a href="{{ route('productos.show', ['producto' => $detalle_pedido->producto->id]) }}">{{$detalle_pedido->producto->nombre}}</a></td>
+            <td>{{($detalle_pedido->producto->activo) == 0 ? "NO": "SI"}}</td>
+            <td><a href="{{ route('categorias.show', ['categoria' => $detalle_pedido->producto->categoria->id]) }}">{{$detalle_pedido->producto->categoria->nombre}}</a></td>
+            <td>${{number_format($detalle_pedido->precio, 2, ',', '.')}}</td>
+            <td>{{$detalle_pedido->producto->stock}}</td>
+            <td>{{$detalle_pedido->producto->descripcion}}</td>
+            <td>{{$detalle_pedido->producto->estado}}</td>
         </tr>
       @endforeach
     </tbody>

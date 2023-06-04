@@ -39,7 +39,7 @@
         @enderror
 
         @error('activo')
-            <div class="alert alert-danger">La visibilidad no es correcta.</div>
+            <div class="alert alert-danger">La disponibilidad no es correcta.</div>
         @enderror
 
         @error('estado')
@@ -52,15 +52,15 @@
                 <h6 class="alert alert-success">{{ session('success') }}</h6>
         @endif
 
-<p><b>Creado</b>: {{$producto->created_at}}</p>
-<p><b>Última modificación</b>: {{$producto->updated_at}}</p>
+<p><b>Creado</b>: {{\Carbon\Carbon::parse($producto->created_at)->format('d-m-Y H:i') }}</p>
+<p><b>Última modificación</b>: {{\Carbon\Carbon::parse($producto->updated_at)->format('d-m-Y H:i') }}</p>
 
 <table class="table">
     <thead>
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Nombre</th>
-        <th scope="col">Visible</th>
+        <th scope="col">Disponibilidad</th>
         <th scope="col">Categoria</th>
         <th scope="col">Precio</th>
         <th scope="col">Stock</th>
@@ -75,7 +75,7 @@
             <td>{{$producto->nombre}}</td>
             <td>{{($producto->activo) == 0 ? "NO": "SI"}}</td>
             <td><a href="{{ route('categorias.show', ['categoria' => $producto->categoria->id]) }}">{{$producto->categoria->nombre}}</a></td>
-            <td>${{$producto->precio}}</td>
+            <td>${{number_format($producto->precio, 2, ',', '.')}}</td>
             <td>{{$producto->stock}}</td>
             <td>{{$producto->descripcion}}</td>
             <td>{{$producto->estado}}</td>
@@ -101,7 +101,7 @@
             <label for="exampleFormControlInput1" class="form-label">Precio (*)</label>
             <input type="text" class="form-control mb-2" name="precio" id="exampleFormControlInput1" value="{{old('precio') == ''?$producto->precio : old('precio')}}">
 
-            <label for="exampleFormControlInput1" class="form-label">Visibilidad (*)</label>
+            <label for="exampleFormControlInput1" class="form-label">Disponibilidad (*)</label>
 
             <select id="inputState" class="form-control" name="activo">
                   <option value="true" {{ old('visible') == 'true' ? 'selected' : '' }}>Si</option>
@@ -140,11 +140,11 @@
     </form>
 
     <br><br>
-    <form action="{{ route('productos.destroy', [$producto->id]) }}" method="POST">
+    <!--<form action="{{ route('productos.destroy', [$producto->id]) }}" method="POST">
         @method('DELETE')
         @csrf
         <button class="btn btn-danger btn-sm">Eliminar producto</button>
-    </form>
+    </form>-->
     </div>
 
 

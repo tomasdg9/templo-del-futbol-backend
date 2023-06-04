@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/categorias/{id}', 'App\Http\Controllers\CategoriasController@showByAPI');
 Route::get('/categorias/page/{page}', 'App\Http\Controllers\CategoriasController@showPageByAPI');
 Route::get('/categorias', 'App\Http\Controllers\CategoriasController@showAllByAPI');
+Route::get('/categorias/buscar/{name}', 'App\Http\Controllers\CategoriasController@searchByAPI');
 
 // API Pedidos (Clientes)
 Route::post('/pedidos/crear', 'App\Http\Controllers\ClientesController@storeByAPI')->name('crearPedidoPorApi');
@@ -32,7 +33,11 @@ Route::get('/pedidos/email/{email}', 'App\Http\Controllers\ClientesController@sh
 Route::get('/pedidos/page/{page}', 'App\Http\Controllers\ClientesController@showPageByAPI');
 
 // API Productos
+Route::get('/productos/buscar/{name}', 'App\Http\Controllers\ProductosController@searchByAPI');
 Route::get('/productos/filtrar', 'App\Http\Controllers\ProductosController@showFilterByAPI');
+Route::get('/productos/masnuevos', 'App\Http\Controllers\ProductosController@getMasNuevos');
+Route::get('/productos/buscarporcategoria/{nombre}/{categoria}', 'App\Http\Controllers\ProductosController@searchCategoriaNameByAPI');
+Route::get('/productos/categoria/{id}', 'App\Http\Controllers\CategoriasController@getProductosByCategoria');
 Route::get('/productos/{id}', 'App\Http\Controllers\ProductosController@showByAPI');
 Route::get('/productos', 'App\Http\Controllers\ProductosController@showAllByAPI');
-Route::get('/productos/categoria/{id}', 'App\Http\Controllers\CategoriasController@getProductosByCategoria');
+

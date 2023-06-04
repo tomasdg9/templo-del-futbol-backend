@@ -23,8 +23,8 @@
 
 <h2>Estadisticas sobre el cliente {{$clientes->first()->email}}</h2>
 <p>Realizó {{$clientes->count()}} pedido(s).</p>
-<p>Primer pedido {{$clientes->first()->created_at}}</p>
-<p>Último pedido {{$clientes->last()->created_at}}</p>
+<p>Primer pedido {{\Carbon\Carbon::parse($clientes->first()->created_at)->format('d-m-Y H:i') }}</p>
+<p>Último pedido {{\Carbon\Carbon::parse($clientes->first()->updated_at)->format('d-m-Y H:i')}}</p>
 @php
     $costoTotal = 0;
 @endphp
@@ -33,7 +33,7 @@
         $costoTotal += $pedido->getCostoTotal();
     @endphp
 @endforeach
-<p>Gastó en total ${{$costoTotal}}</p>
+<p>Gastó en total ${{number_format($costoTotal, 2, ',', '.')}}</p>
 <table class="table">
     <thead>
       <tr>
@@ -49,7 +49,7 @@
                 <th scope="row"><a href="/pedidos/{{$pedido->id}}">{{$pedido->id}}</a></th>
                 <td>{{$pedido->created_at}}</td>
                 <td>{{$pedido->getCantidadProductos()}}</td>
-                <td>${{$pedido->getCostoTotal()}}</td>
+                <td>${{number_format($pedido->getCostoTotal(), 2, ',', '.')}}</td>
             </tr>
         @endforeach
     </tbody>

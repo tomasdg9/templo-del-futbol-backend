@@ -47,7 +47,7 @@
         <th scope="col">Nombre</th>
         <th scope="col">Categoria</th>
         <th scope="col">Stock</th>
-        <th scope="col">Visible</th>
+        <th scope="col">Disponible</th>
         <th scope="col">Precio</th>
         </tr>
     </thead>
@@ -59,7 +59,7 @@
                 <th scope="row">{{$producto->categoria->nombre}}</th>
                 <th scope="row">{{$producto->stock}}</th>
                 <th scope="row">{{($producto->activo) == 0 ? "NO": "SI"}}</th>
-                <th scope="row">${{ $producto->precio}}</th>
+                <th scope="row">${{ number_format($producto->precio, 2, ',', '.')}}</th>
             </tr>
         @endforeach
     </tbody>
