@@ -126,6 +126,7 @@ class ClientesController extends Controller
                 $detallePedido = new DetallePedido;
                 $detallePedido->pedido_id = $pedido->id;
                 $detallePedido->producto_id = $element;
+                $detallePedido->precio = $producto->precio;
                 $detallePedido->save();
 
 				if($producto->activo == false) {

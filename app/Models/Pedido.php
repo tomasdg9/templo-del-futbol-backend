@@ -19,11 +19,15 @@ class Pedido extends Model
     public function getCostoTotal() // Retorna el costo total del pedido.
     {
         $costoTotal = 0;
-        $productos = $this->productos;
-        foreach($productos as $producto){
-            $costoTotal += $producto->precio;
+        $detalle_pedidos = $this->detalle_pedidos;
+        foreach($detalle_pedidos as $detalle_pedido){
+            $costoTotal += $detalle_pedido->precio;
         }
         return $costoTotal;
+    }
+    public function detalle_pedidos()
+    {
+        return $this->hasMany(DetallePedido::class);
     }
 
 

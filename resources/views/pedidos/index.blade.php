@@ -23,7 +23,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($detalle_pedidos as $detalle_pedido)
+        @foreach ($pedidos as $detalle_pedido)
             <tr>
                 <th scope="row">{{$detalle_pedido->id}}</th>
 

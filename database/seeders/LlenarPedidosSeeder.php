@@ -22,6 +22,7 @@ class LlenarPedidosSeeder extends Seeder
                 $detallePedido = new DetallePedido;
                 $detallePedido->pedido_id = $pedido->id;
                 $detallePedido->producto_id = $producto->id;
+                $detallePedido->precio = $producto->precio;
                 $detallePedido->save();
             }
         }
