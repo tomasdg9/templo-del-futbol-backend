@@ -23,7 +23,7 @@
 
 
 
-<form  method="POST" action="{{route('productos.store')}}">
+<form  method="POST" action="{{route('productos.store')}}" enctype="multipart/form-data">
     @csrf
 
     <div class="mb-3 col">
@@ -77,13 +77,13 @@
         <input type="text" class="form-control mb-2" name="stock" id="exampleFormControlInput1" placeholder="Ejemplo: 4" value="{{old('stock')}}">
 
         <label for="exampleFormControlInput1" class="form-label">Descripcion</label>
-        <textarea rows="5" class="form-control mb-2" name="descripcion" id="exampleFormControlInput1" placeholder="Ejemplo: Botines con tapones para ir a trabar fuerte" value="{{old('descripcion')}}"></textarea>
+        <textarea rows="5" class="form-control mb-2" name="descripcion" id="exampleFormControlInput1" value="{{old('descripcion')}}" placeholder="Ejemplo: Botines con tapones para ir a trabar fuerte" ></textarea>
 
         <label for="exampleFormControlInput1" class="form-label">Estado (*)</label>
         <input type="text" class="form-control mb-2" name="estado" id="exampleFormControlInput1" placeholder="Ejemplo: Nuevo" value="{{old('estado')}}">
 
-        <label for="exampleFormControlInput1" class="form-label">Imagen (*) (La imagen para ser visible no tiene que tener problemas con derechos de autor, y solo debe ser por url)</label>
-        <input type="text" class="form-control mb-2" name="imagen" id="exampleFormControlInput1" placeholder="Ejemplo: https://imgur.com/a/mXpX6Ot" value="{{old('imagen')}}">
+        <label for="exampleFormControlInput1" class="form-label">Imagen (*)</label>
+        <br><input type="file" name="imagen" accept=".jpeg, .jpg, .png" required><br>
 
         <label for="exampleFormControlInput1" name="categoria" class="form-label">Categoria (*)</label>
 

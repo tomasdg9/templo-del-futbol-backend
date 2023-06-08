@@ -9,6 +9,8 @@ use App\Models\Categoria;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+
 class ProductosController extends Controller
 {
     /* Los productos pueden ser mostrados, modificados creados o eliminados.*/
@@ -76,7 +78,7 @@ class ProductosController extends Controller
           'descripcion' => 'max:500',
           'estado' => 'required|max:20',
           'categoria' => 'required',
-          'imagen' => 'required|url'
+          'imagen' => 'required|mimes:jpg,png,jpeg'
       ]);
 
         $producto->nombre = $request->nombre;
@@ -85,7 +87,14 @@ class ProductosController extends Controller
         $producto->stock = $request->stock;
         $producto->descripcion = $request->descripcion;
         $producto->estado = $request->estado;
-        $producto->imagen = $request->imagen;
+        
+        // Elimina la anterior imagen de Cloudinary.
+        $nombreArchivo = basename($producto->imagen);
+        $nombreSinExtension = pathinfo($nombreArchivo, PATHINFO_FILENAME); // Obtiene el public id de la imagen anterior.
+        Cloudinary::destroy($nombreSinExtension);
+
+        $uploadedFileUrl = Cloudinary::upload($request->file('imagen')->getRealPath())->getSecurePath(); // OPCIONAL: Sube la imagen a Cloudinary.
+        $producto->imagen = $uploadedFileUrl;
         $producto->save();
         return redirect()->route('productos.show', ['producto' => $producto->id])->with('success', 'Producto actualizado con éxito');
    }
@@ -120,7 +129,7 @@ class ProductosController extends Controller
             'descripcion' => 'max:500',
             'estado' => 'required|max:20',
             'categoria' => 'required',
-            'imagen' => 'required|url'
+            'imagen' => 'required|mimes:jpg,png,jpeg'
         ]);
 
 
@@ -132,7 +141,8 @@ class ProductosController extends Controller
         $producto->stock = $request->stock;
         $producto->descripcion = $request->descripcion;
         $producto->estado = $request->estado;
-        $producto->imagen = $request->imagen;
+        $uploadedFileUrl = Cloudinary::upload($request->file('imagen')->getRealPath())->getSecurePath(); // OPCIONAL: Sube la imagen a Cloudinary.
+        $producto->imagen = $uploadedFileUrl;
         $producto->save();
 
         return redirect()->route('productos.indexPage', ['page' => 1])->with('success', 'El producto '.$producto->nombre.' fue creado con éxito.');
