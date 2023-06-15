@@ -78,7 +78,7 @@ class ProductosController extends Controller
           'descripcion' => 'max:500',
           'estado' => 'required|max:20',
           'categoria' => 'required',
-          'imagen' => 'required|mimes:jpg,png,jpeg'
+          'imagen' => 'required|mimes:jpg,png,jpeg|size:2048' // max 2mb y solo jpg, png y jpeg. (modificar para svg, etc?)
       ]);
 
         $producto->nombre = $request->nombre;
