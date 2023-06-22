@@ -82,7 +82,7 @@
         <label for="exampleFormControlInput1" class="form-label">Estado (*)</label>
         <input type="text" class="form-control mb-2" name="estado" id="exampleFormControlInput1" placeholder="Ejemplo: Nuevo" value="{{old('estado')}}">
 
-        <label for="exampleFormControlInput1" class="form-label">Imagen (*)</label>
+        <label for="exampleFormControlInput1" class="form-label">Imagen (*) (Max: 2MB)</label>
         <br><input type="file" name="imagen" accept=".jpeg, .jpg, .png" required><br>
 
         <label for="exampleFormControlInput1" name="categoria" class="form-label">Categoria (*)</label>
