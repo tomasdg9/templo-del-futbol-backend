@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DetallePedidosController;
 use App\Http\Controllers\ReporteProductosController;
 use App\Http\Controllers\EstadisticasController;
-
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +55,7 @@ Route::resource('rpedidos', ReportePedidosController::class)->middleware('auth')
 Route::get('/rpedidos/page/{inicio}/{fin}/{page}', 'App\Http\Controllers\ReportePedidosController@showPage')->middleware('auth');
 Route::get('/rproductos/page/{inicio}/{fin}/{page}', 'App\Http\Controllers\ReporteProductosController@showPage')->middleware('auth');
 
+Route::resource('users', UserController::class)->middleware('auth');
 
 // Login
 Route::get('/', function () {

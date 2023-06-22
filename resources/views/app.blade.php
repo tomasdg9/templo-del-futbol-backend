@@ -52,8 +52,8 @@
                 
                 @if ($user->hasPermissionTo('Subir de rango'))
                     <!-- Muestra si tiene el permiso indicado -->
-                    <li id="rpedidos">
-                        <a href="{{ route('rpedidos.index') }}"><i class="fas fa-user"></i> Staff</a>
+                    <li id="staff">
+                        <a href="{{ route('users.index') }}"><i class="fas fa-user"></i> Staff</a>
                     </li>
                 @endif
             </ul>
