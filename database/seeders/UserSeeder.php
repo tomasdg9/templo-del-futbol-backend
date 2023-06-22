@@ -28,5 +28,13 @@ class UserSeeder extends Seeder
         ]);
 
         User::factory()->count(5)->create();
+        foreach ($users as $user) {
+            $user->assignRole('Moderador');
+        }
+
+        // Se le asigna el rol de administrador
+        $user = User::where('email', 'admin@iaw.com')->first();
+        $user->assignRole('Administrador');
+
     }
 }

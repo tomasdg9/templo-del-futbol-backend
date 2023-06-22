@@ -46,6 +46,16 @@
 				 <li id="rpedidos"> <!-- Incluye sobre DetallePedidos y los "Clientes" -->
                     <a href="{{ route('rpedidos.index') }}"><i class="fas fa-cog"></i> Reportes pedidos</a>
                 </li>
+                @php
+                    $user = Auth::user(); // Ejemplo para obtener el usuario autenticado.
+                @endphp
+                
+                @if ($user->hasPermissionTo('Subir de rango'))
+                    <!-- Muestra si tiene el permiso indicado -->
+                    <li id="rpedidos">
+                        <a href="{{ route('rpedidos.index') }}"><i class="fas fa-user"></i> Staff</a>
+                    </li>
+                @endif
             </ul>
 
             <ul class="list-unstyled CTAs">
