@@ -30,13 +30,13 @@
             @foreach ($roles as $role)
                 <div>
                     <label>
-                        <input type="checkbox" name="roles[]" value="{{ $role->id }}" {{ in_array($role->id, $user->roles->pluck('id')->toArray()) ? 'checked' : '' }} class="mr-1">
+                        <input type="radio" name="roles[]" value="{{ $role->id }}" {{ in_array($role->id, $user->roles->pluck('id')->toArray()) ? 'checked' : '' }} class="mr-1">
                         {{ $role->name }}
                     </label>
                 </div>
             @endforeach
 
-            <button type="submit">Guardar</button>
+            <button class="btn btn-primary" type="submit">Guardar</button>
         </form>
 
     </div>

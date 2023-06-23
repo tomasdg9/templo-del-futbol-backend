@@ -9,6 +9,12 @@ use App\Models\Pedido;
 
 class ReportePedidosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:Visualizar reportes');
+    }
+
+
     public function index(){
         $pedidos = session('pedidos', []);
         $tieneProx = session('tieneProx', "");

@@ -13,6 +13,11 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ProductosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:Borrar actualizar y modificar');
+    }
+
     /* Los productos pueden ser mostrados, modificados creados o eliminados.*/
    public function index()
      {

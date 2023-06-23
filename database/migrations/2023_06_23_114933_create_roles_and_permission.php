@@ -16,11 +16,10 @@ return new class extends Migration
         Role::create(['name' => 'Moderador']);
 
         // Crear permisos
-        Permission::create(['name' => 'Eliminar productos']);
-        Permission::create(['name' => 'Crear categorias']);
-        Permission::create(['name' => 'Eliminar categorias']);
-        Permission::create(['name' => 'Modificar categorias']);
+        Permission::create(['name' => 'Borrar actualizar y modificar']);
+        Permission::create(['name' => 'Visualizar reportes']);
         Permission::create(['name' => 'Subir de rango']);
+        Permission::create(['name' => 'nadie']); //para que nadie pueda modificar el permiso del admin con id 1 (ni el mismo)
     }
 
     public function down()

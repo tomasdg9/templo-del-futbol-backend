@@ -9,8 +9,13 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:Subir de rango');
+    }
+
     public function index(){
-        $users = User::all();
+        $users = User::whereNotIn('id', [1])->orderBy('id', 'asc')->get();
         return view('users.index', ['users' => $users]);
     }
 

@@ -11,6 +11,12 @@ use Illuminate\Validation\Rule;
 
 class CategoriasController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:Borrar actualizar y modificar');
+    }
+
     public function index()
     {
         return redirect()->route('categorias.indexPage', ['page' => 1]);

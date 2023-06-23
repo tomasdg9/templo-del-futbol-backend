@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class DetallePedidosController extends Controller
 {
+  public function __construct()
+    {
+        $this->middleware('can:Borrar actualizar y modificar');
+    }
+
 
 
     /* Los pedidos pueden ser mostrados.*/

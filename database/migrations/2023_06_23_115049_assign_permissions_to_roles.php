@@ -10,11 +10,8 @@ class AssignPermissionsToRoles extends Migration
     public function up()
     {
         // Obtener permisos
-
-        $eliminarProductos = Permission::where('name', 'Eliminar productos')->first();
-        $crearCategorias = Permission::where('name', 'Crear categorias')->first();
-        $eliminarCategorias = Permission::where('name', 'Eliminar categorias')->first();
-        $modificarCategorias = Permission::where('name', 'Modificar categorias')->first();
+        $borrarActualizarYModificar = Permission::where('name', 'Borrar actualizar y modificar')->first();
+        $visualizarReportes = Permission::where('name', 'Visualizar reportes')->first();
         $subirDeRango = Permission::where('name', 'Subir de rango')->first();
 
         // Obtener roles
@@ -23,9 +20,9 @@ class AssignPermissionsToRoles extends Migration
         $moderador = Role::where('name', 'Moderador')->first();
 
         // Asignar permisos a roles
-        $administrador->givePermissionTo($eliminarProductos, $crearCategorias, $eliminarCategorias, $modificarCategorias, $subirDeRango);
-        $superModerador->givePermissionTo($crearCategorias, $modificarCategorias);
-        $moderador->givePermissionTo($modificarCategorias);
+        $administrador->givePermissionTo($borrarActualizarYModificar, $visualizarReportes, $subirDeRango);
+        $superModerador->givePermissionTo($visualizarReportes, $borrarActualizarYModificar);
+        $moderador->givePermissionTo($borrarActualizarYModificar);
     }
 
     public function down()
