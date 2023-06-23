@@ -9,6 +9,20 @@
 <h3 align="center">Proyecto Framework PHP - Laravel (Vercel en PR)</h3>
 
 <p align="center">
+  <strong>Roles, permisos y usuarios</strong>
+</p>
+<p align="center">
+  Roles: Administrador, Supermoderador, Moderador</br>
+  Administrador -> Tiene a su disposición todas las herramientas, se caracteriza por tener a disposición la modificación de roles a diferentes usuarios.</br>
+  Supermoderador -> Tiene a su disposición todas las herramientas menos la modificación de roles a usuarios. Tiene a disposición la visualización de Reportes de Usuarios y Pedidos.</br>
+  Moderador -> Tiene a disposición sólo las operaciones que pueden realizarse con productos, categorias, visualización de clientes, pedidos y estadísticas. No cuenta con visualización de reportes ni modificación de roles. </br>
+
+  Usuario administrador: "admin@iaw.com" Password: "admin123" </br>
+  Usuarios generados a través de seeders tienen como Password: "iaw123456"</br>
+
+</p>
+
+<p align="center">
   <strong>¿Qué entidades se podrán editar?</strong>
 </p>
 <p align="center">
