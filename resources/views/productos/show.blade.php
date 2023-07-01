@@ -90,7 +90,7 @@
   <br><p>Para editar este producto, rellene el siguiente formulario y luego, presione el botón "<b>Modificar producto</b>"<p>
 <button id="botonFormulario" onClick="cambiarNombre('botonFormulario', 'Editar', 'Esconder')" type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#formulario">Editar</button>
 <div id="formulario" class="collapse">
-    <form  method="POST" action="{{route('productos.update',['producto' => $producto->id])}}">
+    <form  method="POST" action="{{route('productos.update',['producto' => $producto->id])}}" enctype="multipart/form-data">
         @method('PATCH')
         @csrf
         <div class="mb-3 col">
@@ -120,9 +120,8 @@
             <label for="exampleFormControlInput1" class="form-label">Estado (*)</label>
             <input type="text" class="form-control mb-2" name="estado" id="exampleFormControlInput1" value="{{old('estado') == ''?$producto->estado : old('estado')}}">
 
-            <label for="exampleFormControlInput1" class="form-label">Imagen (*) (La imagen para ser visible no tiene que tener problemas con derechos de autor, y solo debe ser por url)</label>
-            <input type="text" class="form-control mb-2" name="imagen" id="exampleFormControlInput1" value="{{old('imagen') == ''?$producto->imagen : old('imagen')}}">
-
+            <label for="exampleFormControlInput1" class="form-label">Imagen (*) (Max: 2MB)</label>
+            <br><input type="file" name="imagen" accept=".jpeg, .jpg, .png" required><br>
 
             <label for="exampleFormControlInput1" name="labelcategoria" class="form-label">Categoria (*)</label>
 

@@ -14,6 +14,11 @@ use Carbon\Carbon;
 
 class EstadisticasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:Borrar actualizar y modificar');
+    }
+
 
     // Esto tarda mucho porque consulta sobre todos los datos. Podriamos usar AJAX para que diga Calculando... Y cuando tenga el valor, lo retorne?
     public function index()

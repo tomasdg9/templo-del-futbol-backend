@@ -10,6 +10,11 @@ use Nette\Utils\ArrayList;
 
 class ReporteProductosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:Visualizar reportes');
+    }
+
     public function index(){
         $productos = session('productos', []);
         $tieneProx = session('tieneProx', "");

@@ -9,9 +9,8 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DetallePedidosController;
 use App\Http\Controllers\ReporteProductosController;
-
 use App\Http\Controllers\EstadisticasController;
-
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +32,8 @@ Route::get('/clientes/search/1', 'App\Http\Controllers\ClientesController@indexS
 
 
 Route::resource('categorias', CategoriasController::class)->middleware('auth');
-Route::get('/categorias/page/{page}', [CategoriasController::class, 'indexPage'])->name('categorias.indexPage');
-Route::post('/categorias/search', [CategoriasController::class, 'searchByName'])->name('categorias.searchByName');
+Route::get('/categorias/page/{page}', [CategoriasController::class, 'indexPage'])->name('categorias.indexPage')->middleware('auth');
+Route::post('/categorias/search', [CategoriasController::class, 'searchByName'])->name('categorias.searchByName')->middleware('auth');
 Route::get('/categorias/search/1', 'App\Http\Controllers\CategoriasController@indexSearch')->name('categorias.indexSearch')->middleware('auth');
 
 Route::resource('rproductos', ReporteProductosController::class)->middleware('auth');
@@ -56,8 +55,8 @@ Route::resource('rpedidos', ReportePedidosController::class)->middleware('auth')
 Route::get('/rpedidos/page/{inicio}/{fin}/{page}', 'App\Http\Controllers\ReportePedidosController@showPage')->middleware('auth');
 Route::get('/rproductos/page/{inicio}/{fin}/{page}', 'App\Http\Controllers\ReporteProductosController@showPage')->middleware('auth');
 
-
-
+Route::get('/users/1/edit')->middleware('can:ninguno'); //esto se hace para que ningun usuario (ni el mismo admin) pueda cambiar los permisos del admin que tiene el id 1 
+Route::resource('users', UserController::class)->middleware('auth');
 
 // Login
 Route::get('/', function () {

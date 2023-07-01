@@ -40,12 +40,24 @@
 				 <li id="clientes"> <!-- Esto vendria a ser Pedidos que se mapearía como "Clientes" -->
                     <a href="{{ route('clientes.index') }}"><i class="fas fa-user"></i> Clientes</a>
                 </li>
-				 <li id="rproductos">
-                    <a href="{{ route('rproductos.index') }}"><i class="fas fa-cog"></i> Reportes productos</a>
-                </li>
-				 <li id="rpedidos"> <!-- Incluye sobre DetallePedidos y los "Clientes" -->
-                    <a href="{{ route('rpedidos.index') }}"><i class="fas fa-cog"></i> Reportes pedidos</a>
-                </li>
+                @can('Visualizar reportes')
+                    <li id="rproductos">
+                        <a href="{{ route('rproductos.index') }}"><i class="fas fa-cog"></i> Reportes productos</a>
+                    </li>
+                    <li id="rpedidos"> <!-- Incluye sobre DetallePedidos y los "Clientes" -->
+                        <a href="{{ route('rpedidos.index') }}"><i class="fas fa-cog"></i> Reportes pedidos</a>
+                    </li>
+                @endcan
+                @php
+                    $user = Auth::user(); // Ejemplo para obtener el usuario autenticado.
+                @endphp
+                
+                    <!-- Muestra si tiene el permiso indicado -->
+                    @can('Subir de rango')
+                        <li id="staff">
+                            <a href="{{ route('users.index') }}"><i class="fas fa-user"></i> Staff</a>
+                        </li>
+                    @endcan
             </ul>
 
             <ul class="list-unstyled CTAs">

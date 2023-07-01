@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class ClientesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:Borrar actualizar y modificar');
+    }
+
 
    public function show(string $email)
    {
