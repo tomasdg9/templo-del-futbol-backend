@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('email', 45);//->unique();
             $table->text('descripcion');
+            $table->text('idmp');
         });
     }
 

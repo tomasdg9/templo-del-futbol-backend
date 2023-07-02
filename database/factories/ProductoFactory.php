@@ -21,7 +21,7 @@ class ProductoFactory extends Factory
         $categoria = Categoria::inRandomOrder()->first();
         return [
             'nombre' => $this->faker->unique()->name(),
-            'precio' => $this->faker->randomFloat(2, 0, 99999999.99),
+            'precio' => $this->faker->randomFloat(2, 0, 79999.99),
             'activo' => $this->faker->boolean(),
             'stock' => $this->faker->randomDigit(),
             'descripcion' => $this->faker->text(),

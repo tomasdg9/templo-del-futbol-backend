@@ -25,6 +25,7 @@
 <h2>Detalles del pedido del cliente: {{$pedido->email}}</h2>
 <p><b>Creado</b>: {{\Carbon\Carbon::parse($pedido->created_at)->format('d-m-Y H:i') }}</p>
 <p><b>Costo Total</b>: ${{number_format($pedido->getCostoTotal(), 2, ',', '.')}}</p>
+<p><b>ID de pago</b>: {{$pedido->idmp}}</p>
 <br>
 <p>Productos del pedido:</p>
 <table class="table">

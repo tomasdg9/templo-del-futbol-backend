@@ -102,6 +102,7 @@ class ClientesController extends Controller
         'email' => 'required|max:255',
         'descripcion' =>'required|max:500',
         'ids' => 'required|regex:/^\d+(?:-\d+)*$/',
+        'idMP' => 'required',
     ]);
 
     if ($validator->fails()) {
@@ -117,6 +118,7 @@ class ClientesController extends Controller
         $pedido = new Pedido;
         $pedido->email = $request->email;
         $pedido->descripcion = $request->descripcion;
+        $pedido->idmp = $request->idMP;
         $pedido->save();
 
         $ids = $request->ids;
