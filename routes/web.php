@@ -23,7 +23,6 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/estadisticas', EstadisticasController::class . '@index')->middleware('auth')->name('principio');
 
 Route::resource('clientes', ClientesController::class)->middleware('auth');
 Route::get('/clientes/page/{page}', [ClientesController::class, 'indexPage'])->name('clientes.indexPage')->middleware('auth');

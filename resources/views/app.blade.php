@@ -25,9 +25,6 @@
             </div>
             <ul class="list-unstyled components">
                 <p>Sesión de: @auth {{Auth::user()->name}} @endauth</p>
-                <li id="estadisticas" class="active">
-                    <a href="{{ route('principio') }}"><i class="fas fa-calculator"></i> Estadisticas</a>
-                </li>
 				 <li id="productos">
                     <a href="{{ route('productos.index') }}"><i class="fas fa-shopping-bag"></i> Productos</a>
                 </li>

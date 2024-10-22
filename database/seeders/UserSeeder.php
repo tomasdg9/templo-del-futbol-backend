@@ -18,8 +18,9 @@ class UserSeeder extends Seeder
     public function run(): void
     {
 
-        DB::table('users')->insert(['name' => 'IAW',
-        'email' => 'admin@iaw.com',
+        DB::table('users')->insert([
+        'name' => 'Admin',
+        'email' => 'admin@gmail.com',
         'email_verified_at' => now(),
         'password' => Hash::make('admin123'),
         'remember_token' => Str::random(10),
@@ -35,7 +36,7 @@ class UserSeeder extends Seeder
         }
 
         // Se le asigna el rol de administrador
-        $user = User::where('email', 'admin@iaw.com')->first();
+        $user = User::where('email', 'admin@gmail.com')->first();
         $user->assignRole('Administrador');
 
     }

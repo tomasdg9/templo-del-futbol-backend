@@ -14,7 +14,7 @@ class DetallePedidoSeeder extends Seeder
     public function run(): void
     {
         DetallePedido::factory()
-            ->count(200)
+            ->count(15)
             ->create();
     }
 }
