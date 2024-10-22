@@ -10,7 +10,7 @@ return [
     |
     |
     */
-    'notification_url' => env('wsQEbXWxC-iU3tlkSmD-zgri21g'),
+    'notification_url' => env('CLOUDINARY_NOTIFICATION_URL'),
 
 
     /*
@@ -23,11 +23,11 @@ return [
     |
     |
     */
-    'cloud_url' => env('cloudinary://476788716473614:wsQEbXWxC-iU3tlkSmD-zgri21g@doutd5l2w'),
+    'cloud_url' => env('CLOUDINARY_URL'),
 
     /**
     * Upload Preset From Cloudinary Dashboard
     *
     */
-    'upload_preset' => env('476788716473614')
+    'upload_preset' => env('CLOUDINARY_UPLOAD_PRESET')
 ];

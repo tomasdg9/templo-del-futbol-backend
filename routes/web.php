@@ -61,7 +61,7 @@ Route::resource('users', UserController::class)->middleware('auth');
 // Login
 Route::get('/', function () {
     if (Auth::check()) { //Si ya inició sesión y quiere ir a la ruta raíz, se re-direcciona al principio.
-        return redirect()->route('principio');
+        return redirect()->route('productos.principio');
     } else { // Si no, lo forza a iniciar sesión.
         return view('auth.login');
     }
@@ -69,7 +69,7 @@ Route::get('/', function () {
 
 
 Route::get('/home', function(){
-    return redirect()->route('principio');
+    return redirect()->route('productos.principio');
 });
 
 require __DIR__.'/auth.php';
