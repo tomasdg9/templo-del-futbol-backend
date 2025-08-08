@@ -8,6 +8,8 @@ use App\Models\Producto;
 use App\Models\Categoria;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use App\Notifications\MensajeRecibido;
+use Illuminate\Support\Facades\Auth;
 
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
@@ -136,6 +138,7 @@ class ProductosController extends Controller
             'categoria' => 'required',
             'imagen' => 'required|mimes:jpg,png,jpeg|max:2048'
         ]);
+        $receptor = Auth::user();
 
 
         $producto = new Producto;
@@ -149,6 +152,7 @@ class ProductosController extends Controller
         $uploadedFileUrl = Cloudinary::upload($request->file('imagen')->getRealPath())->getSecurePath(); // OPCIONAL: Sube la imagen a Cloudinary.
         $producto->imagen = $uploadedFileUrl;
         $producto->save();
+        $receptor->notify(new MensajeRecibido());
 
         return redirect()->route('productos.indexPage', ['page' => 1])->with('success', 'El producto '.$producto->nombre.' fue creado con éxito.');
    }

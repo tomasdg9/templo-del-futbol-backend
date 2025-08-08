@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use NotificationChannels\WebPush\HasPushSubscriptions;
 
 class User extends Authenticatable
 {
@@ -47,6 +48,11 @@ class User extends Authenticatable
     public function productos()
     {
         return $this->hasMany(Producto::class);
+    }
+
+    public function routeNotificationForWebPush()
+    {
+        return $this->pushSubscriptions;
     }
 
 }

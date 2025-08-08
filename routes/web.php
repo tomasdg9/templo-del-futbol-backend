@@ -11,6 +11,8 @@ use App\Http\Controllers\DetallePedidosController;
 use App\Http\Controllers\ReporteProductosController;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\UserController;
+use NotificationChannels\WebPush\PushSubscription;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,17 @@ use App\Http\Controllers\UserController;
 |
 */
 
+
+Route::post('/api/save-subscription', function (Request $request) {
+    $user = Auth::user();
+    dd($user);
+    $user->updatePushSubscription(
+        $request->endpoint,
+        $request->keys['p256dh'],
+        $request->keys['auth']
+    );
+    return response()->json(['success' => true]);
+});
 
 Route::resource('clientes', ClientesController::class)->middleware('auth');
 Route::get('/clientes/page/{page}', [ClientesController::class, 'indexPage'])->name('clientes.indexPage')->middleware('auth');

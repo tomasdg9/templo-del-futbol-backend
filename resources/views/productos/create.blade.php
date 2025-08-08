@@ -69,8 +69,8 @@
         <label for="exampleFormControlInput1" name="activo" class="form-label">Visibilidad (*)</label>
 
         <select id="inputState" class="form-control" name="activo" value="{{old('activo')}}">
-            <option value="true" selected>Si</option>
-            <option value="false">No</option>
+            <option value="{{true}}" selected>Si</option>
+            <option value="{{false}}">No</option>
         </select>
 
         <label for="exampleFormControlInput1" class="form-label">Stock (*)</label>

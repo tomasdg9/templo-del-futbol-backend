@@ -87,6 +87,46 @@
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
         });
+
+            const vapidPublicKey = "{{ config('webpush.vapid.public_key') }}";
+
+        if ('serviceWorker' in navigator && 'PushManager' in window) {
+            navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                askPermission().then(function() {
+                    subscribeUser(registration);
+                });
+            });
+        }
+
+        async function askPermission() {
+            const permission = await Notification.requestPermission();
+            if (permission !== 'granted') {
+                throw new Error('Permission not granted.');
+            }
+        }
+
+        async function subscribeUser(registration) {
+            const subscription = await registration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
+            });
+
+            await fetch('/push-subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify(subscription)
+            });
+        }
+
+        function urlBase64ToUint8Array(base64String) {
+            const padding = '='.repeat((4 - base64String.length % 4) % 4);
+            const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+            const rawData = atob(base64);
+            return Uint8Array.from([...rawData].map(char => char.charCodeAt(0)));
+        }
     </script>
 </body>
 </html>
